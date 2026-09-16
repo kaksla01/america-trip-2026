@@ -1,0 +1,113 @@
+name: Merge daily weather lodging itinerary
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/merge-daily-cards.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Merge weather and lodging into daily itinerary cards
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from urllib.parse import quote
+          import html, re
+
+          p = Path('index.html')
+          text = p.read_text(encoding='utf-8')
+
+          # Remove standalone weather and lodging sections.
+          text = re.sub(
+              r'\n<h2>实时天气与穿着建议</h2>\s*<section class="weather-grid" id="weatherGrid">.*?</section>\s*<div class="smallprint"[^>]*>.*?</div>\s*',
+              '\n', text, count=1, flags=re.S
+          )
+          text = re.sub(
+              r'\n<h2>已确认住宿</h2>\s*<section class="grid">.*?</section>\s*(?=<h2>逐日行程)',
+              '\n', text, count=1, flags=re.S
+          )
+          text = text.replace('<h2>逐日行程</h2>', '<h2>逐日行程 · 天气 / 住宿 / 安排</h2>')
+          text = text.replace('<h2>已确认交通</h2>', '<h2>已确认交通 / 门票</h2>')
+
+          css = '''
+          .day-info-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.35fr);gap:12px;margin:16px 0 6px}
+          .day-info-card{border:1px solid var(--line);background:#fbfcfd;border-radius:16px;padding:14px;min-width:0}
+          .day-info-kicker{font-size:11px;font-weight:850;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-bottom:6px}
+          .day-info-card.weather-card{box-shadow:none}
+          .day-info-card .weather-city{font-size:17px}.day-info-card .wx-temp{font-size:29px}
+          .day-stay-name{font-size:17px;font-weight:850;line-height:1.3;margin:2px 0 7px}
+          .day-stay-line{font-size:12px;color:var(--muted);margin:5px 0;line-height:1.45}
+          .day-stay-line a{color:var(--ink)}
+          .day-stay-status{display:inline-block;font-size:10px;font-weight:850;border-radius:999px;padding:2px 7px;background:#e8f3ff;color:#315f96;margin-left:6px;vertical-align:1px}
+          .day-info-card .wx-suggest{margin-top:8px;padding:8px 10px;font-size:12px}
+          @media(max-width:700px){.day-info-grid{grid-template-columns:1fr}.day-info-card{padding:13px}}
+          '''
+          if '.day-info-grid{' not in text:
+              text = text.replace('</style>', css + '\n</style>', 1)
+
+          D = {
+          '2026-09-25':(('34.0522','-118.2437','洛杉矶 / Lynwood'),('Airbnb · Motel Small Room','入住 13:00 后 · 9/26 11:00 前退房','11112 Long Beach Boulevard, Lynwood, CA 90262','+1 323 942 7473','今晚住宿')),
+          '2026-09-26':(('40.7608','-111.8910','盐湖城'),('Garner Hotel Salt Lake City Airport by IHG','入住 15:00 后 · 9/27 11:00 前退房','223 Jimmy Doolittle Rd, Salt Lake City, UT 84116','+1 801 533 8878','今晚住宿')),
+          '2026-09-27':(('44.6621','-111.1041','West Yellowstone'),('Ho Hum Motel','入住 16:00–21:00 · 9/28 11:00 前退房','126 N Canyon St, West Yellowstone, MT 59758','+1 406 646 7746','今晚住宿')),
+          '2026-09-28':(('44.5990','-110.5472','Yellowstone / Gardiner'),('Airbnb · Gardiner','按 Airbnb 房源说明入住 · 9/29 退房','301 South Yellowstone Street, Gardiner, MT 59030','未提供','今晚住宿')),
+          '2026-09-29':(('44.4279','-110.5885','Yellowstone Lake'),('Lake Yellowstone Hotel & Cabins','入住 14:00 后 · 9/30 12:00 前退房','235 Yellowstone Lake Rd, Yellowstone National Park, WY 82190','+1 307 344 7901','今晚住宿')),
+          '2026-09-30':(('43.7904','-110.6818','Grand Teton / Thayne'),('Airbnb · Cozy camper in amazing setting','入住 15:00 后 · 10/1 10:00 前退房','101089 U.S. 89, Thayne, WY 83127','+1 307 248 3316','今晚住宿')),
+          '2026-10-01':(('38.5733','-109.5498','Moab'),('Hotel 191 - Moab','入住 15:00 后 · 10/2 11:00 前退房','1075 US-191, Moab, UT 84532','+1 435 554 7777','今晚住宿')),
+          '2026-10-02':(('36.9829','-110.1112','Monument Valley / Page'),('Travelodge by Wyndham Page, View of Lake Powell','10/2 15:00 后入住 · 连住 3 晚','207 N Lake Powell Blvd, Page, AZ 86040','+1 928 608 5324','今晚住宿')),
+          '2026-10-03':(('36.0544','-112.1401','Grand Canyon South Rim'),('Travelodge by Wyndham Page, View of Lake Powell','连续入住 · 第 2 晚','207 N Lake Powell Blvd, Page, AZ 86040','+1 928 608 5324','今晚住宿')),
+          '2026-10-04':(('36.9147','-111.4558','Page / Antelope Canyon'),('Travelodge by Wyndham Page, View of Lake Powell','连续入住 · 第 3 晚 · 10/5 11:00 前退房','207 N Lake Powell Blvd, Page, AZ 86040','+1 928 608 5324','今晚住宿')),
+          '2026-10-05':(('37.1889','-112.9986','Springdale / Zion'),('Hyatt Place Springdale / Zion National Park','10/5 15:00 后入住 · 连住 2 晚','1215 Zion Park Blvd, Springdale, UT 84767','+1 435 772 3200','今晚住宿')),
+          '2026-10-06':(('37.2000','-112.9870','Zion National Park'),('Hyatt Place Springdale / Zion National Park','连续入住 · 第 2 晚 · 10/7 11:00 前退房','1215 Zion Park Blvd, Springdale, UT 84767','+1 435 772 3200','今晚住宿')),
+          '2026-10-07':(('36.1699','-115.1398','Las Vegas'),('Horseshoe Las Vegas','入住 16:00 后 · 10/8 11:00 前退房','3645 Las Vegas Blvd S, Las Vegas, NV 89109','+1 702 967 4111','今晚住宿')),
+          '2026-10-08':(('34.1347','-116.3190','Joshua Tree / Banning'),('Quality Inn Banning I-10','入住 14:00 后 · 10/9 11:00 前退房','1690 W Ramsey St, Banning, CA 92220','+1 951 849 8888','今晚住宿')),
+          '2026-10-09':(('34.0195','-118.4912','Santa Monica / Los Angeles'),('无酒店 · 当晚离境','KE012 · LAX 23:50 起飞','Los Angeles International Airport','—','今晚安排')),
+          }
+
+          def weather_card(lat, lon, label):
+              return f'''<article class="day-info-card weather-card" data-lat="{lat}" data-lon="{lon}" data-label="{html.escape(label)}">
+          <div class="day-info-kicker">当地实时天气</div>
+          <div class="weather-head"><div><div class="weather-city">{html.escape(label)}</div><div class="weather-sub">当前天气</div></div><div class="wx-status">加载中…</div></div>
+          <div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div>
+          <div class="wx-suggest">联网后自动获取实时天气，并给出建议穿着。</div></article>'''
+
+          def stay_card(name, timing, address, phone, kicker):
+              href='https://www.google.com/maps/search/?api=1&query=' + quote(address)
+              phone_line='' if phone=='—' else f'<div class="day-stay-line">☎ {html.escape(phone)}</div>'
+              return f'''<article class="day-info-card day-stay-card">
+          <div class="day-info-kicker">{html.escape(kicker)}</div>
+          <div class="day-stay-name">{html.escape(name)}<span class="day-stay-status">已确认</span></div>
+          <div class="day-stay-line">{html.escape(timing)}</div>
+          <div class="day-stay-line"><a href="{href}" target="_blank" rel="noopener">📍 {html.escape(address)}</a></div>
+          {phone_line}</article>'''
+
+          for day, (wx, stay) in D.items():
+              marker = f'id="dailyInfo-{day}"'
+              if marker in text:
+                  continue
+              block = f'\n<div class="day-info-grid" id="dailyInfo-{day}">' + weather_card(*wx) + stay_card(*stay) + '</div>\n'
+              pattern = rf'(<section class="day" id="{re.escape(day)}"[^>]*>.*?<button[^>]*class="route-toggle"[^>]*>展开路线</button>\s*</div>)'
+              text, n = re.subn(pattern, lambda m: m.group(1) + block, text, count=1, flags=re.S)
+              if n != 1:
+                  raise RuntimeError(f'Could not inject daily info for {day}')
+
+          p.write_text(text, encoding='utf-8')
+          Path('public').mkdir(exist_ok=True)
+          Path('public/index.html').write_text(text, encoding='utf-8')
+          PY
+      - name: Commit merged site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html public/index.html
+          if ! git diff --cached --quiet; then
+            git commit -m "Merge daily weather lodging and itinerary cards [skip ci]"
+            git pull --rebase origin main
+            git push
+          fi
