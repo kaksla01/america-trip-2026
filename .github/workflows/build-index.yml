@@ -1,0 +1,28 @@
+name: Build single-file travel handbook
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'parts/**'
+      - '.github/workflows/build-index.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assemble index.html
+        run: cat parts/part-* > index.html
+      - name: Commit generated index.html
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if ! git diff --cached --quiet; then
+            git commit -m "Build travel handbook [skip ci]"
+            git push
+          fi
