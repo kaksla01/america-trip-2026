@@ -16,12 +16,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Assemble index.html
-        run: cat parts/part-* > index.html
-      - name: Commit generated index.html
+        run: |
+          cat parts/part-* > index.html
+          mkdir -p public
+          cp index.html public/index.html
+      - name: Commit generated site
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html
+          git add index.html public/index.html
           if ! git diff --cached --quiet; then
             git commit -m "Build travel handbook [skip ci]"
             git push
