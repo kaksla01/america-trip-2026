@@ -67,6 +67,19 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
 .legend span{display:inline-flex;align-items:center;gap:6px}.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
 @media(max-width:900px){.weather-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.weather-grid{grid-template-columns:1fr}}
+
+.day-info-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.35fr);gap:12px;margin:16px 0 6px}
+.day-info-card{border:1px solid var(--line);background:#fbfcfd;border-radius:16px;padding:14px;min-width:0}
+.day-info-kicker{font-size:11px;font-weight:850;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-bottom:6px}
+.day-info-card.weather-card{box-shadow:none}
+.day-info-card .weather-city{font-size:17px}.day-info-card .wx-temp{font-size:29px}
+.day-stay-name{font-size:17px;font-weight:850;line-height:1.3;margin:2px 0 7px}
+.day-stay-line{font-size:12px;color:var(--muted);margin:5px 0;line-height:1.45}
+.day-stay-line a{color:var(--ink)}
+.day-stay-status{display:inline-block;font-size:10px;font-weight:850;border-radius:999px;padding:2px 7px;background:#e8f3ff;color:#315f96;margin-left:6px;vertical-align:1px}
+.day-info-card .wx-suggest{margin-top:8px;padding:8px 10px;font-size:12px}
+@media(max-width:700px){.day-info-grid{grid-template-columns:1fr}.day-info-card{padding:13px}}
+
 </style>
 </head>
 <body>
@@ -152,23 +165,7 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
   </div>
 </div>
 
-<h2>实时天气与穿着建议</h2>
-<section class="weather-grid" id="weatherGrid">
-  <article class="weather-card" data-lat="34.0522" data-lon="-118.2437" data-label="洛杉矶 / Lynwood"><div class="weather-head"><div><div class="weather-city">洛杉矶 / Lynwood</div><div class="weather-sub">9/25、10/9</div></div><div class="wx-status">加载中…</div></div><div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div><div class="wx-suggest">联网后自动获取当地实时天气，并给出穿着建议。</div></article>
-  <article class="weather-card" data-lat="40.7608" data-lon="-111.8910" data-label="盐湖城"><div class="weather-head"><div><div class="weather-city">盐湖城</div><div class="weather-sub">9/26–9/27</div></div><div class="wx-status">加载中…</div></div><div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div><div class="wx-suggest">联网后自动获取当地实时天气，并给出穿着建议。</div></article>
-  <article class="weather-card" data-lat="44.6621" data-lon="-111.1041" data-label="West Yellowstone"><div class="weather-head"><div><div class="weather-city">West Yellowstone</div><div class="weather-sub">9/27–9/28</div></div><div class="wx-status">加载中…</div></div><div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div><div class="wx-suggest">联网后自动获取当地实时天气，并给出穿着建议。</div></article>
-  <article class="weather-card" data-lat="45.0319" data-lon="-110.7058" data-label="Gardiner"><div class="weather-head"><div><div class="weather-city">Gardiner</div><div class="weather-sub">9/28</div></div><div class="wx-status">加载中…</div></div><div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div><div class="wx-suggest">联网后自动获取当地实时天气，并给出穿着建议。</div></article>
-  <article class="weather-card" data-lat="44.4279" data-lon="-110.5885" data-label="Yellowstone Lake"><div class="weather-head"><div><div class="weather-city">Yellowstone Lake</div><div class="weather-sub">9/29</div></div><div class="wx-status">加载中…</div></div><div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div><div class="wx-suggest">联网后自动获取当地实时天气，并给出穿着建议。</div></article>
-  <article class="weather-card" data-lat="42.9677" data-lon="-110.9585" data-label="Thayne"><div class="weather-head"><div><div class="weather-city">Thayne</div><div class="weather-sub">9/30</div></div><div class="wx-status">加载中…</div></div><div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div><div class="wx-suggest">联网后自动获取当地实时天气，并给出穿着建议。</div></article>
-  <article class="weather-card" data-lat="38.5733" data-lon="-109.5498" data-label="Moab"><div class="weather-head"><div><div class="weather-city">Moab</div><div class="weather-sub">10/1</div></div><div class="wx-status">加载中…</div></div><div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div><div class="wx-suggest">联网后自动获取当地实时天气，并给出穿着建议。</div></article>
-  <article class="weather-card" data-lat="36.9147" data-lon="-111.4558" data-label="Page"><div class="weather-head"><div><div class="weather-city">Page</div><div class="weather-sub">10/2–10/5</div></div><div class="wx-status">加载中…</div></div><div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div><div class="wx-suggest">联网后自动获取当地实时天气，并给出穿着建议。</div></article>
-  <article class="weather-card" data-lat="37.1889" data-lon="-112.9986" data-label="Springdale / Zion"><div class="weather-head"><div><div class="weather-city">Springdale / Zion</div><div class="weather-sub">10/5–10/7</div></div><div class="wx-status">加载中…</div></div><div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div><div class="wx-suggest">联网后自动获取当地实时天气，并给出穿着建议。</div></article>
-  <article class="weather-card" data-lat="36.1699" data-lon="-115.1398" data-label="Las Vegas"><div class="weather-head"><div><div class="weather-city">Las Vegas</div><div class="weather-sub">10/7–10/8</div></div><div class="wx-status">加载中…</div></div><div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div><div class="wx-suggest">联网后自动获取当地实时天气，并给出穿着建议。</div></article>
-  <article class="weather-card" data-lat="33.9256" data-lon="-116.8764" data-label="Banning / Joshua Tree"><div class="weather-head"><div><div class="weather-city">Banning / Joshua Tree</div><div class="weather-sub">10/8–10/9</div></div><div class="wx-status">加载中…</div></div><div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div><div class="wx-suggest">联网后自动获取当地实时天气，并给出穿着建议。</div></article>
-</section>
-<div class="smallprint" style="margin:10px 0 0">实时天气卡片联网后自动刷新；离线打开时会保留占位说明，不影响其他行程内容阅读。</div>
-
-<h2>已确认交通</h2>
+<h2>已确认交通 / 门票</h2>
 <section class="transport">
 <article class="booking-card"><div class="booking-kicker">9/25 · 国际航班</div><h3>上海 → 首尔 → 洛杉矶</h3><p><strong>KE892</strong> PVG T1 08:50 → ICN T2 11:55</p><p><strong>KE017</strong> ICN T2 14:30 → LAX T-B 09:40</p><p>行李直挂 · 首尔转机 2小时35分</p></article>
 <article class="booking-card"><div class="booking-kicker">9/26 · 美国国内航班</div><h3>Los Angeles → Salt Lake City</h3><p><strong>Delta DL1434</strong></p><p>LAX 09:43 → SLC 12:39</p><p>2 位旅客 · 当地时间</p></article>
@@ -177,86 +174,7 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
 <article class="booking-card"><div class="booking-kicker">10/4 · 已购门票</div><h3>Upper Antelope Canyon</h3><p><strong>13:40–15:20 · 13:10 前报到</strong></p><p>Antelope Canyon Tours · Sightseer's Tour · 2 人</p><p><a href="https://www.google.com/maps/search/?api=1&amp;query=22%20S%20Lake%20Powell%20Blvd%2C%20Page%2C%20AZ%2086040" target="_blank">📍 22 S Lake Powell Blvd, Page, AZ 86040</a></p><p>全程按 Arizona / Phoenix Time（MST · UTC−7）</p></article>
 <article class="booking-card"><div class="booking-kicker">10/9–10/11 · 国际返程</div><h3>洛杉矶 → 首尔 → 上海</h3><p><strong>KE012</strong> LAX T-B 23:50 → ICN T2 10/11 04:40</p><p><strong>KE881</strong> ICN T2 08:25 → PVG T1 09:40</p><p>首尔转机 3小时45分</p></article>
 </section>
-<h2>已确认住宿</h2>
-<section class="grid">
-<article class="booking-card">
-<div class="booking-kicker">9/25 · 洛杉矶 / Lynwood</div>
-<h3>Airbnb · Motel Small Room</h3>
-<p><strong>入住</strong> 13:00 后　·　<strong>退房</strong> 9/26 11:00 前</p>
-<p><a href="https://www.google.com/maps/search/?api=1&amp;query=11112%20Long%20Beach%20Boulevard%2C%20Lynwood%2C%20CA%2090262" rel="noopener" target="_blank">📍 11112 Long Beach Boulevard, Lynwood, CA 90262</a></p>
-<p>☎ +1 323 942 7473</p>
-</article>
-<article class="booking-card">
-<div class="booking-kicker">9/26 · 盐湖城</div>
-<h3>Garner Hotel Salt Lake City Airport by IHG</h3>
-<p><strong>入住</strong> 15:00 后　·　<strong>退房</strong> 9/27 11:00 前</p>
-<p><a href="https://www.google.com/maps/search/?api=1&amp;query=223%20Jimmy%20Doolittle%20Rd%2C%20Salt%20Lake%20City%2C%20UT%2084116" rel="noopener" target="_blank">📍 223 Jimmy Doolittle Rd, Salt Lake City, UT 84116</a></p>
-<p>☎ +1 801 533 8878</p>
-</article>
-<article class="booking-card">
-<div class="booking-kicker">9/27 · West Yellowstone</div>
-<h3>Ho Hum Motel</h3>
-<p><strong>入住</strong> 16:00–21:00　·　<strong>退房</strong> 9/28 11:00 前</p>
-<p><a href="https://www.google.com/maps/search/?api=1&amp;query=126%20N%20Canyon%20St%2C%20West%20Yellowstone%2C%20MT%2059758" rel="noopener" target="_blank">📍 126 N Canyon St, West Yellowstone, MT 59758</a></p>
-<p>☎ +1 406 646 7746</p>
-</article>
-<article class="booking-card">
-<div class="booking-kicker">9/28 · Gardiner</div>
-<h3>Airbnb · Gardiner</h3>
-<p><strong>入住</strong> 按 Airbnb 房源说明　·　<strong>退房</strong> 9/29 · 按房源说明</p>
-<p><a href="https://www.google.com/maps/search/?api=1&amp;query=301%20South%20Yellowstone%20Street%2C%20Gardiner%2C%20MT%2059030" rel="noopener" target="_blank">📍 301 South Yellowstone Street, Gardiner, MT 59030</a></p>
-<p>☎ 未在确认单显示</p>
-</article>
-<article class="booking-card">
-<div class="booking-kicker">9/29 · Yellowstone</div>
-<h3>Lake Yellowstone Hotel &amp; Cabins</h3>
-<p><strong>入住</strong> 14:00 后　·　<strong>退房</strong> 9/30 12:00 前</p>
-<p><a href="https://www.google.com/maps/search/?api=1&amp;query=235%20Yellowstone%20Lake%20Rd%2C%20Yellowstone%20National%20Park%2C%20WY%2082190" rel="noopener" target="_blank">📍 235 Yellowstone Lake Rd, Yellowstone National Park, WY 82190</a></p>
-<p>☎ +1 307 344 7901</p>
-</article>
-<article class="booking-card">
-<div class="booking-kicker">9/30 · Thayne</div>
-<h3>Airbnb · Cozy camper in amazing setting</h3>
-<p><strong>入住</strong> 15:00 后　·　<strong>退房</strong> 10/1 10:00 前</p>
-<p><a href="https://www.google.com/maps/search/?api=1&amp;query=101089%20U.S.%2089%2C%20Thayne%2C%20WY%2083127" rel="noopener" target="_blank">📍 101089 U.S. 89, Thayne, WY 83127</a></p>
-<p>☎ +1 307 248 3316</p>
-</article>
-<article class="booking-card">
-<div class="booking-kicker">10/1 · Moab</div>
-<h3>Hotel 191 - Moab</h3>
-<p><strong>入住</strong> 15:00 后　·　<strong>退房</strong> 10/2 11:00 前</p>
-<p><a href="https://www.google.com/maps/search/?api=1&amp;query=1075%20US-191%2C%20Moab%2C%20UT%2084532" rel="noopener" target="_blank">📍 1075 US-191, Moab, UT 84532</a></p>
-<p>☎ +1 435 554 7777</p>
-</article>
-<article class="booking-card">
-<div class="booking-kicker">10/2–10/4 · Page</div>
-<h3>Travelodge by Wyndham Page, View of Lake Powell</h3>
-<p><strong>入住</strong> 10/2 15:00 后　·　<strong>退房</strong> 10/5 11:00 前</p>
-<p><a href="https://www.google.com/maps/search/?api=1&amp;query=207%20N%20Lake%20Powell%20Blvd%2C%20Page%2C%20AZ%2086040" rel="noopener" target="_blank">📍 207 N Lake Powell Blvd, Page, AZ 86040</a></p>
-<p>☎ +1 928 608 5324</p>
-</article>
-<article class="booking-card">
-<div class="booking-kicker">10/5–10/6 · Springdale</div>
-<h3>Hyatt Place Springdale / Zion National Park</h3>
-<p><strong>入住</strong> 10/5 15:00 后　·　<strong>退房</strong> 10/7 11:00 前</p>
-<p><a href="https://www.google.com/maps/search/?api=1&amp;query=1215%20Zion%20Park%20Blvd%2C%20Springdale%2C%20UT%2084767" rel="noopener" target="_blank">📍 1215 Zion Park Blvd, Springdale, UT 84767</a></p>
-<p>☎ +1 435 772 3200</p>
-</article>
-<article class="booking-card">
-<div class="booking-kicker">10/7 · Las Vegas</div>
-<h3>Horseshoe Las Vegas</h3>
-<p><strong>入住</strong> 16:00 后　·　<strong>退房</strong> 10/8 11:00 前</p>
-<p><a href="https://www.google.com/maps/search/?api=1&amp;query=3645%20Las%20Vegas%20Blvd%20S%2C%20Las%20Vegas%2C%20NV%2089109" rel="noopener" target="_blank">📍 3645 Las Vegas Blvd S, Las Vegas, NV 89109</a></p>
-<p>☎ +1 702 967 4111</p>
-</article>
-<article class="booking-card">
-<div class="booking-kicker">10/8 · Banning</div>
-<h3>Quality Inn Banning I-10</h3>
-<p><strong>入住</strong> 14:00 后　·　<strong>退房</strong> 10/9 11:00 前</p>
-<p><a href="https://www.google.com/maps/search/?api=1&amp;query=1690%20W%20Ramsey%20St%2C%20Banning%2C%20CA%2092220" rel="noopener" target="_blank">📍 1690 W Ramsey St, Banning, CA 92220</a></p>
-<p>☎ +1 951 849 8888</p>
-</article></section>
-<h2>逐日行程</h2>
+<h2>逐日行程 · 天气 / 住宿 / 安排</h2>
 <section class="day" id="2026-09-25" style="--day:#ef6c57">
 <div class="day-head">
 <div>
@@ -266,6 +184,17 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
 </div>
 <button aria-expanded="false" class="route-toggle" onclick="toggleRoute(this)">展开路线</button>
 </div>
+<div class="day-info-grid" id="dailyInfo-2026-09-25"><article class="day-info-card weather-card" data-lat="34.0522" data-lon="-118.2437" data-label="洛杉矶 / Lynwood">
+<div class="day-info-kicker">当地实时天气</div>
+<div class="weather-head"><div><div class="weather-city">洛杉矶 / Lynwood</div><div class="weather-sub">当前天气</div></div><div class="wx-status">加载中…</div></div>
+<div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div>
+<div class="wx-suggest">联网后自动获取实时天气，并给出建议穿着。</div></article><article class="day-info-card day-stay-card">
+<div class="day-info-kicker">今晚住宿</div>
+<div class="day-stay-name">Airbnb · Motel Small Room<span class="day-stay-status">已确认</span></div>
+<div class="day-stay-line">入住 13:00 后 · 9/26 11:00 前退房</div>
+<div class="day-stay-line"><a href="https://www.google.com/maps/search/?api=1&query=11112%20Long%20Beach%20Boulevard%2C%20Lynwood%2C%20CA%2090262" target="_blank" rel="noopener">📍 11112 Long Beach Boulevard, Lynwood, CA 90262</a></div>
+<div class="day-stay-line">☎ +1 323 942 7473</div></article></div>
+
 <div class="routebox">
 <svg class="daymap" role="img" viewbox="0 0 760 130"><path d="M40.0,60 Q125.0,35 210.0,88 Q295.0,113 380.0,60 Q465.0,35 550.0,88 Q635.0,113 720.0,60" style="stroke:#ef6c57"></path><circle cx="40.0" cy="60" r="5"></circle><text text-anchor="middle" x="40.0" y="88">Los Angeles Internationa</text><circle cx="210.0" cy="88" r="5"></circle><text text-anchor="middle" x="210.0" y="116">Beverly Hills</text><circle cx="380.0" cy="60" r="5"></circle><text text-anchor="middle" x="380.0" y="88">Hollywood Walk of Fame</text><circle cx="550.0" cy="88" r="5"></circle><text text-anchor="middle" x="550.0" y="116">Griffith Observatory</text><circle cx="720.0" cy="60" r="5"></circle><text text-anchor="middle" x="720.0" y="88">11112 Long Beach Boulevard</text></svg>
 <div class="route-actions">
@@ -321,6 +250,17 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
 </div>
 <button aria-expanded="false" class="route-toggle" onclick="toggleRoute(this)">展开路线</button>
 </div>
+<div class="day-info-grid" id="dailyInfo-2026-09-26"><article class="day-info-card weather-card" data-lat="40.7608" data-lon="-111.8910" data-label="盐湖城">
+<div class="day-info-kicker">当地实时天气</div>
+<div class="weather-head"><div><div class="weather-city">盐湖城</div><div class="weather-sub">当前天气</div></div><div class="wx-status">加载中…</div></div>
+<div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div>
+<div class="wx-suggest">联网后自动获取实时天气，并给出建议穿着。</div></article><article class="day-info-card day-stay-card">
+<div class="day-info-kicker">今晚住宿</div>
+<div class="day-stay-name">Garner Hotel Salt Lake City Airport by IHG<span class="day-stay-status">已确认</span></div>
+<div class="day-stay-line">入住 15:00 后 · 9/27 11:00 前退房</div>
+<div class="day-stay-line"><a href="https://www.google.com/maps/search/?api=1&query=223%20Jimmy%20Doolittle%20Rd%2C%20Salt%20Lake%20City%2C%20UT%2084116" target="_blank" rel="noopener">📍 223 Jimmy Doolittle Rd, Salt Lake City, UT 84116</a></div>
+<div class="day-stay-line">☎ +1 801 533 8878</div></article></div>
+
 <div class="routebox">
 <svg class="daymap" role="img" viewbox="0 0 760 130"><path d="M40.0,60 Q108.0,35 176.0,88 Q244.0,113 312.0,60 Q380.0,35 448.0,88 Q516.0,113 584.0,60 Q652.0,35 720.0,88" style="stroke:#f4a340"></path><circle cx="40.0" cy="60" r="5"></circle><text text-anchor="middle" x="40.0" y="88">11112 Long Beach Boulevard</text><circle cx="176.0" cy="88" r="5"></circle><text text-anchor="middle" x="176.0" y="116">5251 W 98th St</text><circle cx="312.0" cy="60" r="5"></circle><text text-anchor="middle" x="312.0" y="88">Los Angeles Internationa</text><circle cx="448.0" cy="88" r="5"></circle><text text-anchor="middle" x="448.0" y="116">Salt Lake City Internati</text><circle cx="584.0" cy="60" r="5"></circle><text text-anchor="middle" x="584.0" y="88">Antelope Island State Pa</text><circle cx="720.0" cy="88" r="5"></circle><text text-anchor="middle" x="720.0" y="116">223 Jimmy Doolittle Rd</text></svg>
 <div class="route-actions">
@@ -364,6 +304,17 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
 </div>
 <button aria-expanded="false" class="route-toggle" onclick="toggleRoute(this)">展开路线</button>
 </div>
+<div class="day-info-grid" id="dailyInfo-2026-09-27"><article class="day-info-card weather-card" data-lat="44.6621" data-lon="-111.1041" data-label="West Yellowstone">
+<div class="day-info-kicker">当地实时天气</div>
+<div class="weather-head"><div><div class="weather-city">West Yellowstone</div><div class="weather-sub">当前天气</div></div><div class="wx-status">加载中…</div></div>
+<div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div>
+<div class="wx-suggest">联网后自动获取实时天气，并给出建议穿着。</div></article><article class="day-info-card day-stay-card">
+<div class="day-info-kicker">今晚住宿</div>
+<div class="day-stay-name">Ho Hum Motel<span class="day-stay-status">已确认</span></div>
+<div class="day-stay-line">入住 16:00–21:00 · 9/28 11:00 前退房</div>
+<div class="day-stay-line"><a href="https://www.google.com/maps/search/?api=1&query=126%20N%20Canyon%20St%2C%20West%20Yellowstone%2C%20MT%2059758" target="_blank" rel="noopener">📍 126 N Canyon St, West Yellowstone, MT 59758</a></div>
+<div class="day-stay-line">☎ +1 406 646 7746</div></article></div>
+
 <div class="routebox">
 <svg class="daymap" role="img" viewbox="0 0 760 130"><path d="M40.0,60 Q210.0,35 380.0,88 Q550.0,113 720.0,60" style="stroke:#c79a32"></path><circle cx="40.0" cy="60" r="5"></circle><text text-anchor="middle" x="40.0" y="88">Utah State Capitol</text><circle cx="380.0" cy="88" r="5"></circle><text text-anchor="middle" x="380.0" y="116">Temple Square</text><circle cx="720.0" cy="60" r="5"></circle><text text-anchor="middle" x="720.0" y="88">126 N Canyon St</text></svg>
 <div class="route-actions">
@@ -403,6 +354,17 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
 </div>
 <button aria-expanded="false" class="route-toggle" onclick="toggleRoute(this)">展开路线</button>
 </div>
+<div class="day-info-grid" id="dailyInfo-2026-09-28"><article class="day-info-card weather-card" data-lat="44.5990" data-lon="-110.5472" data-label="Yellowstone / Gardiner">
+<div class="day-info-kicker">当地实时天气</div>
+<div class="weather-head"><div><div class="weather-city">Yellowstone / Gardiner</div><div class="weather-sub">当前天气</div></div><div class="wx-status">加载中…</div></div>
+<div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div>
+<div class="wx-suggest">联网后自动获取实时天气，并给出建议穿着。</div></article><article class="day-info-card day-stay-card">
+<div class="day-info-kicker">今晚住宿</div>
+<div class="day-stay-name">Airbnb · Gardiner<span class="day-stay-status">已确认</span></div>
+<div class="day-stay-line">按 Airbnb 房源说明入住 · 9/29 退房</div>
+<div class="day-stay-line"><a href="https://www.google.com/maps/search/?api=1&query=301%20South%20Yellowstone%20Street%2C%20Gardiner%2C%20MT%2059030" target="_blank" rel="noopener">📍 301 South Yellowstone Street, Gardiner, MT 59030</a></div>
+<div class="day-stay-line">☎ 未提供</div></article></div>
+
 <div class="routebox">
 <svg class="daymap" role="img" viewbox="0 0 760 130"><path d="M40.0,60 Q125.0,35 210.0,88 Q295.0,113 380.0,60 Q465.0,35 550.0,88 Q635.0,113 720.0,60" style="stroke:#6b9f73"></path><circle cx="40.0" cy="60" r="5"></circle><text text-anchor="middle" x="40.0" y="88">126 N Canyon St</text><circle cx="210.0" cy="88" r="5"></circle><text text-anchor="middle" x="210.0" y="116">Old Faithful</text><circle cx="380.0" cy="60" r="5"></circle><text text-anchor="middle" x="380.0" y="88">Grand Prismatic Spring</text><circle cx="550.0" cy="88" r="5"></circle><text text-anchor="middle" x="550.0" y="116">Norris Geyser Basin</text><circle cx="720.0" cy="60" r="5"></circle><text text-anchor="middle" x="720.0" y="88">Gardiner</text></svg>
 <div class="route-actions">
@@ -450,6 +412,17 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
 </div>
 <button aria-expanded="false" class="route-toggle" onclick="toggleRoute(this)">展开路线</button>
 </div>
+<div class="day-info-grid" id="dailyInfo-2026-09-29"><article class="day-info-card weather-card" data-lat="44.4279" data-lon="-110.5885" data-label="Yellowstone Lake">
+<div class="day-info-kicker">当地实时天气</div>
+<div class="weather-head"><div><div class="weather-city">Yellowstone Lake</div><div class="weather-sub">当前天气</div></div><div class="wx-status">加载中…</div></div>
+<div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div>
+<div class="wx-suggest">联网后自动获取实时天气，并给出建议穿着。</div></article><article class="day-info-card day-stay-card">
+<div class="day-info-kicker">今晚住宿</div>
+<div class="day-stay-name">Lake Yellowstone Hotel &amp; Cabins<span class="day-stay-status">已确认</span></div>
+<div class="day-stay-line">入住 14:00 后 · 9/30 12:00 前退房</div>
+<div class="day-stay-line"><a href="https://www.google.com/maps/search/?api=1&query=235%20Yellowstone%20Lake%20Rd%2C%20Yellowstone%20National%20Park%2C%20WY%2082190" target="_blank" rel="noopener">📍 235 Yellowstone Lake Rd, Yellowstone National Park, WY 82190</a></div>
+<div class="day-stay-line">☎ +1 307 344 7901</div></article></div>
+
 <div class="routebox">
 <svg class="daymap" role="img" viewbox="0 0 760 130"><path d="M40.0,60 Q96.66666666666666,35 153.33333333333331,88 Q209.99999999999997,113 266.66666666666663,60 Q323.3333333333333,35 380.0,88 Q436.66666666666663,113 493.3333333333333,60 Q550.0,35 606.6666666666666,88 Q663.3333333333333,113 720.0,60" style="stroke:#3d8d92"></path><circle cx="40.0" cy="60" r="5"></circle><text text-anchor="middle" x="40.0" y="88">Gardiner</text><circle cx="153.33333333333331" cy="88" r="5"></circle><text text-anchor="middle" x="153.33333333333331" y="116">Mammoth Hot Springs</text><circle cx="266.66666666666663" cy="60" r="5"></circle><text text-anchor="middle" x="266.66666666666663" y="88">Lamar Valley</text><circle cx="380.0" cy="88" r="5"></circle><text text-anchor="middle" x="380.0" y="116">Tower Fall</text><circle cx="493.3333333333333" cy="60" r="5"></circle><text text-anchor="middle" x="493.3333333333333" y="88">Grand Canyon of the Yell</text><circle cx="606.6666666666666" cy="88" r="5"></circle><text text-anchor="middle" x="606.6666666666666" y="116">Hayden Valley</text><circle cx="720.0" cy="60" r="5"></circle><text text-anchor="middle" x="720.0" y="88">235 Yellowstone Lake Rd</text></svg>
 <div class="route-actions">
@@ -493,6 +466,17 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
 </div>
 <button aria-expanded="false" class="route-toggle" onclick="toggleRoute(this)">展开路线</button>
 </div>
+<div class="day-info-grid" id="dailyInfo-2026-09-30"><article class="day-info-card weather-card" data-lat="43.7904" data-lon="-110.6818" data-label="Grand Teton / Thayne">
+<div class="day-info-kicker">当地实时天气</div>
+<div class="weather-head"><div><div class="weather-city">Grand Teton / Thayne</div><div class="weather-sub">当前天气</div></div><div class="wx-status">加载中…</div></div>
+<div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div>
+<div class="wx-suggest">联网后自动获取实时天气，并给出建议穿着。</div></article><article class="day-info-card day-stay-card">
+<div class="day-info-kicker">今晚住宿</div>
+<div class="day-stay-name">Airbnb · Cozy camper in amazing setting<span class="day-stay-status">已确认</span></div>
+<div class="day-stay-line">入住 15:00 后 · 10/1 10:00 前退房</div>
+<div class="day-stay-line"><a href="https://www.google.com/maps/search/?api=1&query=101089%20U.S.%2089%2C%20Thayne%2C%20WY%2083127" target="_blank" rel="noopener">📍 101089 U.S. 89, Thayne, WY 83127</a></div>
+<div class="day-stay-line">☎ +1 307 248 3316</div></article></div>
+
 <div class="routebox">
 <svg class="daymap" role="img" viewbox="0 0 760 130"><path d="M40.0,60 Q108.0,35 176.0,88 Q244.0,113 312.0,60 Q380.0,35 448.0,88 Q516.0,113 584.0,60 Q652.0,35 720.0,88" style="stroke:#4a77b3"></path><circle cx="40.0" cy="60" r="5"></circle><text text-anchor="middle" x="40.0" y="88">235 Yellowstone Lake Rd</text><circle cx="176.0" cy="88" r="5"></circle><text text-anchor="middle" x="176.0" y="116">West Thumb Geyser Basin</text><circle cx="312.0" cy="60" r="5"></circle><text text-anchor="middle" x="312.0" y="88">Oxbow Bend</text><circle cx="448.0" cy="88" r="5"></circle><text text-anchor="middle" x="448.0" y="116">Jenny Lake</text><circle cx="584.0" cy="60" r="5"></circle><text text-anchor="middle" x="584.0" y="88">Mormon Row</text><circle cx="720.0" cy="88" r="5"></circle><text text-anchor="middle" x="720.0" y="116">101089 U.S. 89</text></svg>
 <div class="route-actions">
@@ -536,6 +520,17 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
 </div>
 <button aria-expanded="false" class="route-toggle" onclick="toggleRoute(this)">展开路线</button>
 </div>
+<div class="day-info-grid" id="dailyInfo-2026-10-01"><article class="day-info-card weather-card" data-lat="38.5733" data-lon="-109.5498" data-label="Moab">
+<div class="day-info-kicker">当地实时天气</div>
+<div class="weather-head"><div><div class="weather-city">Moab</div><div class="weather-sub">当前天气</div></div><div class="wx-status">加载中…</div></div>
+<div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div>
+<div class="wx-suggest">联网后自动获取实时天气，并给出建议穿着。</div></article><article class="day-info-card day-stay-card">
+<div class="day-info-kicker">今晚住宿</div>
+<div class="day-stay-name">Hotel 191 - Moab<span class="day-stay-status">已确认</span></div>
+<div class="day-stay-line">入住 15:00 后 · 10/2 11:00 前退房</div>
+<div class="day-stay-line"><a href="https://www.google.com/maps/search/?api=1&query=1075%20US-191%2C%20Moab%2C%20UT%2084532" target="_blank" rel="noopener">📍 1075 US-191, Moab, UT 84532</a></div>
+<div class="day-stay-line">☎ +1 435 554 7777</div></article></div>
+
 <div class="routebox">
 <svg class="daymap" role="img" viewbox="0 0 760 130"><path d="M40.0,60 Q380.0,35 720.0,88" style="stroke:#6a66b7"></path><circle cx="40.0" cy="60" r="5"></circle><text text-anchor="middle" x="40.0" y="88">101089 U.S. 89</text><circle cx="720.0" cy="88" r="5"></circle><text text-anchor="middle" x="720.0" y="116">1075 US-191</text></svg>
 <div class="route-actions">
@@ -571,6 +566,17 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
 </div>
 <button aria-expanded="false" class="route-toggle" onclick="toggleRoute(this)">展开路线</button>
 </div>
+<div class="day-info-grid" id="dailyInfo-2026-10-02"><article class="day-info-card weather-card" data-lat="36.9829" data-lon="-110.1112" data-label="Monument Valley / Page">
+<div class="day-info-kicker">当地实时天气</div>
+<div class="weather-head"><div><div class="weather-city">Monument Valley / Page</div><div class="weather-sub">当前天气</div></div><div class="wx-status">加载中…</div></div>
+<div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div>
+<div class="wx-suggest">联网后自动获取实时天气，并给出建议穿着。</div></article><article class="day-info-card day-stay-card">
+<div class="day-info-kicker">今晚住宿</div>
+<div class="day-stay-name">Travelodge by Wyndham Page, View of Lake Powell<span class="day-stay-status">已确认</span></div>
+<div class="day-stay-line">10/2 15:00 后入住 · 连住 3 晚</div>
+<div class="day-stay-line"><a href="https://www.google.com/maps/search/?api=1&query=207%20N%20Lake%20Powell%20Blvd%2C%20Page%2C%20AZ%2086040" target="_blank" rel="noopener">📍 207 N Lake Powell Blvd, Page, AZ 86040</a></div>
+<div class="day-stay-line">☎ +1 928 608 5324</div></article></div>
+
 <div class="routebox">
 <svg class="daymap" role="img" viewbox="0 0 760 130"><path d="M40.0,60 Q153.33333333333331,35 266.66666666666663,88 Q380.0,113 493.3333333333333,60 Q606.6666666666666,35 720.0,88" style="stroke:#8d5ca6"></path><circle cx="40.0" cy="60" r="5"></circle><text text-anchor="middle" x="40.0" y="88">1075 US-191</text><circle cx="266.66666666666663" cy="88" r="5"></circle><text text-anchor="middle" x="266.66666666666663" y="116">Arches National Park</text><circle cx="493.3333333333333" cy="60" r="5"></circle><text text-anchor="middle" x="493.3333333333333" y="88">Monument Valley Tribal P</text><circle cx="720.0" cy="88" r="5"></circle><text text-anchor="middle" x="720.0" y="116">207 N Lake Powell Blvd</text></svg>
 <div class="route-actions">
@@ -618,6 +624,17 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
 </div>
 <button aria-expanded="false" class="route-toggle" onclick="toggleRoute(this)">展开路线</button>
 </div>
+<div class="day-info-grid" id="dailyInfo-2026-10-03"><article class="day-info-card weather-card" data-lat="36.0544" data-lon="-112.1401" data-label="Grand Canyon South Rim">
+<div class="day-info-kicker">当地实时天气</div>
+<div class="weather-head"><div><div class="weather-city">Grand Canyon South Rim</div><div class="weather-sub">当前天气</div></div><div class="wx-status">加载中…</div></div>
+<div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div>
+<div class="wx-suggest">联网后自动获取实时天气，并给出建议穿着。</div></article><article class="day-info-card day-stay-card">
+<div class="day-info-kicker">今晚住宿</div>
+<div class="day-stay-name">Travelodge by Wyndham Page, View of Lake Powell<span class="day-stay-status">已确认</span></div>
+<div class="day-stay-line">连续入住 · 第 2 晚</div>
+<div class="day-stay-line"><a href="https://www.google.com/maps/search/?api=1&query=207%20N%20Lake%20Powell%20Blvd%2C%20Page%2C%20AZ%2086040" target="_blank" rel="noopener">📍 207 N Lake Powell Blvd, Page, AZ 86040</a></div>
+<div class="day-stay-line">☎ +1 928 608 5324</div></article></div>
+
 <div class="routebox">
 <svg class="daymap" role="img" viewbox="0 0 760 130"><path d="M40.0,60 Q96.66666666666666,35 153.33333333333331,88 Q209.99999999999997,113 266.66666666666663,60 Q323.3333333333333,35 380.0,88 Q436.66666666666663,113 493.3333333333333,60 Q550.0,35 606.6666666666666,88 Q663.3333333333333,113 720.0,60" style="stroke:#b65b85"></path><circle cx="40.0" cy="60" r="5"></circle><text text-anchor="middle" x="40.0" y="88">207 N Lake Powell Blvd</text><circle cx="153.33333333333331" cy="88" r="5"></circle><text text-anchor="middle" x="153.33333333333331" y="116">Desert View Watchtower</text><circle cx="266.66666666666663" cy="60" r="5"></circle><text text-anchor="middle" x="266.66666666666663" y="88">Navajo Point</text><circle cx="380.0" cy="88" r="5"></circle><text text-anchor="middle" x="380.0" y="116">Grandview Point</text><circle cx="493.3333333333333" cy="60" r="5"></circle><text text-anchor="middle" x="493.3333333333333" y="88">Grand Canyon Village</text><circle cx="606.6666666666666" cy="88" r="5"></circle><text text-anchor="middle" x="606.6666666666666" y="116">Mather Point</text><circle cx="720.0" cy="60" r="5"></circle><text text-anchor="middle" x="720.0" y="88">207 N Lake Powell Blvd</text></svg>
 <div class="route-actions">
@@ -665,6 +682,17 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
 </div>
 <button aria-expanded="false" class="route-toggle" onclick="toggleRoute(this)">展开路线</button>
 </div>
+<div class="day-info-grid" id="dailyInfo-2026-10-04"><article class="day-info-card weather-card" data-lat="36.9147" data-lon="-111.4558" data-label="Page / Antelope Canyon">
+<div class="day-info-kicker">当地实时天气</div>
+<div class="weather-head"><div><div class="weather-city">Page / Antelope Canyon</div><div class="weather-sub">当前天气</div></div><div class="wx-status">加载中…</div></div>
+<div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div>
+<div class="wx-suggest">联网后自动获取实时天气，并给出建议穿着。</div></article><article class="day-info-card day-stay-card">
+<div class="day-info-kicker">今晚住宿</div>
+<div class="day-stay-name">Travelodge by Wyndham Page, View of Lake Powell<span class="day-stay-status">已确认</span></div>
+<div class="day-stay-line">连续入住 · 第 3 晚 · 10/5 11:00 前退房</div>
+<div class="day-stay-line"><a href="https://www.google.com/maps/search/?api=1&query=207%20N%20Lake%20Powell%20Blvd%2C%20Page%2C%20AZ%2086040" target="_blank" rel="noopener">📍 207 N Lake Powell Blvd, Page, AZ 86040</a></div>
+<div class="day-stay-line">☎ +1 928 608 5324</div></article></div>
+
 <div class="routebox">
 <svg class="daymap" role="img" viewbox="0 0 760 130"><path d="M40.0,60 Q108.0,35 176.0,88 Q244.0,113 312.0,60 Q380.0,35 448.0,88 Q516.0,113 584.0,60 Q652.0,35 720.0,88" style="stroke:#c95b6d"></path><circle cx="40.0" cy="60" r="5"></circle><text text-anchor="middle" x="40.0" y="88">207 N Lake Powell Blvd</text><circle cx="176.0" cy="88" r="5"></circle><text text-anchor="middle" x="176.0" y="116">Horseshoe Bend</text><circle cx="312.0" cy="60" r="5"></circle><text text-anchor="middle" x="312.0" y="88">Glen Canyon Dam Overlook</text><circle cx="448.0" cy="88" r="5"></circle><text text-anchor="middle" x="448.0" y="116">22 S Lake Powell Blvd</text><circle cx="584.0" cy="60" r="5"></circle><text text-anchor="middle" x="584.0" y="88">Wahweap Overlook</text><circle cx="720.0" cy="88" r="5"></circle><text text-anchor="middle" x="720.0" y="116">207 N Lake Powell Blvd</text></svg>
 <div class="route-actions">
@@ -712,6 +740,17 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
 </div>
 <button aria-expanded="false" class="route-toggle" onclick="toggleRoute(this)">展开路线</button>
 </div>
+<div class="day-info-grid" id="dailyInfo-2026-10-05"><article class="day-info-card weather-card" data-lat="37.1889" data-lon="-112.9986" data-label="Springdale / Zion">
+<div class="day-info-kicker">当地实时天气</div>
+<div class="weather-head"><div><div class="weather-city">Springdale / Zion</div><div class="weather-sub">当前天气</div></div><div class="wx-status">加载中…</div></div>
+<div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div>
+<div class="wx-suggest">联网后自动获取实时天气，并给出建议穿着。</div></article><article class="day-info-card day-stay-card">
+<div class="day-info-kicker">今晚住宿</div>
+<div class="day-stay-name">Hyatt Place Springdale / Zion National Park<span class="day-stay-status">已确认</span></div>
+<div class="day-stay-line">10/5 15:00 后入住 · 连住 2 晚</div>
+<div class="day-stay-line"><a href="https://www.google.com/maps/search/?api=1&query=1215%20Zion%20Park%20Blvd%2C%20Springdale%2C%20UT%2084767" target="_blank" rel="noopener">📍 1215 Zion Park Blvd, Springdale, UT 84767</a></div>
+<div class="day-stay-line">☎ +1 435 772 3200</div></article></div>
+
 <div class="routebox">
 <svg class="daymap" role="img" viewbox="0 0 760 130"><path d="M40.0,60 Q153.33333333333331,35 266.66666666666663,88 Q380.0,113 493.3333333333333,60 Q606.6666666666666,35 720.0,88" style="stroke:#dd6c4d"></path><circle cx="40.0" cy="60" r="5"></circle><text text-anchor="middle" x="40.0" y="88">207 N Lake Powell Blvd</text><circle cx="266.66666666666663" cy="88" r="5"></circle><text text-anchor="middle" x="266.66666666666663" y="116">Wahweap Overlook</text><circle cx="493.3333333333333" cy="60" r="5"></circle><text text-anchor="middle" x="493.3333333333333" y="88">Kanab</text><circle cx="720.0" cy="88" r="5"></circle><text text-anchor="middle" x="720.0" y="116">1215 Zion Park Blvd</text></svg>
 <div class="route-actions">
@@ -751,6 +790,17 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
 </div>
 <button aria-expanded="false" class="route-toggle" onclick="toggleRoute(this)">展开路线</button>
 </div>
+<div class="day-info-grid" id="dailyInfo-2026-10-06"><article class="day-info-card weather-card" data-lat="37.2000" data-lon="-112.9870" data-label="Zion National Park">
+<div class="day-info-kicker">当地实时天气</div>
+<div class="weather-head"><div><div class="weather-city">Zion National Park</div><div class="weather-sub">当前天气</div></div><div class="wx-status">加载中…</div></div>
+<div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div>
+<div class="wx-suggest">联网后自动获取实时天气，并给出建议穿着。</div></article><article class="day-info-card day-stay-card">
+<div class="day-info-kicker">今晚住宿</div>
+<div class="day-stay-name">Hyatt Place Springdale / Zion National Park<span class="day-stay-status">已确认</span></div>
+<div class="day-stay-line">连续入住 · 第 2 晚 · 10/7 11:00 前退房</div>
+<div class="day-stay-line"><a href="https://www.google.com/maps/search/?api=1&query=1215%20Zion%20Park%20Blvd%2C%20Springdale%2C%20UT%2084767" target="_blank" rel="noopener">📍 1215 Zion Park Blvd, Springdale, UT 84767</a></div>
+<div class="day-stay-line">☎ +1 435 772 3200</div></article></div>
+
 <div class="routebox">
 <svg class="daymap" role="img" viewbox="0 0 760 130"><path d="M40.0,60 Q96.66666666666666,35 153.33333333333331,88 Q209.99999999999997,113 266.66666666666663,60 Q323.3333333333333,35 380.0,88 Q436.66666666666663,113 493.3333333333333,60 Q550.0,35 606.6666666666666,88 Q663.3333333333333,113 720.0,60" style="stroke:#da8a3a"></path><circle cx="40.0" cy="60" r="5"></circle><text text-anchor="middle" x="40.0" y="88">1215 Zion Park Blvd</text><circle cx="153.33333333333331" cy="88" r="5"></circle><text text-anchor="middle" x="153.33333333333331" y="116">Zion Canyon Visitor Cent</text><circle cx="266.66666666666663" cy="60" r="5"></circle><text text-anchor="middle" x="266.66666666666663" y="88">Temple of Sinawava</text><circle cx="380.0" cy="88" r="5"></circle><text text-anchor="middle" x="380.0" y="116">Riverside Walk</text><circle cx="493.3333333333333" cy="60" r="5"></circle><text text-anchor="middle" x="493.3333333333333" y="88">Zion Lodge</text><circle cx="606.6666666666666" cy="88" r="5"></circle><text text-anchor="middle" x="606.6666666666666" y="116">Emerald Pools Trailhead</text><circle cx="720.0" cy="60" r="5"></circle><text text-anchor="middle" x="720.0" y="88">1215 Zion Park Blvd</text></svg>
 <div class="route-actions">
@@ -794,6 +844,17 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
 </div>
 <button aria-expanded="false" class="route-toggle" onclick="toggleRoute(this)">展开路线</button>
 </div>
+<div class="day-info-grid" id="dailyInfo-2026-10-07"><article class="day-info-card weather-card" data-lat="36.1699" data-lon="-115.1398" data-label="Las Vegas">
+<div class="day-info-kicker">当地实时天气</div>
+<div class="weather-head"><div><div class="weather-city">Las Vegas</div><div class="weather-sub">当前天气</div></div><div class="wx-status">加载中…</div></div>
+<div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div>
+<div class="wx-suggest">联网后自动获取实时天气，并给出建议穿着。</div></article><article class="day-info-card day-stay-card">
+<div class="day-info-kicker">今晚住宿</div>
+<div class="day-stay-name">Horseshoe Las Vegas<span class="day-stay-status">已确认</span></div>
+<div class="day-stay-line">入住 16:00 后 · 10/8 11:00 前退房</div>
+<div class="day-stay-line"><a href="https://www.google.com/maps/search/?api=1&query=3645%20Las%20Vegas%20Blvd%20S%2C%20Las%20Vegas%2C%20NV%2089109" target="_blank" rel="noopener">📍 3645 Las Vegas Blvd S, Las Vegas, NV 89109</a></div>
+<div class="day-stay-line">☎ +1 702 967 4111</div></article></div>
+
 <div class="routebox">
 <svg class="daymap" role="img" viewbox="0 0 760 130"><path d="M40.0,60 Q125.0,35 210.0,88 Q295.0,113 380.0,60 Q465.0,35 550.0,88 Q635.0,113 720.0,60" style="stroke:#b7a13a"></path><circle cx="40.0" cy="60" r="5"></circle><text text-anchor="middle" x="40.0" y="88">1215 Zion Park Blvd</text><circle cx="210.0" cy="88" r="5"></circle><text text-anchor="middle" x="210.0" y="116">Horseshoe Las Vegas</text><circle cx="380.0" cy="60" r="5"></circle><text text-anchor="middle" x="380.0" y="88">Sphere</text><circle cx="550.0" cy="88" r="5"></circle><text text-anchor="middle" x="550.0" y="116">Bellagio Fountains</text><circle cx="720.0" cy="60" r="5"></circle><text text-anchor="middle" x="720.0" y="88">Horseshoe Las Vegas</text></svg>
 <div class="route-actions">
@@ -833,6 +894,17 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
 </div>
 <button aria-expanded="false" class="route-toggle" onclick="toggleRoute(this)">展开路线</button>
 </div>
+<div class="day-info-grid" id="dailyInfo-2026-10-08"><article class="day-info-card weather-card" data-lat="34.1347" data-lon="-116.3190" data-label="Joshua Tree / Banning">
+<div class="day-info-kicker">当地实时天气</div>
+<div class="weather-head"><div><div class="weather-city">Joshua Tree / Banning</div><div class="weather-sub">当前天气</div></div><div class="wx-status">加载中…</div></div>
+<div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div>
+<div class="wx-suggest">联网后自动获取实时天气，并给出建议穿着。</div></article><article class="day-info-card day-stay-card">
+<div class="day-info-kicker">今晚住宿</div>
+<div class="day-stay-name">Quality Inn Banning I-10<span class="day-stay-status">已确认</span></div>
+<div class="day-stay-line">入住 14:00 后 · 10/9 11:00 前退房</div>
+<div class="day-stay-line"><a href="https://www.google.com/maps/search/?api=1&query=1690%20W%20Ramsey%20St%2C%20Banning%2C%20CA%2092220" target="_blank" rel="noopener">📍 1690 W Ramsey St, Banning, CA 92220</a></div>
+<div class="day-stay-line">☎ +1 951 849 8888</div></article></div>
+
 <div class="routebox">
 <svg class="daymap" role="img" viewbox="0 0 760 130"><path d="M40.0,60 Q108.0,35 176.0,88 Q244.0,113 312.0,60 Q380.0,35 448.0,88 Q516.0,113 584.0,60 Q652.0,35 720.0,88" style="stroke:#738f59"></path><circle cx="40.0" cy="60" r="5"></circle><text text-anchor="middle" x="40.0" y="88">Horseshoe Las Vegas</text><circle cx="176.0" cy="88" r="5"></circle><text text-anchor="middle" x="176.0" y="116">Joshua Tree National Par</text><circle cx="312.0" cy="60" r="5"></circle><text text-anchor="middle" x="312.0" y="88">Keys View</text><circle cx="448.0" cy="88" r="5"></circle><text text-anchor="middle" x="448.0" y="116">Hidden Valley</text><circle cx="584.0" cy="60" r="5"></circle><text text-anchor="middle" x="584.0" y="88">Desert Hills Premium Out</text><circle cx="720.0" cy="88" r="5"></circle><text text-anchor="middle" x="720.0" y="116">1690 W Ramsey St</text></svg>
 <div class="route-actions">
@@ -872,6 +944,17 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
 </div>
 <button aria-expanded="false" class="route-toggle" onclick="toggleRoute(this)">展开路线</button>
 </div>
+<div class="day-info-grid" id="dailyInfo-2026-10-09"><article class="day-info-card weather-card" data-lat="34.0195" data-lon="-118.4912" data-label="Santa Monica / Los Angeles">
+<div class="day-info-kicker">当地实时天气</div>
+<div class="weather-head"><div><div class="weather-city">Santa Monica / Los Angeles</div><div class="weather-sub">当前天气</div></div><div class="wx-status">加载中…</div></div>
+<div class="wx-temp">--°C</div><div class="wx-line">--</div><div class="wx-line">最高 --° / 最低 --°</div>
+<div class="wx-suggest">联网后自动获取实时天气，并给出建议穿着。</div></article><article class="day-info-card day-stay-card">
+<div class="day-info-kicker">今晚安排</div>
+<div class="day-stay-name">无酒店 · 当晚离境<span class="day-stay-status">已确认</span></div>
+<div class="day-stay-line">KE012 · LAX 23:50 起飞</div>
+<div class="day-stay-line"><a href="https://www.google.com/maps/search/?api=1&query=Los%20Angeles%20International%20Airport" target="_blank" rel="noopener">📍 Los Angeles International Airport</a></div>
+</article></div>
+
 <div class="routebox">
 <svg class="daymap" role="img" viewbox="0 0 760 130"><path d="M40.0,60 Q153.33333333333331,35 266.66666666666663,88 Q380.0,113 493.3333333333333,60 Q606.6666666666666,35 720.0,88" style="stroke:#4d8b7e"></path><circle cx="40.0" cy="60" r="5"></circle><text text-anchor="middle" x="40.0" y="88">1690 W Ramsey St</text><circle cx="266.66666666666663" cy="88" r="5"></circle><text text-anchor="middle" x="266.66666666666663" y="116">Santa Monica Pier</text><circle cx="493.3333333333333" cy="60" r="5"></circle><text text-anchor="middle" x="493.3333333333333" y="88">5251 W 98th St</text><circle cx="720.0" cy="88" r="5"></circle><text text-anchor="middle" x="720.0" y="116">Los Angeles Internationa</text></svg>
 <div class="route-actions">
