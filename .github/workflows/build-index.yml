@@ -1,32 +1,124 @@
-name: Build single-file travel handbook
+name: Maintain travel handbook
 
 on:
   push:
     branches: [main]
     paths:
-      - 'parts/**'
+      - 'index.html'
       - '.github/workflows/build-index.yml'
 
 permissions:
   contents: write
 
 jobs:
-  build:
+  maintain:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Assemble index.html
+      - name: Add zoomable overview map and sync public copy
         run: |
-          cat parts/part-* > index.html
-          mkdir -p public
-          cp index.html public/index.html
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          text = p.read_text(encoding='utf-8')
+
+          text = text.replace(
+              '<p><a href="https://www.google.com/maps/search/?api=1&amp;query=Gardiner" rel="noopener" target="_blank">📍 具体地址请在 Airbnb App 中查看</a></p>',
+              '<p><a href="https://www.google.com/maps/search/?api=1&amp;query=301%20South%20Yellowstone%20Street%2C%20Gardiner%2C%20MT%2059030" rel="noopener" target="_blank">📍 301 South Yellowstone Street, Gardiner, MT 59030</a></p>'
+          )
+          text = text.replace('Gardiner%2C%20MT', '301%20South%20Yellowstone%20Street%2C%20Gardiner%2C%20MT%2059030')
+          text = text.replace('⚠ 新住宿为 Gardiner Airbnb；公开确认单未显示街道地址，出发前在 Airbnb App 中保存离线地址。',
+                              '⚠ Gardiner Airbnb 地址已确认：301 South Yellowstone Street, Gardiner, MT 59030。建议提前保存离线地图。')
+
+          if 'id="overviewMapModal"' not in text:
+              css_anchor = '.map-svg{width:100%;height:auto;background:#fbfcfd;border-radius:16px}'
+              css = '''
+          .map-toolbar{display:flex;justify-content:flex-end;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+          .map-zoom-btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:9px 14px;font-weight:750;cursor:pointer;min-height:42px}
+          .map-zoom-btn:hover{background:var(--soft)}
+          .map-modal{position:fixed;inset:0;z-index:9999;background:rgba(15,23,42,.72);display:none;align-items:center;justify-content:center;padding:18px}
+          .map-modal.open{display:flex}
+          .map-modal-panel{width:min(1200px,96vw);height:min(840px,92vh);background:#fff;border-radius:22px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.28)}
+          .map-modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);background:#fff}
+          .map-modal-title{font-weight:850;font-size:18px}.map-modal-actions{display:flex;gap:8px;flex-wrap:wrap}
+          .map-modal-actions button{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:12px;min-width:44px;min-height:44px;padding:8px 12px;font-weight:800;cursor:pointer}
+          .map-modal-actions button:hover{background:var(--soft)}
+          .map-viewport{position:relative;flex:1;overflow:hidden;background:#f8fafc;touch-action:none;cursor:grab}
+          .map-viewport.dragging{cursor:grabbing}
+          .map-stage{position:absolute;left:50%;top:50%;width:980px;height:690px;transform-origin:center center;will-change:transform}
+          .map-stage .map-svg{width:980px;height:690px;display:block;max-width:none}
+          .map-help{padding:10px 16px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);background:#fff}
+          @media(max-width:700px){.map-modal{padding:0}.map-modal-panel{width:100vw;height:100vh;border-radius:0}.map-modal-head{align-items:flex-start}.map-modal-title{font-size:16px}.map-help{font-size:11px}.map-zoom-btn{width:100%}}
+          '''
+              text = text.replace(css_anchor, css_anchor + css, 1)
+              text = text.replace(
+                  '<section class="overview">\n<svg aria-label="美国西部自驾总览详细路线图" class="map-svg" role="img" viewbox="0 0 980 690">',
+                  '<section class="overview">\n<div class="map-toolbar"><button class="map-zoom-btn" type="button" id="openOverviewMap">🔍 放大地图</button></div>\n<svg id="overviewMapSvg" aria-label="美国西部自驾总览详细路线图" class="map-svg" role="img" viewbox="0 0 980 690">',
+                  1
+              )
+              modal = '''
+          <div class="map-modal" id="overviewMapModal" aria-hidden="true">
+            <div class="map-modal-panel" role="dialog" aria-modal="true" aria-labelledby="overviewMapTitle">
+              <div class="map-modal-head">
+                <div class="map-modal-title" id="overviewMapTitle">美国西部路线总览 · 放大查看</div>
+                <div class="map-modal-actions">
+                  <button type="button" id="mapZoomOut" aria-label="缩小地图">−</button>
+                  <button type="button" id="mapReset" aria-label="重置地图">重置</button>
+                  <button type="button" id="mapZoomIn" aria-label="放大地图">＋</button>
+                  <button type="button" id="mapClose" aria-label="关闭地图">关闭</button>
+                </div>
+              </div>
+              <div class="map-viewport" id="mapViewport"><div class="map-stage" id="mapStage"></div></div>
+              <div class="map-help">电脑：滚轮缩放、按住拖动；手机：双指缩放或用 ＋/−，单指拖动。点击“重置”可回到完整路线。</div>
+            </div>
+          </div>
+          '''
+              text = text.replace('\n<h2>实时天气与穿着建议</h2>', modal + '\n<h2>实时天气与穿着建议</h2>', 1)
+              js = r'''
+          function initOverviewMapZoom(){
+            const openBtn=document.getElementById('openOverviewMap');
+            const modal=document.getElementById('overviewMapModal');
+            const viewport=document.getElementById('mapViewport');
+            const stage=document.getElementById('mapStage');
+            const src=document.getElementById('overviewMapSvg');
+            if(!openBtn||!modal||!viewport||!stage||!src) return;
+            stage.innerHTML=src.outerHTML.replace('id="overviewMapSvg"','id="overviewMapSvgZoom"');
+            let scale=1,x=0,y=0,dragging=false,startX=0,startY=0,baseX=0,baseY=0;
+            const pointers=new Map(); let pinchStartDist=0,pinchStartScale=1;
+            function fitScale(){ const r=viewport.getBoundingClientRect(); return Math.min((r.width-28)/980,(r.height-28)/690,1.25); }
+            function apply(){ stage.style.transform=`translate(calc(-50% + ${x}px),calc(-50% + ${y}px)) scale(${scale})`; }
+            function reset(){ scale=Math.max(.35,fitScale()); x=0; y=0; apply(); }
+            function zoomAt(factor,cx,cy){
+              const prev=scale,next=Math.max(.35,Math.min(4,prev*factor)); if(next===prev)return;
+              const r=viewport.getBoundingClientRect(); const px=(cx??(r.left+r.width/2))-(r.left+r.width/2)-x; const py=(cy??(r.top+r.height/2))-(r.top+r.height/2)-y;
+              x-=px*(next/prev-1); y-=py*(next/prev-1); scale=next; apply();
+            }
+            function open(){ modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; requestAnimationFrame(reset); }
+            function close(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+            openBtn.addEventListener('click',open); document.getElementById('mapClose').addEventListener('click',close); document.getElementById('mapReset').addEventListener('click',reset);
+            document.getElementById('mapZoomIn').addEventListener('click',()=>zoomAt(1.25)); document.getElementById('mapZoomOut').addEventListener('click',()=>zoomAt(.8));
+            modal.addEventListener('click',e=>{if(e.target===modal)close();}); document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))close();});
+            viewport.addEventListener('wheel',e=>{e.preventDefault();zoomAt(e.deltaY<0?1.12:.89,e.clientX,e.clientY);},{passive:false});
+            viewport.addEventListener('pointerdown',e=>{pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});viewport.setPointerCapture(e.pointerId);if(pointers.size===1){dragging=true;viewport.classList.add('dragging');startX=e.clientX;startY=e.clientY;baseX=x;baseY=y;}if(pointers.size===2){const a=[...pointers.values()];pinchStartDist=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);pinchStartScale=scale;dragging=false;}});
+            viewport.addEventListener('pointermove',e=>{if(!pointers.has(e.pointerId))return;pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pointers.size===2){const a=[...pointers.values()];const d=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);if(pinchStartDist>0){scale=Math.max(.35,Math.min(4,pinchStartScale*d/pinchStartDist));apply();}return;}if(dragging&&pointers.size===1){x=baseX+(e.clientX-startX);y=baseY+(e.clientY-startY);apply();}});
+            function endPointer(e){pointers.delete(e.pointerId);if(pointers.size<2)pinchStartDist=0;if(pointers.size===0){dragging=false;viewport.classList.remove('dragging');}}
+            viewport.addEventListener('pointerup',endPointer);viewport.addEventListener('pointercancel',endPointer);window.addEventListener('resize',()=>{if(modal.classList.contains('open')&&scale<=1.3)reset();});
+          }
+          initOverviewMapZoom();
+          '''
+              text = text.replace('\nfunction dateInTZ(tz){', js + '\nfunction dateInTZ(tz){', 1)
+
+          p.write_text(text, encoding='utf-8')
+          Path('public').mkdir(exist_ok=True)
+          Path('public/index.html').write_text(text, encoding='utf-8')
+          PY
       - name: Commit generated site
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html public/index.html
           if ! git diff --cached --quiet; then
-            git commit -m "Build travel handbook [skip ci]"
+            git commit -m "Add zoomable overview map and update Gardiner address [skip ci]"
             git pull --rebase origin main
             git push
           fi
