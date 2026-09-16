@@ -22,6 +22,23 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
 .count b{display:block;font-size:28px;line-height:1} .count span{font-size:11px;color:var(--muted)} .tzmeta{font-size:12px;color:var(--muted);margin-top:8px}
 .overview{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:16px;box-shadow:var(--shadow);overflow:hidden}
 .map-svg{width:100%;height:auto;background:#fbfcfd;border-radius:16px}
+.map-toolbar{display:flex;justify-content:flex-end;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.map-zoom-btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:9px 14px;font-weight:750;cursor:pointer;min-height:42px}
+.map-zoom-btn:hover{background:var(--soft)}
+.map-modal{position:fixed;inset:0;z-index:9999;background:rgba(15,23,42,.72);display:none;align-items:center;justify-content:center;padding:18px}
+.map-modal.open{display:flex}
+.map-modal-panel{width:min(1200px,96vw);height:min(840px,92vh);background:#fff;border-radius:22px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.28)}
+.map-modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);background:#fff}
+.map-modal-title{font-weight:850;font-size:18px}.map-modal-actions{display:flex;gap:8px;flex-wrap:wrap}
+.map-modal-actions button{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:12px;min-width:44px;min-height:44px;padding:8px 12px;font-weight:800;cursor:pointer}
+.map-modal-actions button:hover{background:var(--soft)}
+.map-viewport{position:relative;flex:1;overflow:hidden;background:#f8fafc;touch-action:none;cursor:grab}
+.map-viewport.dragging{cursor:grabbing}
+.map-stage{position:absolute;left:50%;top:50%;width:980px;height:690px;transform-origin:center center;will-change:transform}
+.map-stage .map-svg{width:980px;height:690px;display:block;max-width:none}
+.map-help{padding:10px 16px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);background:#fff}
+@media(max-width:700px){.map-modal{padding:0}.map-modal-panel{width:100vw;height:100vh;border-radius:0}.map-modal-head{align-items:flex-start}.map-modal-title{font-size:16px}.map-help{font-size:11px}.map-zoom-btn{width:100%}}
+
 .map-svg path{fill:none;stroke-width:4;stroke-linecap:round;stroke-dasharray:1 8} .map-svg circle{fill:var(--paper);stroke:var(--ink);stroke-width:2} .map-svg text{font-size:12px;fill:var(--ink);font-weight:700} .map-svg .tiny{font-size:9px;fill:var(--muted);font-weight:500}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px} .booking-card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 4px 20px rgba(0,0,0,.04)}
 .booking-card p{margin:7px 0;font-size:14px} .booking-kicker{font-size:12px;color:var(--accent);font-weight:800;letter-spacing:.06em}
@@ -79,7 +96,8 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
 </section>
 <h2>行程总览地图</h2>
 <section class="overview">
-<svg aria-label="美国西部自驾总览详细路线图" class="map-svg" role="img" viewbox="0 0 980 690">
+<div class="map-toolbar"><button class="map-zoom-btn" type="button" id="openOverviewMap">🔍 放大地图</button></div>
+<svg id="overviewMapSvg" aria-label="美国西部自驾总览详细路线图" class="map-svg" role="img" viewbox="0 0 980 690">
 <rect x="18" y="18" width="944" height="654" rx="20" fill="#fbfcfd" stroke="var(--line)"></rect>
 <text x="52" y="72" font-size="26" font-family="Georgia, serif" fill="var(--ink)">美国西部 14 天路线总览</text>
 <text x="52" y="96" font-size="12" fill="var(--muted)">手绘示意 · 含关键景点、过夜城市与主要转场</text>
@@ -117,6 +135,22 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
 </div>
 <div class="smallprint" style="margin:8px 4px 0">比旧版增加了关键停留点：Monument Valley、Grand Canyon、Antelope Canyon、Zion、Joshua Tree 与 Santa Monica，方便快速核对整体路线。</div>
 </section>
+
+<div class="map-modal" id="overviewMapModal" aria-hidden="true">
+  <div class="map-modal-panel" role="dialog" aria-modal="true" aria-labelledby="overviewMapTitle">
+    <div class="map-modal-head">
+      <div class="map-modal-title" id="overviewMapTitle">美国西部路线总览 · 放大查看</div>
+      <div class="map-modal-actions">
+        <button type="button" id="mapZoomOut" aria-label="缩小地图">−</button>
+        <button type="button" id="mapReset" aria-label="重置地图">重置</button>
+        <button type="button" id="mapZoomIn" aria-label="放大地图">＋</button>
+        <button type="button" id="mapClose" aria-label="关闭地图">关闭</button>
+      </div>
+    </div>
+    <div class="map-viewport" id="mapViewport"><div class="map-stage" id="mapStage"></div></div>
+    <div class="map-help">电脑：滚轮缩放、按住拖动；手机：双指缩放或用 ＋/−，单指拖动。点击“重置”可回到完整路线。</div>
+  </div>
+</div>
 
 <h2>实时天气与穿着建议</h2>
 <section class="weather-grid" id="weatherGrid">
@@ -170,7 +204,7 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
 <div class="booking-kicker">9/28 · Gardiner</div>
 <h3>Airbnb · Gardiner</h3>
 <p><strong>入住</strong> 按 Airbnb 房源说明　·　<strong>退房</strong> 9/29 · 按房源说明</p>
-<p><a href="https://www.google.com/maps/search/?api=1&amp;query=Gardiner" rel="noopener" target="_blank">📍 具体地址请在 Airbnb App 中查看</a></p>
+<p><a href="https://www.google.com/maps/search/?api=1&amp;query=301%20South%20Yellowstone%20Street%2C%20301%20South%20Yellowstone%20Street%2C%20Gardiner%2C%20MT%2059030%2059030" rel="noopener" target="_blank">📍 301 South Yellowstone Street, Gardiner, MT 59030</a></p>
 <p>☎ 未在确认单显示</p>
 </article>
 <article class="booking-card">
@@ -372,8 +406,8 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
 <div class="routebox">
 <svg class="daymap" role="img" viewbox="0 0 760 130"><path d="M40.0,60 Q125.0,35 210.0,88 Q295.0,113 380.0,60 Q465.0,35 550.0,88 Q635.0,113 720.0,60" style="stroke:#6b9f73"></path><circle cx="40.0" cy="60" r="5"></circle><text text-anchor="middle" x="40.0" y="88">126 N Canyon St</text><circle cx="210.0" cy="88" r="5"></circle><text text-anchor="middle" x="210.0" y="116">Old Faithful</text><circle cx="380.0" cy="60" r="5"></circle><text text-anchor="middle" x="380.0" y="88">Grand Prismatic Spring</text><circle cx="550.0" cy="88" r="5"></circle><text text-anchor="middle" x="550.0" y="116">Norris Geyser Basin</text><circle cx="720.0" cy="60" r="5"></circle><text text-anchor="middle" x="720.0" y="88">Gardiner</text></svg>
 <div class="route-actions">
-<a class="primary-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=126%20N%20Canyon%20St%2C%20West%20Yellowstone%2C%20MT%2059758&amp;destination=Gardiner%2C%20MT&amp;travelmode=driving&amp;waypoints=Old%20Faithful|Grand%20Prismatic%20Spring|Norris%20Geyser%20Basin" rel="noopener" target="_blank">打开全天多点导航</a>
-<div class="places"><a href="https://www.google.com/maps/search/?api=1&amp;query=126%20N%20Canyon%20St%2C%20West%20Yellowstone%2C%20MT%2059758" rel="noopener" target="_blank">126 N Canyon St</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Old%20Faithful" rel="noopener" target="_blank">Old Faithful</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grand%20Prismatic%20Spring" rel="noopener" target="_blank">Grand Prismatic Spring</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Norris%20Geyser%20Basin" rel="noopener" target="_blank">Norris Geyser Basin</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Gardiner%2C%20MT" rel="noopener" target="_blank">Gardiner</a></div>
+<a class="primary-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=126%20N%20Canyon%20St%2C%20West%20Yellowstone%2C%20MT%2059758&amp;destination=301%20South%20Yellowstone%20Street%2C%20Gardiner%2C%20MT%2059030&amp;travelmode=driving&amp;waypoints=Old%20Faithful|Grand%20Prismatic%20Spring|Norris%20Geyser%20Basin" rel="noopener" target="_blank">打开全天多点导航</a>
+<div class="places"><a href="https://www.google.com/maps/search/?api=1&amp;query=126%20N%20Canyon%20St%2C%20West%20Yellowstone%2C%20MT%2059758" rel="noopener" target="_blank">126 N Canyon St</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Old%20Faithful" rel="noopener" target="_blank">Old Faithful</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grand%20Prismatic%20Spring" rel="noopener" target="_blank">Grand Prismatic Spring</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Norris%20Geyser%20Basin" rel="noopener" target="_blank">Norris Geyser Basin</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=301%20South%20Yellowstone%20Street%2C%20Gardiner%2C%20MT%2059030" rel="noopener" target="_blank">Gardiner</a></div>
 </div>
 </div>
 <div class="timeline">
@@ -405,7 +439,7 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
 <div class="time">19:00<small>Denver</small></div>
 <div class="event">Gardiner Airbnb 入住、晚餐<div class="duration">预计时长：1小时</div></div>
 </div></div>
-<div class="day-note">⚠ 新住宿为 Gardiner Airbnb；公开确认单未显示街道地址，出发前在 Airbnb App 中保存离线地址。</div>
+<div class="day-note">⚠ Gardiner Airbnb 地址已确认：301 South Yellowstone Street, Gardiner, MT 59030。建议提前保存离线地图。</div>
 </section>
 <section class="day" id="2026-09-29" style="--day:#3d8d92">
 <div class="day-head">
@@ -419,8 +453,8 @@ h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,7vw,68px);line-hei
 <div class="routebox">
 <svg class="daymap" role="img" viewbox="0 0 760 130"><path d="M40.0,60 Q96.66666666666666,35 153.33333333333331,88 Q209.99999999999997,113 266.66666666666663,60 Q323.3333333333333,35 380.0,88 Q436.66666666666663,113 493.3333333333333,60 Q550.0,35 606.6666666666666,88 Q663.3333333333333,113 720.0,60" style="stroke:#3d8d92"></path><circle cx="40.0" cy="60" r="5"></circle><text text-anchor="middle" x="40.0" y="88">Gardiner</text><circle cx="153.33333333333331" cy="88" r="5"></circle><text text-anchor="middle" x="153.33333333333331" y="116">Mammoth Hot Springs</text><circle cx="266.66666666666663" cy="60" r="5"></circle><text text-anchor="middle" x="266.66666666666663" y="88">Lamar Valley</text><circle cx="380.0" cy="88" r="5"></circle><text text-anchor="middle" x="380.0" y="116">Tower Fall</text><circle cx="493.3333333333333" cy="60" r="5"></circle><text text-anchor="middle" x="493.3333333333333" y="88">Grand Canyon of the Yell</text><circle cx="606.6666666666666" cy="88" r="5"></circle><text text-anchor="middle" x="606.6666666666666" y="116">Hayden Valley</text><circle cx="720.0" cy="60" r="5"></circle><text text-anchor="middle" x="720.0" y="88">235 Yellowstone Lake Rd</text></svg>
 <div class="route-actions">
-<a class="primary-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=Gardiner%2C%20MT&amp;destination=235%20Yellowstone%20Lake%20Rd%2C%20Yellowstone%20National%20Park%2C%20WY%2082190&amp;travelmode=driving&amp;waypoints=Mammoth%20Hot%20Springs|Lamar%20Valley|Tower%20Fall|Grand%20Canyon%20of%20the%20Yellowstone|Hayden%20Valley" rel="noopener" target="_blank">打开全天多点导航</a>
-<div class="places"><a href="https://www.google.com/maps/search/?api=1&amp;query=Gardiner%2C%20MT" rel="noopener" target="_blank">Gardiner</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Mammoth%20Hot%20Springs" rel="noopener" target="_blank">Mammoth Hot Springs</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Lamar%20Valley" rel="noopener" target="_blank">Lamar Valley</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Tower%20Fall" rel="noopener" target="_blank">Tower Fall</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grand%20Canyon%20of%20the%20Yellowstone" rel="noopener" target="_blank">Grand Canyon of the Yellowstone</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Hayden%20Valley" rel="noopener" target="_blank">Hayden Valley</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=235%20Yellowstone%20Lake%20Rd%2C%20Yellowstone%20National%20Park%2C%20WY%2082190" rel="noopener" target="_blank">235 Yellowstone Lake Rd</a></div>
+<a class="primary-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=301%20South%20Yellowstone%20Street%2C%20Gardiner%2C%20MT%2059030&amp;destination=235%20Yellowstone%20Lake%20Rd%2C%20Yellowstone%20National%20Park%2C%20WY%2082190&amp;travelmode=driving&amp;waypoints=Mammoth%20Hot%20Springs|Lamar%20Valley|Tower%20Fall|Grand%20Canyon%20of%20the%20Yellowstone|Hayden%20Valley" rel="noopener" target="_blank">打开全天多点导航</a>
+<div class="places"><a href="https://www.google.com/maps/search/?api=1&amp;query=301%20South%20Yellowstone%20Street%2C%20Gardiner%2C%20MT%2059030" rel="noopener" target="_blank">Gardiner</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Mammoth%20Hot%20Springs" rel="noopener" target="_blank">Mammoth Hot Springs</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Lamar%20Valley" rel="noopener" target="_blank">Lamar Valley</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Tower%20Fall" rel="noopener" target="_blank">Tower Fall</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grand%20Canyon%20of%20the%20Yellowstone" rel="noopener" target="_blank">Grand Canyon of the Yellowstone</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Hayden%20Valley" rel="noopener" target="_blank">Hayden Valley</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=235%20Yellowstone%20Lake%20Rd%2C%20Yellowstone%20National%20Park%2C%20WY%2082190" rel="noopener" target="_blank">235 Yellowstone Lake Rd</a></div>
 </div>
 </div>
 <div class="timeline">
@@ -984,6 +1018,37 @@ function toggleRoute(btn){
   btn.textContent=open?'收起路线':'展开路线';
   btn.setAttribute('aria-expanded',open?'true':'false');
 }
+function initOverviewMapZoom(){
+  const openBtn=document.getElementById('openOverviewMap');
+  const modal=document.getElementById('overviewMapModal');
+  const viewport=document.getElementById('mapViewport');
+  const stage=document.getElementById('mapStage');
+  const src=document.getElementById('overviewMapSvg');
+  if(!openBtn||!modal||!viewport||!stage||!src) return;
+  stage.innerHTML=src.outerHTML.replace('id="overviewMapSvg"','id="overviewMapSvgZoom"');
+  let scale=1,x=0,y=0,dragging=false,startX=0,startY=0,baseX=0,baseY=0;
+  const pointers=new Map(); let pinchStartDist=0,pinchStartScale=1;
+  function fitScale(){ const r=viewport.getBoundingClientRect(); return Math.min((r.width-28)/980,(r.height-28)/690,1.25); }
+  function apply(){ stage.style.transform=`translate(calc(-50% + ${x}px),calc(-50% + ${y}px)) scale(${scale})`; }
+  function reset(){ scale=Math.max(.35,fitScale()); x=0; y=0; apply(); }
+  function zoomAt(factor,cx,cy){
+    const prev=scale,next=Math.max(.35,Math.min(4,prev*factor)); if(next===prev)return;
+    const r=viewport.getBoundingClientRect(); const px=(cx??(r.left+r.width/2))-(r.left+r.width/2)-x; const py=(cy??(r.top+r.height/2))-(r.top+r.height/2)-y;
+    x-=px*(next/prev-1); y-=py*(next/prev-1); scale=next; apply();
+  }
+  function open(){ modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; requestAnimationFrame(reset); }
+  function close(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+  openBtn.addEventListener('click',open); document.getElementById('mapClose').addEventListener('click',close); document.getElementById('mapReset').addEventListener('click',reset);
+  document.getElementById('mapZoomIn').addEventListener('click',()=>zoomAt(1.25)); document.getElementById('mapZoomOut').addEventListener('click',()=>zoomAt(.8));
+  modal.addEventListener('click',e=>{if(e.target===modal)close();}); document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))close();});
+  viewport.addEventListener('wheel',e=>{e.preventDefault();zoomAt(e.deltaY<0?1.12:.89,e.clientX,e.clientY);},{passive:false});
+  viewport.addEventListener('pointerdown',e=>{pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});viewport.setPointerCapture(e.pointerId);if(pointers.size===1){dragging=true;viewport.classList.add('dragging');startX=e.clientX;startY=e.clientY;baseX=x;baseY=y;}if(pointers.size===2){const a=[...pointers.values()];pinchStartDist=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);pinchStartScale=scale;dragging=false;}});
+  viewport.addEventListener('pointermove',e=>{if(!pointers.has(e.pointerId))return;pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pointers.size===2){const a=[...pointers.values()];const d=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);if(pinchStartDist>0){scale=Math.max(.35,Math.min(4,pinchStartScale*d/pinchStartDist));apply();}return;}if(dragging&&pointers.size===1){x=baseX+(e.clientX-startX);y=baseY+(e.clientY-startY);apply();}});
+  function endPointer(e){pointers.delete(e.pointerId);if(pointers.size<2)pinchStartDist=0;if(pointers.size===0){dragging=false;viewport.classList.remove('dragging');}}
+  viewport.addEventListener('pointerup',endPointer);viewport.addEventListener('pointercancel',endPointer);window.addEventListener('resize',()=>{if(modal.classList.contains('open')&&scale<=1.3)reset();});
+}
+initOverviewMapZoom();
+
 function dateInTZ(tz){
   const parts=new Intl.DateTimeFormat('en-CA',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
   const o={}; parts.forEach(p=>o[p.type]=p.value);
