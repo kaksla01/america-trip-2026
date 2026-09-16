@@ -1,0 +1,39 @@
+name: Fix Gardiner map link
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fix-gardiner.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fix duplicated Gardiner URL and sync public copy
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          text = p.read_text(encoding='utf-8')
+          bad = '301%20South%20Yellowstone%20Street%2C%20301%20South%20Yellowstone%20Street%2C%20Gardiner%2C%20MT%2059030%2059030'
+          good = '301%20South%20Yellowstone%20Street%2C%20Gardiner%2C%20MT%2059030'
+          text = text.replace(bad, good)
+          p.write_text(text, encoding='utf-8')
+          Path('public').mkdir(exist_ok=True)
+          Path('public/index.html').write_text(text, encoding='utf-8')
+          PY
+      - name: Commit fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html public/index.html
+          if ! git diff --cached --quiet; then
+            git commit -m "Fix Gardiner map link [skip ci]"
+            git pull --rebase origin main
+            git push
+          fi
