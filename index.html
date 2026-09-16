@@ -9,111 +9,180 @@
 
 :root{
   --bg:#f5f5f7;
-  --paper:rgba(255,255,255,.82);
-  --paper-solid:#ffffff;
+  --surface:#ffffff;
+  --surface-soft:#f2f2f4;
+  --surface-muted:#e9e9ec;
   --ink:#1d1d1f;
   --muted:#6e6e73;
-  --line:rgba(60,60,67,.16);
-  --line-strong:rgba(29,29,31,.22);
+  --line:rgba(0,0,0,.08);
   --blue:#0071e3;
-  --blue-soft:#eaf3ff;
-  --green-soft:#eef7f1;
-  --rose-soft:#f8f0f3;
-  --sand-soft:#f7f4ec;
-  --soft:#f2f2f7;
-  --shadow:0 18px 50px rgba(0,0,0,.08);
-  --glass:rgba(255,255,255,.62);
-  --glass-strong:rgba(255,255,255,.76);
+  --blue-hover:#0077ed;
+  --glass:rgba(255,255,255,.14);
+  --glass-line:rgba(255,255,255,.22);
+  --shadow:0 8px 28px rgba(0,0,0,.06);
+  --shadow-soft:0 2px 12px rgba(0,0,0,.04);
+  --radius-xl:30px;
+  --radius-lg:24px;
+  --radius-md:18px;
+  --radius-sm:12px;
 }
-html.dark{--bg:#f5f5f7;--paper:rgba(255,255,255,.82);--paper-solid:#fff;--ink:#1d1d1f;--muted:#6e6e73;--line:rgba(60,60,67,.16);--line-strong:rgba(29,29,31,.22);--blue:#0071e3;--blue-soft:#eaf3ff;--green-soft:#eef7f1;--rose-soft:#f8f0f3;--sand-soft:#f7f4ec;--soft:#f2f2f7;--shadow:0 18px 50px rgba(0,0,0,.08);--glass:rgba(255,255,255,.62);--glass-strong:rgba(255,255,255,.76)}
+html.dark{--bg:#f5f5f7;--surface:#fff;--surface-soft:#f2f2f4;--surface-muted:#e9e9ec;--ink:#1d1d1f;--muted:#6e6e73;--line:rgba(0,0,0,.08);--blue:#0071e3;--blue-hover:#0077ed;--glass:rgba(255,255,255,.14);--glass-line:rgba(255,255,255,.22);--shadow:0 8px 28px rgba(0,0,0,.06);--shadow-soft:0 2px 12px rgba(0,0,0,.04)}
 *{box-sizing:border-box}
 html{background:var(--bg)}
-body{margin:0;background:
-  radial-gradient(circle at 10% -5%,rgba(0,113,227,.08),transparent 28%),
-  radial-gradient(circle at 95% 10%,rgba(52,199,89,.05),transparent 22%),
-  var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","PingFang SC","Helvetica Neue",Arial,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif;line-height:1.48;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 a{color:inherit;text-decoration-thickness:1px;text-underline-offset:3px}
-.wrap{max-width:1120px;margin:0 auto;padding:22px}
-.hero{padding:38px 2px 18px}
-.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
-h1{font-size:clamp(38px,7vw,68px);line-height:.98;letter-spacing:-.045em;margin:12px 0 12px;font-weight:760}
-h2{font-size:clamp(27px,3.6vw,34px);line-height:1.05;letter-spacing:-.03em;margin:52px 0 18px;font-weight:720}
-h3{margin:3px 0 8px;font-size:21px;line-height:1.18;letter-spacing:-.018em;font-weight:690}
-.sub{color:var(--muted);font-size:15px;max-width:900px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px 72px}
+.hero{padding:54px 0 24px}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--muted);text-transform:none}
+h1{font-size:clamp(48px,8vw,82px);line-height:.96;letter-spacing:-.055em;margin:8px 0 18px;font-weight:700}
+h2{font-size:clamp(30px,4vw,44px);line-height:1.02;letter-spacing:-.035em;margin:76px 0 24px;font-weight:700}
+h3{font-size:24px;line-height:1.12;letter-spacing:-.025em;margin:2px 0 9px;font-weight:650}
+.sub{color:var(--muted);font-size:17px;max-width:920px}
 
-/* Apple-like surfaces */
-.focus,.overview,.booking-card,.day,.todo-list,.tips{border:1px solid var(--line);box-shadow:var(--shadow)}
-.focus{position:relative;overflow:hidden;border-radius:30px;padding:24px;background:linear-gradient(145deg,rgba(255,255,255,.84),rgba(248,250,252,.68));backdrop-filter:blur(28px) saturate(140%);-webkit-backdrop-filter:blur(28px) saturate(140%)}
-.focus:before{content:"";position:absolute;inset:auto -70px -90px auto;width:270px;height:270px;border-radius:50%;background:radial-gradient(circle,rgba(0,113,227,.17),rgba(0,113,227,0) 68%)}
-.focus-grid{display:grid;grid-template-columns:1.24fr .94fr;gap:20px;align-items:end;position:relative;z-index:1}
-.next-label{display:inline-flex;align-items:center;padding:7px 11px;border-radius:999px;background:var(--glass);border:1px solid rgba(255,255,255,.72);box-shadow:inset 0 1px 0 rgba(255,255,255,.7);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);font-size:12px;color:var(--muted);font-weight:650}
-#nextEvent{font-size:clamp(25px,4vw,34px);font-weight:730;letter-spacing:-.03em;line-height:1.06;margin:11px 0 7px}
-#nextMeta{display:inline-flex;align-items:center;background:rgba(29,29,31,.9);color:#fff;padding:9px 13px;border-radius:999px;font-size:13px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
-.tzmeta{font-size:12px;color:var(--muted);margin-top:10px}
-.count{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
-.count div{background:var(--glass-strong);border:1px solid rgba(255,255,255,.72);border-radius:20px;padding:13px 8px;text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 8px 24px rgba(0,0,0,.035);backdrop-filter:blur(22px) saturate(150%);-webkit-backdrop-filter:blur(22px) saturate(150%)}
-.count b{display:block;font-size:28px;line-height:1;font-weight:720;letter-spacing:-.03em}.count span{font-size:10px;color:var(--muted)}
+/* Apple-like feature hero */
+.focus{position:relative;overflow:hidden;border-radius:var(--radius-xl);padding:34px;background:
+  radial-gradient(circle at 78% 14%,rgba(58,114,255,.44),transparent 28%),
+  radial-gradient(circle at 18% 92%,rgba(0,180,255,.18),transparent 34%),
+  linear-gradient(135deg,#09090b 0%,#10131a 58%,#08090c 100%);
+  color:#fff;box-shadow:var(--shadow)}
+.focus:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.04),transparent 28%);pointer-events:none}
+.focus-grid{display:grid;grid-template-columns:1.18fr .9fr;gap:26px;align-items:end;position:relative;z-index:1}
+.next-label{display:inline-flex;align-items:center;padding:8px 12px;border-radius:999px;background:var(--glass);border:1px solid var(--glass-line);backdrop-filter:blur(24px) saturate(135%);-webkit-backdrop-filter:blur(24px) saturate(135%);font-size:12px;color:rgba(255,255,255,.72);font-weight:600}
+#nextEvent{font-size:clamp(30px,4.4vw,48px);font-weight:650;letter-spacing:-.045em;line-height:1.02;margin:14px 0 10px;max-width:16ch}
+#nextMeta{display:inline-flex;align-items:center;padding:9px 13px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);color:#fff;font-size:13px;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.tzmeta{font-size:12px;color:rgba(255,255,255,.58);margin-top:11px}
+.count{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.count div{padding:15px 8px;text-align:center;border-radius:20px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(24px) saturate(135%);-webkit-backdrop-filter:blur(24px) saturate(135%)}
+.count b{display:block;font-size:30px;line-height:1;font-weight:650;letter-spacing:-.04em}.count span{font-size:10px;color:rgba(255,255,255,.62)}
 
-/* Map */
-.overview{background:rgba(255,255,255,.74);border-radius:30px;padding:16px;overflow:hidden;backdrop-filter:blur(24px) saturate(125%);-webkit-backdrop-filter:blur(24px) saturate(125%)}
-.map-toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;padding:2px}
-.map-style-pill{display:inline-flex;align-items:center;padding:8px 12px;border-radius:999px;background:var(--glass);border:1px solid rgba(255,255,255,.78);box-shadow:0 5px 18px rgba(0,0,0,.035);font-size:11px;color:var(--muted);font-weight:650;letter-spacing:.06em;text-transform:uppercase;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
-.map-zoom-btn,.route-toggle,.primary-link,.todaybtn{appearance:none;border:0;background:var(--blue);color:#fff;border-radius:999px;padding:10px 15px;font-weight:650;cursor:pointer;box-shadow:0 4px 14px rgba(0,113,227,.22);transition:transform .18s ease,filter .18s ease}
-.map-zoom-btn:hover,.route-toggle:hover,.primary-link:hover,.todaybtn:hover{filter:brightness(1.03);transform:translateY(-1px)}
-.map-svg{width:100%;height:auto;background:#e9ece8;border-radius:22px;border:1px solid rgba(29,29,31,.14);display:block}
-#overviewMapSvg .map-title{font-size:31px;font-weight:720;letter-spacing:-.03em;fill:#202124}
-#overviewMapSvg .map-subtitle{font-size:13px;fill:#6f7478;font-weight:560}
-#overviewMapSvg .state-label{font-size:11px;fill:#92979c;font-weight:650;letter-spacing:.14em}
-#overviewMapSvg .topo-line{fill:none;stroke:#b9bfbb;stroke-width:1.25;opacity:.68}
-#overviewMapSvg .topo-line.thick{stroke:#aab1ad;stroke-width:1.8;opacity:.78}
-#overviewMapSvg .map-river{fill:none;stroke:#73a9d6;stroke-width:2.8;opacity:.88}
-#overviewMapSvg .minor-road{fill:none;stroke:#c8bfa9;stroke-width:1.5;stroke-dasharray:5 5;opacity:.72}
-#overviewMapSvg .park-area{stroke:#697269;stroke-width:1.1;opacity:.9}
-#overviewMapSvg .park-label{font-size:11px;fill:#5d665e;font-weight:650;letter-spacing:.02em}
-#overviewMapSvg .route-outline{fill:none;stroke:rgba(255,255,255,.95);stroke-width:12;stroke-linecap:round;stroke-linejoin:round}
-#overviewMapSvg .route-main{fill:none;stroke:#0066cc;stroke-width:5.1;stroke-linecap:round;stroke-linejoin:round}
-#overviewMapSvg .route-secondary{fill:none;stroke:#6389ad;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:6 5}
-#overviewMapSvg .stop-circle,#overviewMapSvg .stop-square,#overviewMapSvg .stop-diamond{fill:#fff;stroke:#0066cc;stroke-width:2.8}
-#overviewMapSvg .stop-text{font-size:10.5px;fill:#0066cc;font-weight:760;text-anchor:middle;dominant-baseline:middle}
-#overviewMapSvg .map-caption{font-size:10px;fill:#565b60;font-weight:600}
-#overviewMapSvg .legend-box{fill:rgba(255,255,255,.84);stroke:rgba(29,29,31,.18);stroke-width:1}
-#overviewMapSvg .legend-text{font-size:12px;fill:#3a3d40;font-weight:590}
-.overview-legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:13px}
-.overview-legend-item{display:flex;gap:11px;align-items:flex-start;padding:12px 13px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
-.overview-legend-num{flex:0 0 auto;width:28px;height:28px;border-radius:50%;background:var(--blue);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
-.overview-legend-text{font-size:13px;line-height:1.35}.overview-legend-text strong{display:block;font-size:13px;font-weight:680}.overview-legend-text span{display:block;color:var(--muted);font-size:11px;margin-top:2px}
+/* Main white tiles */
+.overview,.booking-card,.day,.todo-list,.tips{background:var(--surface);border:0;box-shadow:var(--shadow-soft)}
+.overview{border-radius:var(--radius-xl);padding:22px;overflow:hidden}
+.map-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.map-style-pill{font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.01em}
+.map-zoom-btn,.route-toggle,.primary-link,.todaybtn{appearance:none;border:0;background:var(--blue);color:#fff;border-radius:999px;padding:10px 16px;font-weight:600;cursor:pointer;text-decoration:none;transition:background .18s ease,transform .18s ease}
+.map-zoom-btn:hover,.route-toggle:hover,.primary-link:hover,.todaybtn:hover{background:var(--blue-hover);transform:translateY(-1px)}
+.map-svg{display:block;width:100%;height:auto;border-radius:22px;background:#e9ece8;border:1px solid rgba(0,0,0,.07)}
+#overviewMapSvg .map-title{font-size:31px;font-weight:700;letter-spacing:-.035em;fill:#202124}
+#overviewMapSvg .map-subtitle{font-size:13px;fill:#74777b;font-weight:500}
+#overviewMapSvg .state-label{font-size:11px;fill:#989ba0;font-weight:650;letter-spacing:.14em}
+#overviewMapSvg .topo-line{fill:none;stroke:#b8beb9;stroke-width:1.2;opacity:.64}
+#overviewMapSvg .topo-line.thick{stroke:#aab1ad;stroke-width:1.7;opacity:.76}
+#overviewMapSvg .map-river{fill:none;stroke:#79a8d3;stroke-width:2.6;opacity:.86}
+#overviewMapSvg .minor-road{fill:none;stroke:#cbbfa5;stroke-width:1.45;stroke-dasharray:5 5;opacity:.7}
+#overviewMapSvg .park-area{stroke:#7c857d;stroke-width:1;opacity:.92}
+#overviewMapSvg .park-label{font-size:11px;fill:#5e665f;font-weight:600}
+#overviewMapSvg .route-outline{fill:none;stroke:rgba(255,255,255,.96);stroke-width:11;stroke-linecap:round;stroke-linejoin:round}
+#overviewMapSvg .route-main{fill:none;stroke:#0a66d8;stroke-width:4.8;stroke-linecap:round;stroke-linejoin:round}
+#overviewMapSvg .route-secondary{fill:none;stroke:#7590aa;stroke-width:2.25;stroke-linecap:round;stroke-dasharray:6 5}
+#overviewMapSvg .stop-circle,#overviewMapSvg .stop-square,#overviewMapSvg .stop-diamond{fill:#fff;stroke:#0a66d8;stroke-width:2.6}
+#overviewMapSvg .stop-text{font-size:10px;fill:#0a66d8;font-weight:700;text-anchor:middle;dominant-baseline:middle}
+#overviewMapSvg .map-caption{font-size:10px;fill:#5f6368;font-weight:550}
+#overviewMapSvg .legend-box{fill:rgba(255,255,255,.92);stroke:rgba(0,0,0,.08);stroke-width:1}
+#overviewMapSvg .legend-text{font-size:12px;fill:#3d4044;font-weight:550}
+.overview-legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+.overview-legend-item{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:18px;background:var(--surface-soft)}
+.overview-legend-num{flex:0 0 auto;width:30px;height:30px;border-radius:999px;background:#1d1d1f;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:650}
+.overview-legend-text{font-size:13px;line-height:1.36}.overview-legend-text strong{display:block;font-size:14px;font-weight:650;margin-bottom:2px}.overview-legend-text span{display:block;color:var(--muted);font-size:12px}
+.smallprint{font-size:12px;color:var(--muted);margin:12px 2px 80px}
 
-/* modal glass */
-.map-modal{position:fixed;inset:0;z-index:9999;background:rgba(16,18,22,.42);display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
-.map-modal.open{display:flex}.map-modal-panel{width:min(1220px,96vw);height:min(860px,92vh);background:rgba(245,245,247,.78);border-radius:26px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 100px rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.6);backdrop-filter:blur(28px) saturate(145%);-webkit-backdrop-filter:blur(28px) saturate(145%)}
-.map-modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.7);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
-.map-modal-title{font-weight:680;font-size:17px}.map-modal-actions{display:flex;gap:8px;flex-wrap:wrap}.map-modal-actions button{border:1px solid var(--line);background:rgba(255,255,255,.78);color:var(--ink);border-radius:12px;min-width:42px;min-height:42px;padding:8px 12px;font-weight:630;cursor:pointer;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
-.map-viewport{position:relative;flex:1;overflow:hidden;background:#e9ece8;touch-action:none;cursor:grab}.map-viewport.dragging{cursor:grabbing}.map-stage{position:absolute;left:50%;top:50%;width:980px;height:690px;transform-origin:center center;will-change:transform}.map-stage .map-svg{width:980px;height:690px;display:block;max-width:none}.map-help{padding:10px 16px;border-top:1px solid var(--line);font-size:11px;color:var(--muted);background:rgba(255,255,255,.7);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+/* Map modal */
+.map-modal{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.map-modal.open{display:flex}.map-modal-panel{width:min(1220px,96vw);height:min(860px,92vh);background:rgba(250,250,252,.94);border-radius:28px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 90px rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.6);backdrop-filter:blur(30px) saturate(135%);-webkit-backdrop-filter:blur(30px) saturate(135%)}
+.map-modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 17px;border-bottom:1px solid var(--line)}.map-modal-title{font-weight:650;font-size:17px}.map-modal-actions{display:flex;gap:8px;flex-wrap:wrap}.map-modal-actions button{border:0;background:#e9e9ed;color:var(--ink);border-radius:999px;min-width:42px;min-height:42px;padding:8px 12px;font-weight:600;cursor:pointer}.map-viewport{position:relative;flex:1;overflow:hidden;background:#e9ece8;touch-action:none;cursor:grab}.map-viewport.dragging{cursor:grabbing}.map-stage{position:absolute;left:50%;top:50%;width:980px;height:690px;transform-origin:center center;will-change:transform}.map-stage .map-svg{width:980px;height:690px;display:block;max-width:none}.map-help{padding:10px 16px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);background:rgba(255,255,255,.76)}
 
-/* transport cards */
-.grid,.transport{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.booking-card{border-radius:24px;padding:18px;background:rgba(255,255,255,.84);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
-.transport .booking-card:nth-child(1),.transport .booking-card:nth-child(2),.transport .booking-card:nth-child(3),.transport .booking-card:nth-child(4),.transport .booking-card:nth-child(5),.transport .booking-card:nth-child(6){background:rgba(255,255,255,.84)}
-.booking-card p{margin:7px 0;font-size:14px}.booking-kicker{font-size:11px;color:var(--blue);font-weight:670;letter-spacing:.02em;margin-bottom:6px}.transport .booking-card h3{margin-top:4px}
+/* Transport tiles: consistent with Apple product cards */
+.grid,.transport{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.booking-card{border-radius:var(--radius-lg);padding:24px;min-height:184px;position:relative;overflow:hidden}
+.booking-card p{margin:8px 0;font-size:14px;color:#3f3f43}.booking-kicker{font-size:12px;color:var(--muted);font-weight:600;margin-bottom:10px}.transport .booking-card h3{font-size:26px;margin:2px 0 12px}
+.transport .booking-card:nth-child(n){background:#fff}
 
-/* daily cards */
-.day{background:rgba(255,255,255,.84);border-radius:28px;margin:16px 0;padding:20px;position:relative;overflow:hidden;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
-.day:before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--day)}
-.day:after{display:none}.day>*{position:relative;z-index:1}.day-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.day-label{font-size:12px;color:var(--blue);font-weight:700;letter-spacing:.04em;margin-bottom:7px}.tz{font-size:12px;color:var(--muted)}
-.route-toggle{font-size:13px;padding:9px 13px;background:rgba(0,113,227,.1);color:var(--blue);box-shadow:none;border:1px solid rgba(0,113,227,.14);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.day-info-grid{display:grid;grid-template-columns:minmax(0,.94fr) minmax(0,1.36fr);gap:12px;margin:16px 0 8px}
-.day-info-card{border:1px solid rgba(60,60,67,.12);border-radius:22px;padding:15px;min-width:0;position:relative;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.035);backdrop-filter:blur(22px) saturate(145%);-webkit-backdrop-filter:blur(22px) saturate(145%)}
-.day-info-card.weather-card{background:linear-gradient(145deg,rgba(235,247,241,.72),rgba(255,255,255,.66))}.day-stay-card{background:linear-gradient(145deg,rgba(248,242,245,.72),rgba(255,255,255,.68))}
-.day-info-kicker{display:inline-flex;padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.78);font-size:10px;font-weight:680;letter-spacing:.04em;color:var(--muted);text-transform:uppercase;margin-bottom:8px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.weather-head{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;margin-bottom:8px}.weather-city{font-size:17px;font-weight:680}.weather-sub,.wx-status,.day-stay-line{font-size:12px;color:var(--muted)}.wx-temp{font-size:36px;font-weight:720;letter-spacing:-.04em;line-height:1;margin:8px 0 4px}.wx-line{font-size:13px;color:var(--ink);margin:3px 0}.wx-suggest{margin-top:10px;padding:10px 12px;background:rgba(255,255,255,.55);border-radius:15px;font-size:12px;line-height:1.45;border:1px solid rgba(255,255,255,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.day-stay-name{font-size:17px;font-weight:680;line-height:1.28;margin:2px 0 7px}.day-stay-line{margin:5px 0;line-height:1.45}.day-stay-status{display:inline-block;font-size:10px;font-weight:670;border-radius:999px;padding:3px 7px;background:rgba(255,255,255,.66);color:var(--blue);margin-left:6px;vertical-align:1px;border:1px solid rgba(0,113,227,.12)}
-.routebox{display:none;margin:16px 0;background:rgba(242,242,247,.74);border-radius:22px;padding:18px 14px 14px;border:1px solid var(--line);position:relative;overflow:hidden;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}.routebox:before{content:"当日路线";position:absolute;left:14px;top:12px;display:inline-flex;padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.8);font-size:10px;color:var(--muted);font-weight:660;letter-spacing:.04em;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}.routebox.open{display:block}.routebox .daymap{margin-top:28px}.daymap{width:100%;height:auto}.daymap path{fill:none;stroke-width:3;stroke-linecap:round;stroke-dasharray:0}.daymap circle{fill:#fff;stroke:var(--blue);stroke-width:2}.daymap text{font-size:10px;fill:var(--ink);font-weight:560}.route-actions{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}.primary-link{display:inline-block;text-decoration:none;font-size:13px;padding:9px 13px}.places{font-size:11px;color:var(--muted);max-width:65%}
-.timeline{margin-top:16px;display:grid;gap:9px}.timeline-row{display:grid;grid-template-columns:88px 1fr;gap:12px;padding:12px 0;border-top:1px solid rgba(60,60,67,.12);background:transparent}.timeline-row:first-child{border-top:0}.time{font-weight:690;font-size:17px;line-height:1.05;color:var(--ink);padding:3px 0;text-align:left}.time small{display:block;font-size:10px;color:var(--muted);font-weight:520;margin-top:4px}.event{font-size:14px;padding:0}.badge{display:inline-block;margin-left:6px;border-radius:999px;padding:3px 7px;font-size:10px;font-weight:650;vertical-align:1px;border:0}.badge.ticket{background:#e9f6ee;color:#267744}.badge.todo{background:#fff4d6;color:#856404}.badge.confirmed{background:#eaf3ff;color:#0066cc}.duration{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.35}.day-note{margin-top:14px;padding:12px 14px;border-radius:16px;background:rgba(242,242,247,.72);font-size:12px;color:#4a4a4f;border:1px solid rgba(60,60,67,.1);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.todo-list,.tips{background:rgba(255,255,255,.78);border-radius:26px;padding:22px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}.todo-list ul,.tips ul{margin:0;padding-left:20px}.todo-list li,.tips li{margin:10px 0}
-.sticky{position:sticky;bottom:12px;display:flex;justify-content:center;pointer-events:none}.todaybtn{pointer-events:auto;padding:10px 15px;background:rgba(29,29,31,.82);box-shadow:0 8px 30px rgba(0,0,0,.14);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
-.smallprint{font-size:12px;color:var(--muted);margin:13px 4px 80px}
-@media(max-width:900px){.transport,.grid,.overview-legend{grid-template-columns:1fr}.day-info-grid{grid-template-columns:1fr}.places{max-width:100%}}
-@media(max-width:700px){.wrap{padding:12px}.focus-grid{grid-template-columns:1fr}.count{grid-template-columns:repeat(2,1fr)}#nextEvent{font-size:25px}.timeline-row{grid-template-columns:70px 1fr}.map-modal{padding:0}.map-modal-panel{width:100vw;height:100vh;border-radius:0}.map-modal-head{align-items:flex-start}.map-modal-title{font-size:16px}.map-help{font-size:11px}.map-zoom-btn{width:100%}.overview-legend{grid-template-columns:1fr}.overview-legend-item{padding:10px 11px}}
+/* Daily cards */
+.day{border-radius:var(--radius-xl);margin:18px 0;padding:26px;position:relative;overflow:hidden}
+.day:before,.day:after{display:none!important}
+.day-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding-bottom:2px}.day-label{font-size:12px;color:var(--muted);font-weight:600;margin-bottom:8px}.tz{font-size:12px;color:var(--muted)}button{font:inherit}
+.route-toggle{padding:9px 14px;box-shadow:none}
+.day-info-grid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.28fr);gap:14px;margin:22px 0 8px}
+.day-info-card{border:0;border-radius:20px;padding:18px;min-width:0;background:var(--surface-soft)}
+.day-info-card:before{display:none!important}.day-info-card.weather-card,.day-stay-card{background:var(--surface-soft)}
+.day-info-kicker{font-size:11px;color:var(--muted);font-weight:600;letter-spacing:.02em;text-transform:none;margin-bottom:8px}.weather-head{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;margin-bottom:8px}.weather-city{font-size:19px;font-weight:650}.weather-sub,.wx-status,.day-stay-line{font-size:12px;color:var(--muted)}.wx-temp{font-size:36px;font-weight:650;letter-spacing:-.04em;line-height:1;margin:8px 0 5px}.wx-line{font-size:13px;color:#444447;margin:3px 0}.wx-suggest{margin-top:12px;padding:12px 13px;background:#fff;border-radius:14px;font-size:13px;line-height:1.45;color:#424245}.day-stay-name{font-size:19px;font-weight:650;line-height:1.28;margin:2px 0 9px}.day-stay-line{margin:6px 0;line-height:1.45}.day-stay-line a{color:var(--ink)}.day-stay-status{display:inline-block;font-size:10px;font-weight:600;border-radius:999px;padding:3px 7px;background:#e3f1ff;color:#0059b2;margin-left:6px;vertical-align:1px}
+.routebox{display:none;margin:18px 0;background:var(--surface-soft);border-radius:20px;padding:18px}.routebox:before{display:none!important}.routebox.open{display:block}.routebox .daymap{margin-top:0}.daymap{width:100%;height:auto}.daymap path{fill:none;stroke-width:3.5;stroke-linecap:round;stroke-dasharray:0}.daymap circle{fill:#fff;stroke:#0071e3;stroke-width:2}.daymap text{font-size:10px;fill:#3f4347;font-weight:550}.route-actions{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}.primary-link{display:inline-block;padding:9px 14px}.places{font-size:11px;color:var(--muted);max-width:65%}
+.timeline{margin-top:20px}.timeline-row{display:grid;grid-template-columns:92px 1fr;gap:16px;padding:14px 0;border-top:1px solid var(--line);background:transparent;box-shadow:none;border-radius:0}.timeline-row:first-child{border-top:0}.time{font-weight:650;font-size:18px;line-height:1.05;color:var(--ink);padding:2px 0;text-align:left;background:transparent}.time small{display:block;font-size:10px;color:var(--muted);font-weight:500;margin-top:4px}.event{font-size:15px;padding:0}.badge{display:inline-block;margin-left:6px;border-radius:999px;padding:3px 7px;font-size:10px;font-weight:600;vertical-align:1px}.badge.ticket{background:#eaf6ee;color:#287244}.badge.todo{background:#fff3cf;color:#7b5d00}.badge.confirmed{background:#eaf3ff;color:#0059b2}.duration{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.35}.day-note{margin-top:16px;padding:13px 14px;border-radius:15px;background:var(--surface-soft);font-size:12px;color:#4d4d50}
+
+.todo-list,.tips{border-radius:var(--radius-lg);padding:26px}.todo-list ul,.tips ul{margin:0;padding-left:20px}.todo-list li,.tips li{margin:10px 0}.sticky{position:sticky;bottom:12px;display:flex;justify-content:center;pointer-events:none}.todaybtn{pointer-events:auto;box-shadow:0 8px 24px rgba(0,113,227,.2)}
+
+@media(max-width:900px){.grid,.transport,.overview-legend{grid-template-columns:1fr}.day-info-grid{grid-template-columns:1fr}.places{max-width:100%}}
+@media(max-width:700px){.wrap{padding:0 14px 58px}.hero{padding-top:34px}.focus{padding:24px;border-radius:26px}.focus-grid{grid-template-columns:1fr}.count{grid-template-columns:repeat(2,1fr)}.overview,.day{border-radius:26px}.day{padding:20px}.timeline-row{grid-template-columns:72px 1fr;gap:12px}.time{font-size:15px}.map-modal{padding:0}.map-modal-panel{width:100vw;height:100vh;border-radius:0}.map-modal-head{align-items:flex-start}.map-zoom-btn{width:100%}h2{margin-top:58px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+
+
+/* --- Refined light Apple-style countdown card --- */
+.focus{
+  background:
+    radial-gradient(circle at 84% 18%,rgba(0,113,227,.12),transparent 26%),
+    radial-gradient(circle at 10% 92%,rgba(111,189,255,.10),transparent 28%),
+    linear-gradient(180deg,rgba(255,255,255,.94),rgba(248,249,251,.96));
+  color:var(--ink);
+  border:1px solid rgba(0,0,0,.045);
+  box-shadow:0 14px 38px rgba(0,0,0,.055);
+}
+.focus:before{background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,0) 44%)}
+.next-label{
+  color:#6e6e73;
+  background:rgba(255,255,255,.66);
+  border:1px solid rgba(0,0,0,.06);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
+  backdrop-filter:blur(22px) saturate(150%);
+  -webkit-backdrop-filter:blur(22px) saturate(150%);
+}
+#nextEvent{color:#1d1d1f}
+#nextMeta{
+  color:#005bb5;
+  background:rgba(0,113,227,.08);
+  border:1px solid rgba(0,113,227,.12);
+  backdrop-filter:blur(20px) saturate(140%);
+  -webkit-backdrop-filter:blur(20px) saturate(140%);
+}
+.tzmeta{color:#86868b}
+.count div{
+  background:rgba(255,255,255,.70);
+  border:1px solid rgba(0,0,0,.055);
+  box-shadow:0 6px 16px rgba(0,0,0,.035),inset 0 1px 0 rgba(255,255,255,.95);
+  backdrop-filter:blur(24px) saturate(150%);
+  -webkit-backdrop-filter:blur(24px) saturate(150%);
+}
+.count b{color:#1d1d1f}.count span{color:#86868b}
+
+/* --- Apple Maps-inspired overview map visual language --- */
+.overview{padding:20px}
+.map-svg{background:#f7f7f4;border:0;border-radius:22px}
+#overviewMapSvg .map-title{font-size:30px;font-weight:650;letter-spacing:-.03em;fill:#1d1d1f}
+#overviewMapSvg .map-subtitle{font-size:12px;fill:#7a7a80;font-weight:500}
+#overviewMapSvg .land-bg{fill:#f7f7f4}
+#overviewMapSvg .water-fill{fill:#d9edf8;stroke:#b8d9eb;stroke-width:1}
+#overviewMapSvg .water-line{fill:none;stroke:#9dc8e1;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+#overviewMapSvg .park-fill{fill:#dfead8;stroke:#c8d8c0;stroke-width:1}
+#overviewMapSvg .desert-fill{fill:#f2eadf;stroke:#e6ddd0;stroke-width:1}
+#overviewMapSvg .state-boundary{fill:none;stroke:#dededb;stroke-width:1.1;stroke-dasharray:4 5}
+#overviewMapSvg .road-casing{fill:none;stroke:#d0d0ce;stroke-width:5.2;stroke-linecap:round;stroke-linejoin:round}
+#overviewMapSvg .road-major{fill:none;stroke:#fff;stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round}
+#overviewMapSvg .road-highway-casing{fill:none;stroke:#d4b35f;stroke-width:6.4;stroke-linecap:round;stroke-linejoin:round}
+#overviewMapSvg .road-highway{fill:none;stroke:#fff3ca;stroke-width:4.7;stroke-linecap:round;stroke-linejoin:round}
+#overviewMapSvg .road-minor{fill:none;stroke:#e2e2df;stroke-width:2;stroke-linecap:round}
+#overviewMapSvg .route-outline{fill:none;stroke:rgba(255,255,255,.96);stroke-width:10.5;stroke-linecap:round;stroke-linejoin:round}
+#overviewMapSvg .route-main{fill:none;stroke:#0a84ff;stroke-width:5.6;stroke-linecap:round;stroke-linejoin:round;filter:url(#routeShadow)}
+#overviewMapSvg .route-return{fill:none;stroke:#0a84ff;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:7 6;opacity:.72}
+#overviewMapSvg .state-label{font-size:11px;fill:#a0a0a5;font-weight:600;letter-spacing:.13em}
+#overviewMapSvg .city-label{font-size:12px;fill:#3a3a3c;font-weight:600;stroke:#fff;stroke-width:4px;paint-order:stroke;stroke-linejoin:round}
+#overviewMapSvg .poi-label{font-size:10.5px;fill:#5d5d62;font-weight:550;stroke:#fff;stroke-width:3.5px;paint-order:stroke;stroke-linejoin:round}
+#overviewMapSvg .park-label{font-size:10.5px;fill:#55735c;font-weight:600;stroke:#eef5ea;stroke-width:3px;paint-order:stroke}
+#overviewMapSvg .road-label{font-size:9px;fill:#8b7644;font-weight:650;stroke:#fff;stroke-width:3px;paint-order:stroke}
+#overviewMapSvg .stop-circle,#overviewMapSvg .stop-square,#overviewMapSvg .stop-diamond{fill:#fff;stroke:#0a84ff;stroke-width:2.4;filter:url(#pinShadow)}
+#overviewMapSvg .stop-text{font-size:9.5px;fill:#0878e7;font-weight:700;text-anchor:middle;dominant-baseline:middle}
+#overviewMapSvg .map-caption{font-size:10px;fill:#74777c;font-weight:500}
+#overviewMapSvg .legend-box{fill:rgba(255,255,255,.90);stroke:rgba(0,0,0,.06);stroke-width:1;filter:url(#panelShadow)}
+#overviewMapSvg .legend-text{font-size:11px;fill:#515154;font-weight:550}
 
 </style>
 </head>
@@ -145,64 +214,92 @@ h3{margin:3px 0 8px;font-size:21px;line-height:1.18;letter-spacing:-.018em;font-
 <h2>行程总览地图</h2>
 <section class="overview">
 <div class="map-toolbar">
-  <div class="map-style-pill">Route overview · terrain</div>
+  <div class="map-style-pill">Apple Maps style · route overview</div>
   <button class="map-zoom-btn" id="openOverviewMap" type="button">放大地图</button>
 </div>
-<svg aria-label="美国西部自驾总览详细路线图" class="map-svg" id="overviewMapSvg" role="img" viewBox="0 0 980 690">
+<svg aria-label="美国西部自驾总览路线图" class="map-svg" id="overviewMapSvg" role="img" viewBox="0 0 980 690">
   <defs>
-    <linearGradient id="landGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#edf0ec"/><stop offset="1" stop-color="#e5e9e4"/></linearGradient>
-    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity=".16"/></filter>
+    <filter id="routeShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="1.2" stdDeviation="1.2" flood-color="#0066cc" flood-opacity=".22"/></filter>
+    <filter id="pinShadow" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="1.3" stdDeviation="1.5" flood-color="#000" flood-opacity=".18"/></filter>
+    <filter id="panelShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity=".10"/></filter>
   </defs>
-  <rect x="16" y="16" width="948" height="658" rx="22" fill="url(#landGrad)" stroke="#c6cbc7" stroke-width="1"></rect>
-  <text class="map-title" x="38" y="60">Western U.S. Road Trip</text>
-  <text class="map-subtitle" x="40" y="84">Sep 25 – Oct 9, 2026 · terrain overview · not to scale</text>
 
-  <g opacity=".95">
-    <path class="topo-line thick" d="M40 124 C132 94 214 118 298 88 S456 82 544 114 S716 160 934 108"></path>
-    <path class="topo-line" d="M28 146 C120 116 212 144 302 116 S460 108 550 140 S726 188 946 132"></path>
-    <path class="topo-line" d="M24 170 C116 140 206 168 298 140 S456 132 552 164 S734 214 952 158"></path>
-    <path class="topo-line thick" d="M20 198 C110 166 198 194 288 166 S450 154 552 188 S738 240 956 184"></path>
-    <path class="topo-line" d="M20 226 C110 198 196 222 284 198 S444 182 550 216 S746 270 958 214"></path>
-    <path class="topo-line" d="M18 256 C108 232 194 254 280 232 S440 216 550 246 S752 300 960 244"></path>
-    <path class="topo-line thick" d="M18 290 C108 268 194 282 278 264 S438 250 550 280 S754 330 960 278"></path>
-    <path class="topo-line" d="M20 324 C108 306 194 312 278 300 S438 286 550 314 S752 360 958 310"></path>
-    <path class="topo-line" d="M20 356 C108 342 194 348 278 338 S438 324 550 350 S752 392 958 340"></path>
-    <path class="topo-line thick" d="M20 390 C108 376 194 382 278 372 S438 358 550 382 S750 420 956 374"></path>
-    <path class="topo-line" d="M20 424 C108 412 194 416 278 406 S438 392 550 414 S748 450 954 406"></path>
-    <path class="topo-line" d="M20 458 C108 448 194 452 278 442 S438 428 550 448 S748 482 954 438"></path>
-    <path class="topo-line thick" d="M18 494 C106 486 192 488 278 480 S438 466 550 484 S746 516 952 472"></path>
-    <path class="topo-line" d="M18 530 C106 522 192 522 278 516 S438 502 550 518 S744 548 952 506"></path>
-    <path class="topo-line" d="M18 566 C106 558 190 560 278 554 S438 538 550 552 S742 580 952 542"></path>
-    <path class="topo-line thick" d="M18 602 C106 594 190 596 278 592 S438 574 550 586 S740 612 950 578"></path>
-    <path class="topo-line" d="M116 106 C156 150 172 214 148 276 S128 390 158 448 S196 550 178 632"></path>
-    <path class="topo-line" d="M178 108 C216 152 228 214 204 276 S178 394 212 450 S254 552 242 638"></path>
-    <path class="topo-line" d="M692 100 C652 154 648 226 688 280 S744 396 706 462 S646 562 680 630"></path>
-    <path class="topo-line" d="M750 108 C714 156 712 226 750 280 S798 392 764 458 S708 558 738 626"></path>
-  </g>
+  <rect class="land-bg" x="12" y="12" width="956" height="666" rx="22"></rect>
 
+  <!-- Water / landscape areas -->
+  <path class="water-fill" d="M18 470 C44 456 68 468 80 500 L82 666 L18 666 Z"></path>
+  <path class="water-fill" d="M568 230 C590 214 623 218 637 240 C648 256 638 279 614 286 C588 292 562 281 556 262 C550 248 554 238 568 230Z"></path>
+  <path class="water-fill" d="M714 119 C728 109 748 112 756 126 C764 140 755 154 737 157 C719 160 706 150 706 138 C706 130 708 124 714 119Z"></path>
+  <path class="water-fill" d="M638 402 C659 391 690 394 705 409 C716 420 710 438 692 445 C668 454 639 447 630 432 C624 422 628 410 638 402Z"></path>
+  <path class="water-line" d="M604 409 C620 414 635 422 649 434 C658 443 664 451 669 462"></path>
+  <path class="water-line" d="M577 465 C558 473 545 487 536 505 C528 521 514 532 496 538"></path>
+
+  <!-- Parks / protected areas -->
+  <path class="park-fill" d="M646 84 C676 69 729 75 759 101 C782 121 778 164 752 187 C720 213 667 207 638 179 C615 157 618 105 646 84Z"></path>
+  <path class="park-fill" d="M651 173 C670 162 698 163 716 179 C733 193 731 220 711 233 C686 250 653 244 640 224 C627 205 632 185 651 173Z"></path>
+  <path class="park-fill" d="M718 231 C746 215 794 221 819 246 C840 266 835 303 805 316 C771 331 728 319 711 294 C697 273 698 244 718 231Z"></path>
+  <path class="park-fill" d="M452 378 C483 360 521 366 545 388 C566 406 563 439 538 454 C507 472 463 466 444 441 C428 420 432 391 452 378Z"></path>
+  <path class="desert-fill" d="M544 434 C580 413 627 416 653 442 C673 463 666 500 634 517 C597 536 546 527 528 498 C513 474 520 449 544 434Z"></path>
+  <path class="park-fill" d="M192 524 C223 508 273 514 299 540 C318 559 313 594 284 610 C250 628 203 620 183 592 C166 570 170 538 192 524Z"></path>
+
+  <!-- State boundaries -->
+  <path class="state-boundary" d="M188 100 L188 642"></path>
+  <path class="state-boundary" d="M345 86 L345 640"></path>
+  <path class="state-boundary" d="M520 84 L520 642"></path>
+  <path class="state-boundary" d="M660 78 L660 638"></path>
+  <path class="state-boundary" d="M800 86 L800 638"></path>
+  <path class="state-boundary" d="M520 360 L800 360"></path>
+
+  <!-- Apple Maps-like road network -->
+  <path class="road-casing" d="M104 570 C190 540 258 500 322 465 C394 425 470 388 544 342 C613 300 675 252 739 198 C788 157 821 128 850 108"></path>
+  <path class="road-major" d="M104 570 C190 540 258 500 322 465 C394 425 470 388 544 342 C613 300 675 252 739 198 C788 157 821 128 850 108"></path>
+  <path class="road-highway-casing" d="M120 550 C216 498 330 442 444 384 C539 336 627 287 711 229 C756 198 789 173 824 142"></path>
+  <path class="road-highway" d="M120 550 C216 498 330 442 444 384 C539 336 627 287 711 229 C756 198 789 173 824 142"></path>
+  <path class="road-casing" d="M602 269 C654 221 689 176 703 121 C711 94 727 80 751 76"></path>
+  <path class="road-major" d="M602 269 C654 221 689 176 703 121 C711 94 727 80 751 76"></path>
+  <path class="road-casing" d="M694 190 C728 228 757 277 812 356"></path>
+  <path class="road-major" d="M694 190 C728 228 757 277 812 356"></path>
+  <path class="road-casing" d="M811 356 C754 391 705 416 650 434 C624 444 604 457 586 470"></path>
+  <path class="road-major" d="M811 356 C754 391 705 416 650 434 C624 444 604 457 586 470"></path>
+  <path class="road-casing" d="M586 470 C548 452 520 438 488 421 C433 426 372 443 320 470"></path>
+  <path class="road-major" d="M586 470 C548 452 520 438 488 421 C433 426 372 443 320 470"></path>
+  <path class="road-highway-casing" d="M320 470 C289 506 265 535 242 564 C208 560 178 559 144 560"></path>
+  <path class="road-highway" d="M320 470 C289 506 265 535 242 564 C208 560 178 559 144 560"></path>
+  <path class="road-minor" d="M130 515 C178 491 216 468 250 443"></path>
+  <path class="road-minor" d="M350 502 C388 492 424 480 462 455"></path>
+  <path class="road-minor" d="M545 392 C571 379 594 370 621 363"></path>
+  <path class="road-minor" d="M681 355 C706 344 733 338 758 340"></path>
+
+  <!-- Route -->
+  <path class="route-outline" d="M124 558 L610 270 L700 118 L718 102 L736 126 L688 192 L760 264 L812 356 L650 434 L586 470 L488 421 L320 470 L242 564 L144 560"></path>
+  <path class="route-main" d="M124 558 L610 270 L700 118 L718 102 L736 126 L688 192 L760 264 L812 356 L650 434 L586 470 L488 421 L320 470 L242 564 L144 560"></path>
+  <path class="route-return" d="M586 470 C611 456 631 445 650 434 C625 431 605 442 586 470"></path>
+
+  <!-- Labels -->
+  <text class="map-title" x="34" y="52">Western U.S. Road Trip</text>
+  <text class="map-subtitle" x="36" y="74">Sep 25 – Oct 9, 2026 · schematic road map · not to scale</text>
+
+  <text class="state-label" x="106" y="226">CALIFORNIA</text>
+  <text class="state-label" x="248" y="250">NEVADA</text>
+  <text class="state-label" x="432" y="210">UTAH</text>
+  <text class="state-label" x="608" y="214">WYOMING</text>
+  <text class="state-label" x="692" y="68">MONTANA</text>
+  <text class="state-label" x="540" y="542">ARIZONA</text>
+
+  <text class="park-label" x="652" y="91">Yellowstone National Park</text>
+  <text class="park-label" x="645" y="180">Grand Teton</text>
+  <text class="park-label" x="731" y="235">Arches / Canyonlands</text>
+  <text class="park-label" x="454" y="385">Zion National Park</text>
+  <text class="park-label" x="548" y="441">Grand Canyon</text>
+  <text class="park-label" x="196" y="532">Joshua Tree</text>
+
+  <text class="road-label" x="417" y="394">I‑15</text>
+  <text class="road-label" x="679" y="225">US‑89</text>
+  <text class="road-label" x="752" y="292">US‑191</text>
+  <text class="road-label" x="276" y="520">I‑15 / I‑10</text>
+
+  <!-- Numbered route stops -->
   <g>
-    <path class="map-river" d="M106 252 C170 236 224 248 282 230 S392 220 452 238 S558 256 618 246 S744 220 830 236"></path>
-    <path class="map-river" d="M606 392 C642 378 678 376 716 386 S792 410 862 398"></path>
-    <path class="minor-road" d="M204 518 C286 492 360 444 426 386 S560 282 624 200"></path>
-    <path class="minor-road" d="M304 560 C384 532 460 510 540 486 S700 422 830 366"></path>
-  </g>
-
-  <g>
-    <path class="park-area" d="M650 92 C676 80 730 84 756 106 C774 122 766 162 742 180 C716 198 672 198 646 174 C628 158 628 112 650 92Z" fill="#dfe8d8"></path><text class="park-label" x="650" y="84">Yellowstone NP</text>
-    <path class="park-area" d="M730 236 C758 224 794 230 816 252 C828 268 826 292 804 306 C774 322 734 316 718 292 C706 272 708 244 730 236Z" fill="#e5ded0"></path><text class="park-label" x="736" y="224">Arches / Canyonlands</text>
-    <path class="park-area" d="M466 388 C494 374 520 378 540 396 C554 410 554 436 534 446 C506 462 468 458 452 438 C438 418 444 398 466 388Z" fill="#d9e6d6"></path><text class="park-label" x="444" y="378">Zion NP</text>
-    <path class="park-area" d="M554 444 C586 426 628 428 646 448 C660 462 656 494 630 506 C598 520 552 512 538 486 C530 470 534 454 554 444Z" fill="#e6ded2"></path><text class="park-label" x="538" y="436">Grand Canyon NP</text>
-    <path class="park-area" d="M618 400 C648 382 684 382 706 396 C718 406 716 428 696 438 C666 454 626 448 612 428 C604 416 606 406 618 400Z" fill="#d8eaf1"></path><text class="park-label" x="626" y="392">Lake Powell / Page</text>
-    <path class="park-area" d="M206 536 C236 522 274 526 292 548 C304 562 302 590 280 602 C252 616 212 612 194 590 C182 574 184 548 206 536Z" fill="#e7e0cf"></path><text class="park-label" x="176" y="526">Joshua Tree NP</text>
-  </g>
-
-  <g>
-    <path class="route-outline" d="M124 558 L610 270 L700 118 L718 102 L736 126 L688 192 L760 264 L812 356 L650 434 L586 470 L488 421 L320 470 L242 564 L144 560"></path>
-    <path class="route-main" d="M124 558 L610 270 L700 118 L718 102 L736 126 L688 192 L760 264 L812 356 L650 434 L586 470 L488 421 L320 470 L242 564 L144 560"></path>
-    <path class="route-secondary" d="M650 434 L586 470"></path>
-  </g>
-
-  <g filter="url(#softShadow)">
     <rect class="stop-square" x="113" y="547" width="22" height="22" rx="5"></rect><text class="stop-text" x="124" y="558">1</text>
     <rect class="stop-square" x="599" y="259" width="22" height="22" rx="5"></rect><text class="stop-text" x="610" y="270">2</text>
     <circle class="stop-circle" cx="700" cy="118" r="11"></circle><text class="stop-text" x="700" y="118">3</text>
@@ -219,20 +316,29 @@ h3{margin:3px 0 8px;font-size:21px;line-height:1.18;letter-spacing:-.018em;font-
     <circle class="stop-circle" cx="144" cy="560" r="11"></circle><text class="stop-text" x="144" y="560">14</text>
   </g>
 
-  <g>
-    <text class="state-label" x="72" y="606">CA</text><text class="state-label" x="296" y="516">NV</text><text class="state-label" x="460" y="288">UT</text><text class="state-label" x="644" y="118">MT</text><text class="state-label" x="666" y="198">WY</text><text class="state-label" x="532" y="446">AZ</text>
-    <text class="map-caption" x="88" y="542">Los Angeles</text><text class="map-caption" x="620" y="292">Salt Lake City</text><text class="map-caption" x="768" y="288">Moab</text><text class="map-caption" x="660" y="457">Page</text><text class="map-caption" x="328" y="492">Las Vegas</text>
-  </g>
+  <!-- City labels offset from route to avoid collisions -->
+  <text class="city-label" x="83" y="588">Los Angeles</text>
+  <text class="city-label" x="572" y="296">Salt Lake City</text>
+  <text class="city-label" x="659" y="111">West Yellowstone</text>
+  <text class="city-label" x="733" y="91">Gardiner</text>
+  <text class="city-label" x="749" y="143">Yellowstone Lake</text>
+  <text class="city-label" x="646" y="210">Thayne</text>
+  <text class="city-label" x="773" y="248">Moab</text>
+  <text class="poi-label" x="827" y="350">Monument Valley</text>
+  <text class="city-label" x="664" y="429">Page</text>
+  <text class="poi-label" x="598" y="490">Grand Canyon South Rim</text>
+  <text class="city-label" x="462" y="414">Springdale</text>
+  <text class="city-label" x="327" y="457">Las Vegas</text>
+  <text class="poi-label" x="193" y="581">Joshua Tree / Banning</text>
+  <text class="city-label" x="110" y="547">Santa Monica</text>
 
-  <g>
-    <rect class="legend-box" x="34" y="474" width="258" height="156" rx="17"></rect>
-    <text class="legend-text" x="56" y="504">Map legend</text>
-    <line x1="56" y1="526" x2="106" y2="526" class="route-main"></line><text class="legend-text" x="122" y="531">Driving route</text>
-    <line x1="56" y1="552" x2="106" y2="552" class="map-river"></line><text class="legend-text" x="122" y="557">River / water</text>
-    <circle class="stop-circle" cx="67" cy="581" r="9"></circle><text class="stop-text" x="67" y="581">3</text><text class="legend-text" x="90" y="586">Overnight / key stop</text>
-    <polygon class="stop-diamond" points="58,608 67,617 58,626 49,617"></polygon><text class="stop-text" x="58" y="617">8</text><text class="legend-text" x="90" y="622">Scenic / park stop</text>
-  </g>
+  <!-- Small Apple-like floating legend -->
+  <rect class="legend-box" x="42" y="102" width="188" height="112" rx="16"></rect>
+  <path class="route-main" d="M62 132 L108 132"></path><text class="legend-text" x="122" y="136">Trip route</text>
+  <path class="road-highway" d="M62 160 L108 160"></path><text class="legend-text" x="122" y="164">Highway</text>
+  <path class="water-line" d="M62 188 L108 188"></path><text class="legend-text" x="122" y="192">Water</text>
 </svg>
+
 <div class="overview-legend">
   <div class="overview-legend-item"><div class="overview-legend-num">1</div><div class="overview-legend-text"><strong>洛杉矶 / LAX</strong><span>D1 抵达；D15 返回洛杉矶并准备离境</span></div></div>
   <div class="overview-legend-item"><div class="overview-legend-num">2</div><div class="overview-legend-text"><strong>盐湖城</strong><span>D2 国内航班抵达，取长租车并过夜</span></div></div>
@@ -249,7 +355,7 @@ h3{margin:3px 0 8px;font-size:21px;line-height:1.18;letter-spacing:-.018em;font-
   <div class="overview-legend-item"><div class="overview-legend-num">13</div><div class="overview-legend-text"><strong>Joshua Tree / Banning</strong><span>D14 游玩后夜宿 Banning</span></div></div>
   <div class="overview-legend-item"><div class="overview-legend-num">14</div><div class="overview-legend-text"><strong>Santa Monica</strong><span>D15 海边停留后前往 LAX</span></div></div>
 </div>
-<div class="smallprint">地图采用更接近专业 terrain / road map 的表达：降低装饰色，强化道路、水系、地形线与国家公园区域；路线统一使用蓝色主线。</div>
+<div class="smallprint">地图改为 Apple Maps 风格的道路图视觉：浅色底图、白色道路、绿色公园、蓝色水系与蓝色导航路线。由于这是单文件离线手册，采用内置矢量地图风格，而不是调用需要 MapKit 凭证的实时 Apple Maps 图层。</div>
 </section>
 <div aria-hidden="true" class="map-modal" id="overviewMapModal">
 <div aria-labelledby="overviewMapTitle" aria-modal="true" class="map-modal-panel" role="dialog">
@@ -463,13 +569,13 @@ h3{margin:3px 0 8px;font-size:21px;line-height:1.18;letter-spacing:-.018em;font-
 <div class="day-info-kicker">今晚住宿</div>
 <div class="day-stay-name">Airbnb · Gardiner<span class="day-stay-status">已确认</span></div>
 <div class="day-stay-line">按 Airbnb 房源说明入住 · 9/29 退房</div>
-<div class="day-stay-line"><a href="https://www.google.com/maps/search/?api=1&amp;query=301%20South%20Yellowstone%20Street%2C%20301%20South%20Yellowstone%20Street%2C%20Gardiner%2C%20MT%2059030%2059030" rel="noopener" target="_blank">📍 301 South Yellowstone Street, Gardiner, MT 59030</a></div>
+<div class="day-stay-line"><a href="https://www.google.com/maps/search/?api=1&amp;query=301%20South%20Yellowstone%20Street%2C%20Gardiner%2C%20MT%2059030" rel="noopener" target="_blank">📍 301 South Yellowstone Street, Gardiner, MT 59030</a></div>
 <div class="day-stay-line">☎ 未提供</div></article></div>
 <div class="routebox">
 <svg class="daymap" role="img" viewbox="0 0 760 130"><path d="M40.0,60 Q125.0,35 210.0,88 Q295.0,113 380.0,60 Q465.0,35 550.0,88 Q635.0,113 720.0,60" style="stroke:#6b9f73"></path><circle cx="40.0" cy="60" r="5"></circle><text text-anchor="middle" x="40.0" y="88">126 N Canyon St</text><circle cx="210.0" cy="88" r="5"></circle><text text-anchor="middle" x="210.0" y="116">Old Faithful</text><circle cx="380.0" cy="60" r="5"></circle><text text-anchor="middle" x="380.0" y="88">Grand Prismatic Spring</text><circle cx="550.0" cy="88" r="5"></circle><text text-anchor="middle" x="550.0" y="116">Norris Geyser Basin</text><circle cx="720.0" cy="60" r="5"></circle><text text-anchor="middle" x="720.0" y="88">Gardiner</text></svg>
 <div class="route-actions">
-<a class="primary-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=126%20N%20Canyon%20St%2C%20West%20Yellowstone%2C%20MT%2059758&amp;destination=301%20South%20Yellowstone%20Street%2C%20Gardiner%2C%20MT%2059030&amp;travelmode=driving&amp;waypoints=Old%20Faithful|Grand%20Prismatic%20Spring|Norris%20Geyser%20Basin" rel="noopener" target="_blank">打开全天多点导航</a>
-<div class="places"><a href="https://www.google.com/maps/search/?api=1&amp;query=126%20N%20Canyon%20St%2C%20West%20Yellowstone%2C%20MT%2059758" rel="noopener" target="_blank">126 N Canyon St</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Old%20Faithful" rel="noopener" target="_blank">Old Faithful</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grand%20Prismatic%20Spring" rel="noopener" target="_blank">Grand Prismatic Spring</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Norris%20Geyser%20Basin" rel="noopener" target="_blank">Norris Geyser Basin</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=301%20South%20Yellowstone%20Street%2C%20Gardiner%2C%20MT%2059030" rel="noopener" target="_blank">Gardiner</a></div>
+<a class="primary-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=126%20N%20Canyon%20St%2C%20West%20Yellowstone%2C%20MT%2059758&amp;destination=Gardiner%2C%20MT&amp;travelmode=driving&amp;waypoints=Old%20Faithful|Grand%20Prismatic%20Spring|Norris%20Geyser%20Basin" rel="noopener" target="_blank">打开全天多点导航</a>
+<div class="places"><a href="https://www.google.com/maps/search/?api=1&amp;query=126%20N%20Canyon%20St%2C%20West%20Yellowstone%2C%20MT%2059758" rel="noopener" target="_blank">126 N Canyon St</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Old%20Faithful" rel="noopener" target="_blank">Old Faithful</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grand%20Prismatic%20Spring" rel="noopener" target="_blank">Grand Prismatic Spring</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Norris%20Geyser%20Basin" rel="noopener" target="_blank">Norris Geyser Basin</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Gardiner%2C%20MT" rel="noopener" target="_blank">Gardiner</a></div>
 </div>
 </div>
 <div class="timeline">
@@ -524,8 +630,8 @@ h3{margin:3px 0 8px;font-size:21px;line-height:1.18;letter-spacing:-.018em;font-
 <div class="routebox">
 <svg class="daymap" role="img" viewbox="0 0 760 130"><path d="M40.0,60 Q96.66666666666666,35 153.33333333333331,88 Q209.99999999999997,113 266.66666666666663,60 Q323.3333333333333,35 380.0,88 Q436.66666666666663,113 493.3333333333333,60 Q550.0,35 606.6666666666666,88 Q663.3333333333333,113 720.0,60" style="stroke:#3d8d92"></path><circle cx="40.0" cy="60" r="5"></circle><text text-anchor="middle" x="40.0" y="88">Gardiner</text><circle cx="153.33333333333331" cy="88" r="5"></circle><text text-anchor="middle" x="153.33333333333331" y="116">Mammoth Hot Springs</text><circle cx="266.66666666666663" cy="60" r="5"></circle><text text-anchor="middle" x="266.66666666666663" y="88">Lamar Valley</text><circle cx="380.0" cy="88" r="5"></circle><text text-anchor="middle" x="380.0" y="116">Tower Fall</text><circle cx="493.3333333333333" cy="60" r="5"></circle><text text-anchor="middle" x="493.3333333333333" y="88">Grand Canyon of the Yell</text><circle cx="606.6666666666666" cy="88" r="5"></circle><text text-anchor="middle" x="606.6666666666666" y="116">Hayden Valley</text><circle cx="720.0" cy="60" r="5"></circle><text text-anchor="middle" x="720.0" y="88">235 Yellowstone Lake Rd</text></svg>
 <div class="route-actions">
-<a class="primary-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=301%20South%20Yellowstone%20Street%2C%20Gardiner%2C%20MT%2059030&amp;destination=235%20Yellowstone%20Lake%20Rd%2C%20Yellowstone%20National%20Park%2C%20WY%2082190&amp;travelmode=driving&amp;waypoints=Mammoth%20Hot%20Springs|Lamar%20Valley|Tower%20Fall|Grand%20Canyon%20of%20the%20Yellowstone|Hayden%20Valley" rel="noopener" target="_blank">打开全天多点导航</a>
-<div class="places"><a href="https://www.google.com/maps/search/?api=1&amp;query=301%20South%20Yellowstone%20Street%2C%20Gardiner%2C%20MT%2059030" rel="noopener" target="_blank">Gardiner</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Mammoth%20Hot%20Springs" rel="noopener" target="_blank">Mammoth Hot Springs</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Lamar%20Valley" rel="noopener" target="_blank">Lamar Valley</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Tower%20Fall" rel="noopener" target="_blank">Tower Fall</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grand%20Canyon%20of%20the%20Yellowstone" rel="noopener" target="_blank">Grand Canyon of the Yellowstone</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Hayden%20Valley" rel="noopener" target="_blank">Hayden Valley</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=235%20Yellowstone%20Lake%20Rd%2C%20Yellowstone%20National%20Park%2C%20WY%2082190" rel="noopener" target="_blank">235 Yellowstone Lake Rd</a></div>
+<a class="primary-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=Gardiner%2C%20MT&amp;destination=235%20Yellowstone%20Lake%20Rd%2C%20Yellowstone%20National%20Park%2C%20WY%2082190&amp;travelmode=driving&amp;waypoints=Mammoth%20Hot%20Springs|Lamar%20Valley|Tower%20Fall|Grand%20Canyon%20of%20the%20Yellowstone|Hayden%20Valley" rel="noopener" target="_blank">打开全天多点导航</a>
+<div class="places"><a href="https://www.google.com/maps/search/?api=1&amp;query=Gardiner%2C%20MT" rel="noopener" target="_blank">Gardiner</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Mammoth%20Hot%20Springs" rel="noopener" target="_blank">Mammoth Hot Springs</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Lamar%20Valley" rel="noopener" target="_blank">Lamar Valley</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Tower%20Fall" rel="noopener" target="_blank">Tower Fall</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grand%20Canyon%20of%20the%20Yellowstone" rel="noopener" target="_blank">Grand Canyon of the Yellowstone</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Hayden%20Valley" rel="noopener" target="_blank">Hayden Valley</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=235%20Yellowstone%20Lake%20Rd%2C%20Yellowstone%20National%20Park%2C%20WY%2082190" rel="noopener" target="_blank">235 Yellowstone Lake Rd</a></div>
 </div>
 </div>
 <div class="timeline">
