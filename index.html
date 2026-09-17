@@ -184,6 +184,68 @@ h3{font-size:24px;line-height:1.12;letter-spacing:-.025em;margin:2px 0 9px;font-
 #overviewMapSvg .legend-box{fill:rgba(255,255,255,.90);stroke:rgba(0,0,0,.06);stroke-width:1;filter:url(#panelShadow)}
 #overviewMapSvg .legend-text{font-size:11px;fill:#515154;font-weight:550}
 
+
+/* Apple Maps reference refinement */
+.map-svg{background:#f4f1e8;border:0;border-radius:22px}
+#overviewMapSvg .map-title{font-size:30px;font-weight:650;letter-spacing:-.03em;fill:#1d1d1f}
+#overviewMapSvg .map-subtitle{font-size:12px;fill:#77797d;font-weight:500}
+#overviewMapSvg .land-bg{fill:#f4f1e8}
+#overviewMapSvg .urban-fill{fill:#f7f5ef}
+#overviewMapSvg .park-fill{fill:#cfeab8;stroke:#bddaa5;stroke-width:1}
+#overviewMapSvg .park-deep{fill:#bfe3a2;stroke:#abd28d;stroke-width:1}
+#overviewMapSvg .desert-fill{fill:#efe4cb;stroke:#e4d5b4;stroke-width:1}
+#overviewMapSvg .water-fill{fill:#9bd7ea;stroke:#86c8dd;stroke-width:1}
+#overviewMapSvg .water-line{fill:none;stroke:#60c3e5;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+#overviewMapSvg .state-boundary{fill:none;stroke:#d5d4cf;stroke-width:1;stroke-dasharray:3 5}
+#overviewMapSvg .local-road{fill:none;stroke:#e1e2df;stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round}
+#overviewMapSvg .local-road-outline{fill:none;stroke:#cdd0d2;stroke-width:2.45;stroke-linecap:round;stroke-linejoin:round}
+#overviewMapSvg .road-casing{fill:none;stroke:#aeb5bd;stroke-width:7.1;stroke-linecap:round;stroke-linejoin:round}
+#overviewMapSvg .road-major{fill:none;stroke:#d8dde2;stroke-width:5.2;stroke-linecap:round;stroke-linejoin:round}
+#overviewMapSvg .road-highway-casing{fill:none;stroke:#98a4b0;stroke-width:9;stroke-linecap:round;stroke-linejoin:round}
+#overviewMapSvg .road-highway{fill:none;stroke:#c3c9cf;stroke-width:6.2;stroke-linecap:round;stroke-linejoin:round}
+#overviewMapSvg .road-minor{fill:none;stroke:#d9dcde;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+#overviewMapSvg .route-outline{fill:none;stroke:#fff;stroke-width:11;stroke-linecap:round;stroke-linejoin:round;filter:url(#routeShadow)}
+#overviewMapSvg .route-main{fill:none;stroke:#2787f5;stroke-width:6.2;stroke-linecap:round;stroke-linejoin:round}
+#overviewMapSvg .route-return{fill:none;stroke:#2787f5;stroke-width:4.4;stroke-linecap:round;stroke-linejoin:round;opacity:.72}
+#overviewMapSvg .city-label{font-size:12.5px;fill:#343538;font-weight:650;stroke:#fff;stroke-width:4px;paint-order:stroke;stroke-linejoin:round}
+#overviewMapSvg .city-label.big{font-size:15px;font-weight:700}
+#overviewMapSvg .poi-label{font-size:10.5px;fill:#56585c;font-weight:550;stroke:#fff;stroke-width:3.5px;paint-order:stroke;stroke-linejoin:round}
+#overviewMapSvg .park-label{font-size:10.5px;fill:#397c49;font-weight:650;stroke:#eff8e9;stroke-width:3.4px;paint-order:stroke;stroke-linejoin:round}
+#overviewMapSvg .state-label{font-size:10px;fill:#8a8b8f;font-weight:650;letter-spacing:.12em;stroke:#fff;stroke-width:3px;paint-order:stroke}
+#overviewMapSvg .road-label{font-size:8.5px;fill:#55595f;font-weight:650;stroke:#fff;stroke-width:3px;paint-order:stroke}
+#overviewMapSvg .hwy-shield-blue{fill:#2d6cdf;stroke:#fff;stroke-width:1.7}
+#overviewMapSvg .hwy-shield-green{fill:#00a56a;stroke:#fff;stroke-width:1.7}
+#overviewMapSvg .hwy-shield-yellow{fill:#ffd64d;stroke:#fff;stroke-width:1.7}
+#overviewMapSvg .hwy-shield-text{font-size:8px;fill:#fff;font-weight:750;text-anchor:middle;dominant-baseline:middle}
+#overviewMapSvg .hwy-shield-darktext{font-size:8px;fill:#3f3b23;font-weight:750;text-anchor:middle;dominant-baseline:middle}
+#overviewMapSvg .stop-circle,#overviewMapSvg .stop-square,#overviewMapSvg .stop-diamond{fill:#fff;stroke:#2787f5;stroke-width:2.7;filter:url(#pinShadow)}
+#overviewMapSvg .stop-text{font-size:10px;fill:#2787f5;font-weight:750;text-anchor:middle;dominant-baseline:middle}
+#overviewMapSvg .legend-box{fill:rgba(255,255,255,.94);stroke:rgba(0,0,0,.07);stroke-width:1;filter:url(#panelShadow)}
+#overviewMapSvg .legend-text{font-size:11px;fill:#4b4d50;font-weight:550}
+
+
+/* Attraction photo gallery */
+.photo-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+.photo-btn{appearance:none;border:0;background:#f0f5ff;color:#0066cc;border-radius:999px;padding:7px 10px;display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:650;line-height:1;cursor:pointer;transition:background .18s ease,transform .18s ease;white-space:nowrap}
+.photo-btn:hover{background:#e5efff}.photo-btn:active{transform:scale(.97)}
+.photo-btn svg{width:14px;height:14px;display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.photo-modal{position:fixed;inset:0;z-index:10050;background:rgba(8,12,20,.45);backdrop-filter:blur(18px) saturate(1.15);-webkit-backdrop-filter:blur(18px) saturate(1.15);display:none;align-items:center;justify-content:center;padding:22px}
+.photo-modal.open{display:flex}
+.photo-panel{width:min(1080px,96vw);max-height:90vh;background:rgba(250,250,252,.92);border:1px solid rgba(255,255,255,.7);border-radius:30px;box-shadow:0 26px 90px rgba(0,0,0,.28);overflow:hidden;display:flex;flex-direction:column}
+.photo-panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:20px 22px 16px;border-bottom:1px solid rgba(0,0,0,.08)}
+.photo-panel-title{font-size:22px;font-weight:700;letter-spacing:-.02em}.photo-panel-sub{font-size:12px;color:var(--muted);margin-top:3px}
+.photo-close{appearance:none;border:0;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.06);color:#111;font-size:20px;line-height:1;cursor:pointer;flex:0 0 auto}.photo-close:hover{background:rgba(0,0,0,.1)}
+.photo-grid{padding:18px 22px 22px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;overflow:auto}
+.photo-card{position:relative;border-radius:18px;overflow:hidden;background:#e9e9ec;min-height:190px;aspect-ratio:4/3;box-shadow:inset 0 0 0 1px rgba(0,0,0,.04)}
+.photo-card:first-child{grid-column:span 2;grid-row:span 2;aspect-ratio:auto;min-height:390px}
+.photo-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s ease}.photo-card:hover img{transform:scale(1.02)}
+.photo-card a{position:absolute;inset:0;text-indent:-9999px;z-index:2}
+.photo-card-label{position:absolute;left:10px;right:10px;bottom:10px;padding:7px 9px;border-radius:10px;background:rgba(20,20,24,.56);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#fff;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
+.photo-loading,.photo-empty{grid-column:1/-1;min-height:260px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--muted);font-size:14px;padding:30px}
+.photo-spinner{width:24px;height:24px;border-radius:50%;border:2px solid rgba(0,0,0,.12);border-top-color:#0071e3;animation:photoSpin .8s linear infinite;margin-right:10px}@keyframes photoSpin{to{transform:rotate(360deg)}}
+.photo-fallback-link{display:inline-block;margin-top:10px;color:#0071e3;text-decoration:none;font-weight:600}
+@media(max-width:760px){.photo-modal{padding:0;align-items:flex-end}.photo-panel{width:100%;max-height:92vh;border-radius:28px 28px 0 0}.photo-panel-head{padding:18px 18px 14px}.photo-panel-title{font-size:20px}.photo-grid{grid-template-columns:repeat(2,minmax(0,1fr));padding:14px 14px 24px;gap:9px}.photo-card,.photo-card:first-child{grid-column:auto;grid-row:auto;aspect-ratio:1/1;min-height:0;border-radius:15px}.photo-card:first-child{grid-column:1/-1;aspect-ratio:16/10}.photo-btn{font-size:11px;padding:7px 9px}}
+
 </style>
 </head>
 <body>
@@ -214,91 +276,106 @@ h3{font-size:24px;line-height:1.12;letter-spacing:-.025em;margin:2px 0 9px;font-
 <h2>行程总览地图</h2>
 <section class="overview">
 <div class="map-toolbar">
-  <div class="map-style-pill">Apple Maps style · route overview</div>
+  <div class="map-style-pill">Apple Maps inspired · route overview</div>
   <button class="map-zoom-btn" id="openOverviewMap" type="button">放大地图</button>
 </div>
 <svg aria-label="美国西部自驾总览路线图" class="map-svg" id="overviewMapSvg" role="img" viewBox="0 0 980 690">
   <defs>
-    <filter id="routeShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="1.2" stdDeviation="1.2" flood-color="#0066cc" flood-opacity=".22"/></filter>
-    <filter id="pinShadow" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="1.3" stdDeviation="1.5" flood-color="#000" flood-opacity=".18"/></filter>
-    <filter id="panelShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity=".10"/></filter>
+    <filter id="routeShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="1.2" stdDeviation="1.2" flood-color="#0066cc" flood-opacity=".18"/></filter>
+    <filter id="pinShadow" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="1.2" stdDeviation="1.4" flood-color="#000" flood-opacity=".16"/></filter>
+    <filter id="panelShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="5" flood-color="#000" flood-opacity=".09"/></filter>
   </defs>
 
   <rect class="land-bg" x="12" y="12" width="956" height="666" rx="22"></rect>
 
-  <!-- Water / landscape areas -->
-  <path class="water-fill" d="M18 470 C44 456 68 468 80 500 L82 666 L18 666 Z"></path>
-  <path class="water-fill" d="M568 230 C590 214 623 218 637 240 C648 256 638 279 614 286 C588 292 562 281 556 262 C550 248 554 238 568 230Z"></path>
-  <path class="water-fill" d="M714 119 C728 109 748 112 756 126 C764 140 755 154 737 157 C719 160 706 150 706 138 C706 130 708 124 714 119Z"></path>
-  <path class="water-fill" d="M638 402 C659 391 690 394 705 409 C716 420 710 438 692 445 C668 454 639 447 630 432 C624 422 628 410 638 402Z"></path>
-  <path class="water-line" d="M604 409 C620 414 635 422 649 434 C658 443 664 451 669 462"></path>
-  <path class="water-line" d="M577 465 C558 473 545 487 536 505 C528 521 514 532 496 538"></path>
+  <!-- urban / terrain zones -->
+  <path class="urban-fill" d="M42 440 C138 420 256 438 332 492 C384 529 366 618 286 648 L36 648 Z"></path>
+  <path class="urban-fill" d="M265 420 C342 386 433 394 498 438 C546 470 532 538 474 562 C407 590 318 568 272 520 C243 490 238 448 265 420Z"></path>
+  <path class="urban-fill" d="M558 228 C626 198 704 213 746 258 C778 292 766 348 714 368 C656 391 585 370 548 324 C522 291 528 244 558 228Z"></path>
 
-  <!-- Parks / protected areas -->
-  <path class="park-fill" d="M646 84 C676 69 729 75 759 101 C782 121 778 164 752 187 C720 213 667 207 638 179 C615 157 618 105 646 84Z"></path>
-  <path class="park-fill" d="M651 173 C670 162 698 163 716 179 C733 193 731 220 711 233 C686 250 653 244 640 224 C627 205 632 185 651 173Z"></path>
-  <path class="park-fill" d="M718 231 C746 215 794 221 819 246 C840 266 835 303 805 316 C771 331 728 319 711 294 C697 273 698 244 718 231Z"></path>
-  <path class="park-fill" d="M452 378 C483 360 521 366 545 388 C566 406 563 439 538 454 C507 472 463 466 444 441 C428 420 432 391 452 378Z"></path>
-  <path class="desert-fill" d="M544 434 C580 413 627 416 653 442 C673 463 666 500 634 517 C597 536 546 527 528 498 C513 474 520 449 544 434Z"></path>
-  <path class="park-fill" d="M192 524 C223 508 273 514 299 540 C318 559 313 594 284 610 C250 628 203 620 183 592 C166 570 170 538 192 524Z"></path>
+  <!-- parks / deserts -->
+  <path class="park-deep" d="M633 72 C674 50 744 57 780 92 C810 122 801 174 764 203 C720 236 654 224 621 189 C595 161 600 93 633 72Z"></path>
+  <path class="park-fill" d="M644 170 C667 155 705 156 729 177 C749 195 746 225 723 241 C693 260 651 252 635 227 C620 206 623 185 644 170Z"></path>
+  <path class="park-fill" d="M702 218 C739 195 806 203 841 239 C869 267 861 320 819 339 C770 361 711 345 687 311 C667 283 672 239 702 218Z"></path>
+  <path class="park-fill" d="M426 361 C463 338 520 343 556 375 C584 400 576 448 540 471 C496 498 436 483 410 448 C387 418 395 381 426 361Z"></path>
+  <path class="desert-fill" d="M518 422 C564 391 637 400 673 439 C701 470 690 522 648 547 C598 575 526 555 502 511 C484 478 490 441 518 422Z"></path>
+  <path class="park-deep" d="M174 512 C216 486 281 496 315 533 C341 562 329 609 290 631 C245 656 181 637 160 596 C144 565 149 529 174 512Z"></path>
 
-  <!-- State boundaries -->
-  <path class="state-boundary" d="M188 100 L188 642"></path>
-  <path class="state-boundary" d="M345 86 L345 640"></path>
-  <path class="state-boundary" d="M520 84 L520 642"></path>
-  <path class="state-boundary" d="M660 78 L660 638"></path>
-  <path class="state-boundary" d="M800 86 L800 638"></path>
-  <path class="state-boundary" d="M520 360 L800 360"></path>
+  <!-- water -->
+  <path class="water-fill" d="M15 487 C49 470 80 485 95 519 L94 666 L15 666 Z"></path>
+  <path class="water-fill" d="M701 106 C721 94 750 97 764 114 C775 130 765 151 741 157 C717 164 695 151 694 136 C694 124 696 114 701 106Z"></path>
+  <path class="water-fill" d="M622 395 C650 379 691 383 711 404 C727 421 718 445 694 455 C663 469 625 459 613 438 C605 423 608 404 622 395Z"></path>
+  <path class="water-line" d="M105 254 C159 239 224 241 276 260 C322 277 365 279 414 263 C468 245 518 247 568 260"></path>
+  <path class="water-line" d="M612 405 C631 413 646 424 660 438 C670 448 679 456 691 463"></path>
+  <path class="water-line" d="M568 466 C548 474 535 490 527 510 C520 526 505 537 486 544"></path>
 
-  <!-- Apple Maps-like road network -->
-  <path class="road-casing" d="M104 570 C190 540 258 500 322 465 C394 425 470 388 544 342 C613 300 675 252 739 198 C788 157 821 128 850 108"></path>
-  <path class="road-major" d="M104 570 C190 540 258 500 322 465 C394 425 470 388 544 342 C613 300 675 252 739 198 C788 157 821 128 850 108"></path>
-  <path class="road-highway-casing" d="M120 550 C216 498 330 442 444 384 C539 336 627 287 711 229 C756 198 789 173 824 142"></path>
-  <path class="road-highway" d="M120 550 C216 498 330 442 444 384 C539 336 627 287 711 229 C756 198 789 173 824 142"></path>
-  <path class="road-casing" d="M602 269 C654 221 689 176 703 121 C711 94 727 80 751 76"></path>
-  <path class="road-major" d="M602 269 C654 221 689 176 703 121 C711 94 727 80 751 76"></path>
-  <path class="road-casing" d="M694 190 C728 228 757 277 812 356"></path>
-  <path class="road-major" d="M694 190 C728 228 757 277 812 356"></path>
-  <path class="road-casing" d="M811 356 C754 391 705 416 650 434 C624 444 604 457 586 470"></path>
-  <path class="road-major" d="M811 356 C754 391 705 416 650 434 C624 444 604 457 586 470"></path>
-  <path class="road-casing" d="M586 470 C548 452 520 438 488 421 C433 426 372 443 320 470"></path>
-  <path class="road-major" d="M586 470 C548 452 520 438 488 421 C433 426 372 443 320 470"></path>
-  <path class="road-highway-casing" d="M320 470 C289 506 265 535 242 564 C208 560 178 559 144 560"></path>
-  <path class="road-highway" d="M320 470 C289 506 265 535 242 564 C208 560 178 559 144 560"></path>
-  <path class="road-minor" d="M130 515 C178 491 216 468 250 443"></path>
-  <path class="road-minor" d="M350 502 C388 492 424 480 462 455"></path>
-  <path class="road-minor" d="M545 392 C571 379 594 370 621 363"></path>
-  <path class="road-minor" d="M681 355 C706 344 733 338 758 340"></path>
+  <!-- state boundaries -->
+  <path class="state-boundary" d="M184 94 L184 648"></path>
+  <path class="state-boundary" d="M344 84 L344 646"></path>
+  <path class="state-boundary" d="M518 82 L518 646"></path>
+  <path class="state-boundary" d="M658 78 L658 640"></path>
+  <path class="state-boundary" d="M804 84 L804 640"></path>
+  <path class="state-boundary" d="M518 359 L804 359"></path>
 
-  <!-- Route -->
+  <!-- dense secondary road network -->
+  <g>
+    <path class="local-road-outline" d="M52 538 C105 523 151 505 197 482 C238 460 277 442 319 423"></path><path class="local-road" d="M52 538 C105 523 151 505 197 482 C238 460 277 442 319 423"></path>
+    <path class="local-road-outline" d="M74 592 C136 571 186 548 232 514 C273 484 310 458 352 438"></path><path class="local-road" d="M74 592 C136 571 186 548 232 514 C273 484 310 458 352 438"></path>
+    <path class="local-road-outline" d="M112 623 C157 595 197 572 245 552 C285 536 332 523 377 512"></path><path class="local-road" d="M112 623 C157 595 197 572 245 552 C285 536 332 523 377 512"></path>
+    <path class="local-road-outline" d="M205 401 C247 424 286 446 324 469 C363 491 401 508 442 522"></path><path class="local-road" d="M205 401 C247 424 286 446 324 469 C363 491 401 508 442 522"></path>
+    <path class="local-road-outline" d="M310 390 C355 410 395 429 434 447 C472 464 508 479 548 493"></path><path class="local-road" d="M310 390 C355 410 395 429 434 447 C472 464 508 479 548 493"></path>
+    <path class="local-road-outline" d="M488 384 C533 368 574 354 614 343 C655 331 698 324 740 323"></path><path class="local-road" d="M488 384 C533 368 574 354 614 343 C655 331 698 324 740 323"></path>
+    <path class="local-road-outline" d="M548 313 C587 302 625 291 664 276 C701 262 735 248 770 232"></path><path class="local-road" d="M548 313 C587 302 625 291 664 276 C701 262 735 248 770 232"></path>
+    <path class="local-road-outline" d="M630 234 C650 212 667 190 683 166 C698 143 711 122 724 99"></path><path class="local-road" d="M630 234 C650 212 667 190 683 166 C698 143 711 122 724 99"></path>
+    <path class="local-road-outline" d="M739 206 C764 232 785 260 804 293 C823 325 839 357 853 389"></path><path class="local-road" d="M739 206 C764 232 785 260 804 293 C823 325 839 357 853 389"></path>
+    <path class="local-road-outline" d="M760 378 C720 397 686 414 650 431 C617 446 585 461 555 481"></path><path class="local-road" d="M760 378 C720 397 686 414 650 431 C617 446 585 461 555 481"></path>
+  </g>
+
+  <!-- major highways -->
+  <path class="road-highway-casing" d="M92 584 C196 523 314 458 442 392 C543 340 631 292 716 233 C765 199 804 168 846 129"></path>
+  <path class="road-highway" d="M92 584 C196 523 314 458 442 392 C543 340 631 292 716 233 C765 199 804 168 846 129"></path>
+  <path class="road-casing" d="M597 273 C651 226 686 178 703 122 C713 92 729 76 756 70"></path>
+  <path class="road-major" d="M597 273 C651 226 686 178 703 122 C713 92 729 76 756 70"></path>
+  <path class="road-casing" d="M687 191 C724 230 757 280 812 356"></path>
+  <path class="road-major" d="M687 191 C724 230 757 280 812 356"></path>
+  <path class="road-casing" d="M812 356 C753 391 702 416 650 434 C622 444 603 456 584 471"></path>
+  <path class="road-major" d="M812 356 C753 391 702 416 650 434 C622 444 603 456 584 471"></path>
+  <path class="road-casing" d="M584 471 C547 454 519 438 488 421 C433 426 373 443 320 470"></path>
+  <path class="road-major" d="M584 471 C547 454 519 438 488 421 C433 426 373 443 320 470"></path>
+  <path class="road-highway-casing" d="M320 470 C290 506 265 535 242 564 C207 561 176 560 144 560"></path>
+  <path class="road-highway" d="M320 470 C290 506 265 535 242 564 C207 561 176 560 144 560"></path>
+
+  <!-- highway shields -->
+  <g>
+    <rect class="hwy-shield-blue" x="379" y="408" width="28" height="18" rx="5"></rect><text class="hwy-shield-text" x="393" y="417">I‑15</text>
+    <rect class="hwy-shield-green" x="679" y="202" width="30" height="18" rx="8"></rect><text class="hwy-shield-text" x="694" y="211">89</text>
+    <rect class="hwy-shield-yellow" x="762" y="278" width="35" height="18" rx="5"></rect><text class="hwy-shield-darktext" x="779.5" y="287">191</text>
+    <rect class="hwy-shield-blue" x="244" y="525" width="27" height="18" rx="5"></rect><text class="hwy-shield-text" x="257.5" y="534">I‑10</text>
+  </g>
+
+  <!-- route overlay -->
   <path class="route-outline" d="M124 558 L610 270 L700 118 L718 102 L736 126 L688 192 L760 264 L812 356 L650 434 L586 470 L488 421 L320 470 L242 564 L144 560"></path>
   <path class="route-main" d="M124 558 L610 270 L700 118 L718 102 L736 126 L688 192 L760 264 L812 356 L650 434 L586 470 L488 421 L320 470 L242 564 L144 560"></path>
-  <path class="route-return" d="M586 470 C611 456 631 445 650 434 C625 431 605 442 586 470"></path>
 
-  <!-- Labels -->
+  <!-- titles -->
   <text class="map-title" x="34" y="52">Western U.S. Road Trip</text>
-  <text class="map-subtitle" x="36" y="74">Sep 25 – Oct 9, 2026 · schematic road map · not to scale</text>
+  <text class="map-subtitle" x="36" y="74">Sep 25 – Oct 9, 2026 · Apple Maps inspired schematic · not to scale</text>
 
-  <text class="state-label" x="106" y="226">CALIFORNIA</text>
-  <text class="state-label" x="248" y="250">NEVADA</text>
-  <text class="state-label" x="432" y="210">UTAH</text>
-  <text class="state-label" x="608" y="214">WYOMING</text>
-  <text class="state-label" x="692" y="68">MONTANA</text>
-  <text class="state-label" x="540" y="542">ARIZONA</text>
+  <!-- state / park labels -->
+  <text class="state-label" x="103" y="225">CALIFORNIA</text>
+  <text class="state-label" x="249" y="250">NEVADA</text>
+  <text class="state-label" x="430" y="210">UTAH</text>
+  <text class="state-label" x="610" y="215">WYOMING</text>
+  <text class="state-label" x="699" y="66">MONTANA</text>
+  <text class="state-label" x="536" y="545">ARIZONA</text>
+  <text class="park-label" x="650" y="91">Yellowstone National Park</text>
+  <text class="park-label" x="646" y="180">Grand Teton National Park</text>
+  <text class="park-label" x="731" y="236">Arches National Park</text>
+  <text class="park-label" x="448" y="385">Zion National Park</text>
+  <text class="park-label" x="545" y="441">Grand Canyon National Park</text>
+  <text class="park-label" x="191" y="531">Joshua Tree National Park</text>
 
-  <text class="park-label" x="652" y="91">Yellowstone National Park</text>
-  <text class="park-label" x="645" y="180">Grand Teton</text>
-  <text class="park-label" x="731" y="235">Arches / Canyonlands</text>
-  <text class="park-label" x="454" y="385">Zion National Park</text>
-  <text class="park-label" x="548" y="441">Grand Canyon</text>
-  <text class="park-label" x="196" y="532">Joshua Tree</text>
-
-  <text class="road-label" x="417" y="394">I‑15</text>
-  <text class="road-label" x="679" y="225">US‑89</text>
-  <text class="road-label" x="752" y="292">US‑191</text>
-  <text class="road-label" x="276" y="520">I‑15 / I‑10</text>
-
-  <!-- Numbered route stops -->
+  <!-- numbered stops -->
   <g>
     <rect class="stop-square" x="113" y="547" width="22" height="22" rx="5"></rect><text class="stop-text" x="124" y="558">1</text>
     <rect class="stop-square" x="599" y="259" width="22" height="22" rx="5"></rect><text class="stop-text" x="610" y="270">2</text>
@@ -316,27 +393,26 @@ h3{font-size:24px;line-height:1.12;letter-spacing:-.025em;margin:2px 0 9px;font-
     <circle class="stop-circle" cx="144" cy="560" r="11"></circle><text class="stop-text" x="144" y="560">14</text>
   </g>
 
-  <!-- City labels offset from route to avoid collisions -->
-  <text class="city-label" x="83" y="588">Los Angeles</text>
-  <text class="city-label" x="572" y="296">Salt Lake City</text>
-  <text class="city-label" x="659" y="111">West Yellowstone</text>
-  <text class="city-label" x="733" y="91">Gardiner</text>
-  <text class="city-label" x="749" y="143">Yellowstone Lake</text>
-  <text class="city-label" x="646" y="210">Thayne</text>
-  <text class="city-label" x="773" y="248">Moab</text>
-  <text class="poi-label" x="827" y="350">Monument Valley</text>
-  <text class="city-label" x="664" y="429">Page</text>
-  <text class="poi-label" x="598" y="490">Grand Canyon South Rim</text>
-  <text class="city-label" x="462" y="414">Springdale</text>
-  <text class="city-label" x="327" y="457">Las Vegas</text>
-  <text class="poi-label" x="193" y="581">Joshua Tree / Banning</text>
-  <text class="city-label" x="110" y="547">Santa Monica</text>
+  <!-- city labels; reduced to avoid clutter -->
+  <text class="city-label big" x="73" y="594">Los Angeles</text>
+  <text class="city-label big" x="566" y="297">Salt Lake City</text>
+  <text class="city-label" x="651" y="111">West Yellowstone</text>
+  <text class="city-label" x="735" y="91">Gardiner</text>
+  <text class="city-label" x="644" y="211">Thayne</text>
+  <text class="city-label big" x="775" y="248">Moab</text>
+  <text class="poi-label" x="828" y="350">Monument Valley</text>
+  <text class="city-label big" x="664" y="429">Page</text>
+  <text class="poi-label" x="596" y="490">Grand Canyon South Rim</text>
+  <text class="city-label" x="459" y="414">Springdale</text>
+  <text class="city-label big" x="327" y="457">Las Vegas</text>
+  <text class="poi-label" x="189" y="581">Joshua Tree / Banning</text>
+  <text class="city-label" x="108" y="547">Santa Monica</text>
 
-  <!-- Small Apple-like floating legend -->
-  <rect class="legend-box" x="42" y="102" width="188" height="112" rx="16"></rect>
-  <path class="route-main" d="M62 132 L108 132"></path><text class="legend-text" x="122" y="136">Trip route</text>
-  <path class="road-highway" d="M62 160 L108 160"></path><text class="legend-text" x="122" y="164">Highway</text>
-  <path class="water-line" d="M62 188 L108 188"></path><text class="legend-text" x="122" y="192">Water</text>
+  <!-- floating legend -->
+  <rect class="legend-box" x="42" y="100" width="196" height="112" rx="16"></rect>
+  <path class="route-main" d="M62 130 L108 130"></path><text class="legend-text" x="124" y="134">Trip route</text>
+  <path class="road-highway" d="M62 158 L108 158"></path><text class="legend-text" x="124" y="162">Major highway</text>
+  <rect class="hwy-shield-green" x="62" y="180" width="28" height="18" rx="8"></rect><text class="hwy-shield-text" x="76" y="189">89</text><text class="legend-text" x="104" y="192">Road shield</text>
 </svg>
 
 <div class="overview-legend">
@@ -346,16 +422,16 @@ h3{font-size:24px;line-height:1.12;letter-spacing:-.025em;margin:2px 0 9px;font-
   <div class="overview-legend-item"><div class="overview-legend-num">4</div><div class="overview-legend-text"><strong>Gardiner</strong><span>D4 夜宿 · 9/28 住宿</span></div></div>
   <div class="overview-legend-item"><div class="overview-legend-num">5</div><div class="overview-legend-text"><strong>Yellowstone Lake</strong><span>D5 夜宿园内</span></div></div>
   <div class="overview-legend-item"><div class="overview-legend-num">6</div><div class="overview-legend-text"><strong>Thayne</strong><span>D6 夜宿</span></div></div>
-  <div class="overview-legend-item"><div class="overview-legend-num">7</div><div class="overview-legend-text"><strong>Moab / Arches</strong><span>D7 夜宿 Moab；D8 清晨进 Arches</span></div></div>
+  <div class="overview-legend-item"><div class="overview-legend-num">7</div><div class="overview-legend-text"><strong>Moab / Arches</strong><span>D7 夜宿 Moab；D8 清晨进入 Arches</span></div></div>
   <div class="overview-legend-item"><div class="overview-legend-num">8</div><div class="overview-legend-text"><strong>Monument Valley</strong><span>D8 主观景台停留</span></div></div>
   <div class="overview-legend-item"><div class="overview-legend-num">9</div><div class="overview-legend-text"><strong>Page / Antelope Canyon</strong><span>D8–D10 连住；含马蹄湾与羚羊谷</span></div></div>
   <div class="overview-legend-item"><div class="overview-legend-num">10</div><div class="overview-legend-text"><strong>Grand Canyon South Rim</strong><span>D9 从 Page 往返一日</span></div></div>
   <div class="overview-legend-item"><div class="overview-legend-num">11</div><div class="overview-legend-text"><strong>Springdale / Zion</strong><span>D11–D12 连住</span></div></div>
   <div class="overview-legend-item"><div class="overview-legend-num">12</div><div class="overview-legend-text"><strong>Las Vegas</strong><span>D13 夜宿</span></div></div>
   <div class="overview-legend-item"><div class="overview-legend-num">13</div><div class="overview-legend-text"><strong>Joshua Tree / Banning</strong><span>D14 游玩后夜宿 Banning</span></div></div>
-  <div class="overview-legend-item"><div class="overview-legend-num">14</div><div class="overview-legend-text"><strong>Santa Monica</strong><span>D15 海边停留后前往 LAX</span></div></div>
+  <div class="overview-legend-item"><div class="overview-legend-num">14</div><div class="overview-legend-text"><strong>Santa Monica</strong><span>D15 海边停留后前往 LAX 还车</span></div></div>
 </div>
-<div class="smallprint">地图改为 Apple Maps 风格的道路图视觉：浅色底图、白色道路、绿色公园、蓝色水系与蓝色导航路线。由于这是单文件离线手册，采用内置矢量地图风格，而不是调用需要 MapKit 凭证的实时 Apple Maps 图层。</div>
+<div class="smallprint">这版地图按你上传的 Apple Maps 截图进一步调整：更明显的绿色公园、浅米色陆地、蓝色水域、灰色多级道路、彩色公路盾牌和蓝色导航路线。总览仍为示意图，不替代实际导航。</div>
 </section>
 <div aria-hidden="true" class="map-modal" id="overviewMapModal">
 <div aria-labelledby="overviewMapTitle" aria-modal="true" class="map-modal-panel" role="dialog">
@@ -569,13 +645,13 @@ h3{font-size:24px;line-height:1.12;letter-spacing:-.025em;margin:2px 0 9px;font-
 <div class="day-info-kicker">今晚住宿</div>
 <div class="day-stay-name">Airbnb · Gardiner<span class="day-stay-status">已确认</span></div>
 <div class="day-stay-line">按 Airbnb 房源说明入住 · 9/29 退房</div>
-<div class="day-stay-line"><a href="https://www.google.com/maps/search/?api=1&amp;query=301%20South%20Yellowstone%20Street%2C%20301%20South%20Yellowstone%20Street%2C%20Gardiner%2C%20MT%2059030%2059030" rel="noopener" target="_blank">📍 301 South Yellowstone Street, Gardiner, MT 59030</a></div>
+<div class="day-stay-line"><a href="https://www.google.com/maps/search/?api=1&amp;query=301%20South%20Yellowstone%20Street%2C%20Gardiner%2C%20MT%2059030" rel="noopener" target="_blank">📍 301 South Yellowstone Street, Gardiner, MT 59030</a></div>
 <div class="day-stay-line">☎ 未提供</div></article></div>
 <div class="routebox">
 <svg class="daymap" role="img" viewbox="0 0 760 130"><path d="M40.0,60 Q125.0,35 210.0,88 Q295.0,113 380.0,60 Q465.0,35 550.0,88 Q635.0,113 720.0,60" style="stroke:#6b9f73"></path><circle cx="40.0" cy="60" r="5"></circle><text text-anchor="middle" x="40.0" y="88">126 N Canyon St</text><circle cx="210.0" cy="88" r="5"></circle><text text-anchor="middle" x="210.0" y="116">Old Faithful</text><circle cx="380.0" cy="60" r="5"></circle><text text-anchor="middle" x="380.0" y="88">Grand Prismatic Spring</text><circle cx="550.0" cy="88" r="5"></circle><text text-anchor="middle" x="550.0" y="116">Norris Geyser Basin</text><circle cx="720.0" cy="60" r="5"></circle><text text-anchor="middle" x="720.0" y="88">Gardiner</text></svg>
 <div class="route-actions">
-<a class="primary-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=126%20N%20Canyon%20St%2C%20West%20Yellowstone%2C%20MT%2059758&amp;destination=301%20South%20Yellowstone%20Street%2C%20Gardiner%2C%20MT%2059030&amp;travelmode=driving&amp;waypoints=Old%20Faithful|Grand%20Prismatic%20Spring|Norris%20Geyser%20Basin" rel="noopener" target="_blank">打开全天多点导航</a>
-<div class="places"><a href="https://www.google.com/maps/search/?api=1&amp;query=126%20N%20Canyon%20St%2C%20West%20Yellowstone%2C%20MT%2059758" rel="noopener" target="_blank">126 N Canyon St</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Old%20Faithful" rel="noopener" target="_blank">Old Faithful</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grand%20Prismatic%20Spring" rel="noopener" target="_blank">Grand Prismatic Spring</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Norris%20Geyser%20Basin" rel="noopener" target="_blank">Norris Geyser Basin</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=301%20South%20Yellowstone%20Street%2C%20Gardiner%2C%20MT%2059030" rel="noopener" target="_blank">Gardiner</a></div>
+<a class="primary-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=126%20N%20Canyon%20St%2C%20West%20Yellowstone%2C%20MT%2059758&amp;destination=Gardiner%2C%20MT&amp;travelmode=driving&amp;waypoints=Old%20Faithful|Grand%20Prismatic%20Spring|Norris%20Geyser%20Basin" rel="noopener" target="_blank">打开全天多点导航</a>
+<div class="places"><a href="https://www.google.com/maps/search/?api=1&amp;query=126%20N%20Canyon%20St%2C%20West%20Yellowstone%2C%20MT%2059758" rel="noopener" target="_blank">126 N Canyon St</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Old%20Faithful" rel="noopener" target="_blank">Old Faithful</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grand%20Prismatic%20Spring" rel="noopener" target="_blank">Grand Prismatic Spring</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Norris%20Geyser%20Basin" rel="noopener" target="_blank">Norris Geyser Basin</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Gardiner%2C%20MT" rel="noopener" target="_blank">Gardiner</a></div>
 </div>
 </div>
 <div class="timeline">
@@ -630,8 +706,8 @@ h3{font-size:24px;line-height:1.12;letter-spacing:-.025em;margin:2px 0 9px;font-
 <div class="routebox">
 <svg class="daymap" role="img" viewbox="0 0 760 130"><path d="M40.0,60 Q96.66666666666666,35 153.33333333333331,88 Q209.99999999999997,113 266.66666666666663,60 Q323.3333333333333,35 380.0,88 Q436.66666666666663,113 493.3333333333333,60 Q550.0,35 606.6666666666666,88 Q663.3333333333333,113 720.0,60" style="stroke:#3d8d92"></path><circle cx="40.0" cy="60" r="5"></circle><text text-anchor="middle" x="40.0" y="88">Gardiner</text><circle cx="153.33333333333331" cy="88" r="5"></circle><text text-anchor="middle" x="153.33333333333331" y="116">Mammoth Hot Springs</text><circle cx="266.66666666666663" cy="60" r="5"></circle><text text-anchor="middle" x="266.66666666666663" y="88">Lamar Valley</text><circle cx="380.0" cy="88" r="5"></circle><text text-anchor="middle" x="380.0" y="116">Tower Fall</text><circle cx="493.3333333333333" cy="60" r="5"></circle><text text-anchor="middle" x="493.3333333333333" y="88">Grand Canyon of the Yell</text><circle cx="606.6666666666666" cy="88" r="5"></circle><text text-anchor="middle" x="606.6666666666666" y="116">Hayden Valley</text><circle cx="720.0" cy="60" r="5"></circle><text text-anchor="middle" x="720.0" y="88">235 Yellowstone Lake Rd</text></svg>
 <div class="route-actions">
-<a class="primary-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=301%20South%20Yellowstone%20Street%2C%20Gardiner%2C%20MT%2059030&amp;destination=235%20Yellowstone%20Lake%20Rd%2C%20Yellowstone%20National%20Park%2C%20WY%2082190&amp;travelmode=driving&amp;waypoints=Mammoth%20Hot%20Springs|Lamar%20Valley|Tower%20Fall|Grand%20Canyon%20of%20the%20Yellowstone|Hayden%20Valley" rel="noopener" target="_blank">打开全天多点导航</a>
-<div class="places"><a href="https://www.google.com/maps/search/?api=1&amp;query=301%20South%20Yellowstone%20Street%2C%20Gardiner%2C%20MT%2059030" rel="noopener" target="_blank">Gardiner</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Mammoth%20Hot%20Springs" rel="noopener" target="_blank">Mammoth Hot Springs</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Lamar%20Valley" rel="noopener" target="_blank">Lamar Valley</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Tower%20Fall" rel="noopener" target="_blank">Tower Fall</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grand%20Canyon%20of%20the%20Yellowstone" rel="noopener" target="_blank">Grand Canyon of the Yellowstone</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Hayden%20Valley" rel="noopener" target="_blank">Hayden Valley</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=235%20Yellowstone%20Lake%20Rd%2C%20Yellowstone%20National%20Park%2C%20WY%2082190" rel="noopener" target="_blank">235 Yellowstone Lake Rd</a></div>
+<a class="primary-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=Gardiner%2C%20MT&amp;destination=235%20Yellowstone%20Lake%20Rd%2C%20Yellowstone%20National%20Park%2C%20WY%2082190&amp;travelmode=driving&amp;waypoints=Mammoth%20Hot%20Springs|Lamar%20Valley|Tower%20Fall|Grand%20Canyon%20of%20the%20Yellowstone|Hayden%20Valley" rel="noopener" target="_blank">打开全天多点导航</a>
+<div class="places"><a href="https://www.google.com/maps/search/?api=1&amp;query=Gardiner%2C%20MT" rel="noopener" target="_blank">Gardiner</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Mammoth%20Hot%20Springs" rel="noopener" target="_blank">Mammoth Hot Springs</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Lamar%20Valley" rel="noopener" target="_blank">Lamar Valley</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Tower%20Fall" rel="noopener" target="_blank">Tower Fall</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grand%20Canyon%20of%20the%20Yellowstone" rel="noopener" target="_blank">Grand Canyon of the Yellowstone</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=Hayden%20Valley" rel="noopener" target="_blank">Hayden Valley</a> · <a href="https://www.google.com/maps/search/?api=1&amp;query=235%20Yellowstone%20Lake%20Rd%2C%20Yellowstone%20National%20Park%2C%20WY%2082190" rel="noopener" target="_blank">235 Yellowstone Lake Rd</a></div>
 </div>
 </div>
 <div class="timeline">
@@ -1206,6 +1282,20 @@ h3{font-size:24px;line-height:1.12;letter-spacing:-.025em;margin:2px 0 9px;font-
 </div>
 <div class="sticky"><button class="todaybtn" onclick="jumpToday()">跳到当前行程</button></div>
 </main>
+
+<div class="photo-modal" id="attractionPhotoModal" aria-hidden="true">
+  <div class="photo-panel" role="dialog" aria-modal="true" aria-labelledby="attractionPhotoTitle">
+    <div class="photo-panel-head">
+      <div>
+        <div class="photo-panel-title" id="attractionPhotoTitle">景点照片</div>
+        <div class="photo-panel-sub">在线加载 5 张相关照片 · 图片来源 Wikimedia Commons</div>
+      </div>
+      <button class="photo-close" id="attractionPhotoClose" type="button" aria-label="关闭照片">×</button>
+    </div>
+    <div class="photo-grid" id="attractionPhotoGrid"></div>
+  </div>
+</div>
+
 <script>
 const EVENTS=[{"at": "2026-09-25T08:50:00+08:00", "label": "PVG T1 起飞 · KE892 → 首尔", "tz": "Asia/Shanghai", "date": "2026-09-25", "time": "08:50"}, {"at": "2026-09-25T09:40:00-07:00", "label": "抵达 LAX Terminal B · 入境 / 行李", "tz": "America/Los_Angeles", "date": "2026-09-25", "time": "09:40"}, {"at": "2026-09-25T11:00:00-07:00", "label": "Europcar / FOX 订单取车时间（实际取车可能更晚）", "tz": "America/Los_Angeles", "date": "2026-09-25", "time": "10:30"}, {"at": "2026-09-25T11:55:00+09:00", "label": "抵达 ICN T2 · 转机 2小时35分", "tz": "Asia/Seoul", "date": "2026-09-25", "time": "11:55"}, {"at": "2026-09-25T14:00:00-07:00", "label": "Beverly Hills / Rodeo Drive", "tz": "America/Los_Angeles", "date": "2026-09-25", "time": "14:00"}, {"at": "2026-09-25T14:30:00+09:00", "label": "ICN T2 起飞 · KE017 → LAX", "tz": "Asia/Seoul", "date": "2026-09-25", "time": "14:30"}, {"at": "2026-09-25T15:30:00-07:00", "label": "Hollywood Walk of Fame / TCL Chinese Theatre", "tz": "America/Los_Angeles", "date": "2026-09-25", "time": "15:30"}, {"at": "2026-09-25T17:15:00-07:00", "label": "Griffith Observatory · 日落 / 夜景", "tz": "America/Los_Angeles", "date": "2026-09-25", "time": "17:15"}, {"at": "2026-09-25T20:00:00-07:00", "label": "回酒店办理入住", "tz": "America/Los_Angeles", "date": "2026-09-25", "time": "20:00"}, {"at": "2026-09-26T07:00:00-07:00", "label": "建议提前到 LAX Europcar 还车（订单截止时间 09:00）", "tz": "America/Los_Angeles", "date": "2026-09-26", "time": "09:00"}, {"at": "2026-09-26T09:43:00-07:00", "label": "DL1434 · LAX → SLC 起飞", "tz": "America/Los_Angeles", "date": "2026-09-26", "time": "09:43"}, {"at": "2026-09-26T12:39:00-06:00", "label": "抵达 SLC", "tz": "America/Denver", "date": "2026-09-26", "time": "12:39"}, {"at": "2026-09-26T13:30:00-06:00", "label": "Avis 盐湖城机场取车 → 前往酒店寄存行李", "tz": "America/Denver", "date": "2026-09-26", "time": "13:30"}, {"at": "2026-09-26T15:00:00-06:00", "label": "Antelope Island / 大盐湖观景", "tz": "America/Denver", "date": "2026-09-26", "time": "15:00"}, {"at": "2026-09-26T19:30:00-06:00", "label": "返回酒店入住、晚餐", "tz": "America/Denver", "date": "2026-09-26", "time": "19:30"}, {"at": "2026-09-27T08:30:00-06:00", "label": "Utah State Capitol · 自助参观", "tz": "America/Denver", "date": "2026-09-27", "time": "08:30"}, {"at": "2026-09-27T09:30:00-06:00", "label": "Temple Square / Visitors’ Center", "tz": "America/Denver", "date": "2026-09-27", "time": "09:30"}, {"at": "2026-09-27T10:30:00-06:00", "label": "午餐、取行李、加油", "tz": "America/Denver", "date": "2026-09-27", "time": "10:45"}, {"at": "2026-09-27T12:00:00-06:00", "label": "驾车前往 West Yellowstone", "tz": "America/Denver", "date": "2026-09-27", "time": "12:00"}, {"at": "2026-09-27T17:30:00-06:00", "label": "Ho Hum Motel 入住、晚餐", "tz": "America/Denver", "date": "2026-09-27", "time": "17:30"}, {"at": "2026-09-28T07:30:00-06:00", "label": "西入口 → Old Faithful", "tz": "America/Denver", "date": "2026-09-28", "time": "07:30"}, {"at": "2026-09-28T09:30:00-06:00", "label": "Old Faithful + Upper Geyser Basin", "tz": "America/Denver", "date": "2026-09-28", "time": "09:30"}, {"at": "2026-09-28T12:00:00-06:00", "label": "午餐", "tz": "America/Denver", "date": "2026-09-28", "time": "12:00"}, {"at": "2026-09-28T13:00:00-06:00", "label": "Grand Prismatic + Midway Geyser Basin", "tz": "America/Denver", "date": "2026-09-28", "time": "13:00"}, {"at": "2026-09-28T15:30:00-06:00", "label": "Norris Geyser Basin", "tz": "America/Denver", "date": "2026-09-28", "time": "15:30"}, {"at": "2026-09-28T17:00:00-06:00", "label": "经 Mammoth 方向前往 Gardiner", "tz": "America/Denver", "date": "2026-09-28", "time": "17:00"}, {"at": "2026-09-28T19:00:00-06:00", "label": "Gardiner Airbnb 入住、晚餐", "tz": "America/Denver", "date": "2026-09-28", "time": "19:00"}, {"at": "2026-09-29T07:30:00-06:00", "label": "Mammoth Hot Springs", "tz": "America/Denver", "date": "2026-09-29", "time": "07:30"}, {"at": "2026-09-29T09:30:00-06:00", "label": "Lamar Valley · 野生动物观景", "tz": "America/Denver", "date": "2026-09-29", "time": "09:30"}, {"at": "2026-09-29T12:00:00-06:00", "label": "Tower Fall / 午餐", "tz": "America/Denver", "date": "2026-09-29", "time": "12:00"}, {"at": "2026-09-29T13:30:00-06:00", "label": "Grand Canyon of the Yellowstone", "tz": "America/Denver", "date": "2026-09-29", "time": "13:30"}, {"at": "2026-09-29T16:30:00-06:00", "label": "Hayden Valley", "tz": "America/Denver", "date": "2026-09-29", "time": "16:30"}, {"at": "2026-09-29T17:30:00-06:00", "label": "前往 Lake Yellowstone Hotel & Cabins", "tz": "America/Denver", "date": "2026-09-29", "time": "17:30"}, {"at": "2026-09-30T07:30:00-06:00", "label": "West Thumb Geyser Basin", "tz": "America/Denver", "date": "2026-09-30", "time": "07:30"}, {"at": "2026-09-30T10:00:00-06:00", "label": "Jackson Lake / Oxbow Bend", "tz": "America/Denver", "date": "2026-09-30", "time": "10:00"}, {"at": "2026-09-30T12:00:00-06:00", "label": "Jenny Lake + 午餐", "tz": "America/Denver", "date": "2026-09-30", "time": "12:00"}, {"at": "2026-09-30T14:30:00-06:00", "label": "Mormon Row / Schwabacher Landing", "tz": "America/Denver", "date": "2026-09-30", "time": "14:30"}, {"at": "2026-09-30T16:00:00-06:00", "label": "前往 Thayne Airbnb", "tz": "America/Denver", "date": "2026-09-30", "time": "16:00"}, {"at": "2026-09-30T18:00:00-06:00", "label": "Thayne Airbnb 入住", "tz": "America/Denver", "date": "2026-09-30", "time": "18:00"}, {"at": "2026-10-01T07:30:00-06:00", "label": "离开 Thayne · 长途转场", "tz": "America/Denver", "date": "2026-10-01", "time": "07:30"}, {"at": "2026-10-01T12:00:00-06:00", "label": "途中午餐 / 加油 / 休息", "tz": "America/Denver", "date": "2026-10-01", "time": "12:00"}, {"at": "2026-10-01T16:30:00-06:00", "label": "抵达 Hotel 191 - Moab", "tz": "America/Denver", "date": "2026-10-01", "time": "16:30"}, {"at": "2026-10-01T18:00:00-06:00", "label": "Moab 晚餐、轻松散步", "tz": "America/Denver", "date": "2026-10-01", "time": "18:00"}, {"at": "2026-10-02T07:00:00-06:00", "label": "退房 → Arches National Park", "tz": "America/Denver", "date": "2026-10-02", "time": "07:00"}, {"at": "2026-10-02T07:30:00-06:00", "label": "Balanced Rock / Windows / Delicate Arch Viewpoint", "tz": "America/Denver", "date": "2026-10-02", "time": "07:30"}, {"at": "2026-10-02T11:15:00-06:00", "label": "Moab 午餐、加油", "tz": "America/Denver", "date": "2026-10-02", "time": "11:15"}, {"at": "2026-10-02T12:00:00-06:00", "label": "前往 Monument Valley", "tz": "America/Denver", "date": "2026-10-02", "time": "12:00"}, {"at": "2026-10-02T14:45:00-06:00", "label": "Visitor Center / 主观景台（不走 17-mile loop）", "tz": "America/Denver", "date": "2026-10-02", "time": "14:45"}, {"at": "2026-10-02T16:15:00-06:00", "label": "前往 Page", "tz": "America/Denver", "date": "2026-10-02", "time": "16:15"}, {"at": "2026-10-02T17:15:00-07:00", "label": "Travelodge by Wyndham Page 入住", "tz": "America/Phoenix", "date": "2026-10-02", "time": "18:15"}, {"at": "2026-10-03T06:00:00-07:00", "label": "Page 出发 → Desert View", "tz": "America/Phoenix", "date": "2026-10-03", "time": "06:00"}, {"at": "2026-10-03T08:15:00-07:00", "label": "Desert View Watchtower / 东入口观景", "tz": "America/Phoenix", "date": "2026-10-03", "time": "08:15"}, {"at": "2026-10-03T09:15:00-07:00", "label": "Desert View Drive 沿线观景", "tz": "America/Phoenix", "date": "2026-10-03", "time": "09:15"}, {"at": "2026-10-03T11:30:00-07:00", "label": "Grand Canyon Village / 午餐", "tz": "America/Phoenix", "date": "2026-10-03", "time": "11:30"}, {"at": "2026-10-03T13:00:00-07:00", "label": "Mather Point + Rim Trail 短走", "tz": "America/Phoenix", "date": "2026-10-03", "time": "13:00"}, {"at": "2026-10-03T15:30:00-07:00", "label": "返回 Page", "tz": "America/Phoenix", "date": "2026-10-03", "time": "15:30"}, {"at": "2026-10-03T18:00:00-07:00", "label": "回到酒店", "tz": "America/Phoenix", "date": "2026-10-03", "time": "18:00"}, {"at": "2026-10-04T08:30:00-07:00", "label": "Horseshoe Bend", "tz": "America/Phoenix", "date": "2026-10-04", "time": "08:30"}, {"at": "2026-10-04T10:30:00-07:00", "label": "Glen Canyon Dam / Lake Powell 周边", "tz": "America/Phoenix", "date": "2026-10-04", "time": "10:30"}, {"at": "2026-10-04T12:15:00-07:00", "label": "午餐后前往集合点", "tz": "America/Phoenix", "date": "2026-10-04", "time": "12:15"}, {"at": "2026-10-04T13:10:00-07:00", "label": "Antelope Canyon Tours 办公室报到", "tz": "America/Phoenix", "date": "2026-10-04", "time": "13:10"}, {"at": "2026-10-04T13:40:00-07:00", "label": "Upper Antelope Canyon · Sightseer's Tour", "tz": "America/Phoenix", "date": "2026-10-04", "time": "13:40"}, {"at": "2026-10-04T15:20:00-07:00", "label": "Tour 结束 · 返回 Page", "tz": "America/Phoenix", "date": "2026-10-04", "time": "15:20"}, {"at": "2026-10-04T16:30:00-07:00", "label": "Wahweap Overlook / 湖区机动", "tz": "America/Phoenix", "date": "2026-10-04", "time": "16:30"}, {"at": "2026-10-05T08:30:00-07:00", "label": "Page 周边补漏 / Lake Powell", "tz": "America/Phoenix", "date": "2026-10-05", "time": "08:30"}, {"at": "2026-10-05T11:00:00-07:00", "label": "午餐、取行李", "tz": "America/Phoenix", "date": "2026-10-05", "time": "11:00"}, {"at": "2026-10-05T12:00:00-07:00", "label": "前往 Springdale · 注意加 1 小时时差", "tz": "America/Phoenix", "date": "2026-10-05", "time": "12:00"}, {"at": "2026-10-05T15:15:00-06:00", "label": "Hyatt Place Springdale 入住", "tz": "America/Denver", "date": "2026-10-05", "time": "15:00"}, {"at": "2026-10-05T17:00:00-06:00", "label": "Springdale 小镇散步、早休息", "tz": "America/Denver", "date": "2026-10-05", "time": "17:00"}, {"at": "2026-10-06T07:00:00-06:00", "label": "搭 Zion Shuttle 入园", "tz": "America/Denver", "date": "2026-10-06", "time": "07:00"}, {"at": "2026-10-06T08:00:00-06:00", "label": "Riverside Walk / The Narrows 河口段", "tz": "America/Denver", "date": "2026-10-06", "time": "08:00"}, {"at": "2026-10-06T11:30:00-06:00", "label": "Zion Lodge / 午餐", "tz": "America/Denver", "date": "2026-10-06", "time": "11:30"}, {"at": "2026-10-06T13:00:00-06:00", "label": "Emerald Pools 或 Canyon Overlook", "tz": "America/Denver", "date": "2026-10-06", "time": "13:00"}, {"at": "2026-10-06T16:00:00-06:00", "label": "轻松收尾", "tz": "America/Denver", "date": "2026-10-06", "time": "16:00"}, {"at": "2026-10-06T18:00:00-06:00", "label": "返回 Springdale 晚餐", "tz": "America/Denver", "date": "2026-10-06", "time": "18:00"}, {"at": "2026-10-07T08:30:00-06:00", "label": "退房 → Las Vegas", "tz": "America/Denver", "date": "2026-10-07", "time": "08:30"}, {"at": "2026-10-07T11:30:00-07:00", "label": "Horseshoe Las Vegas 寄存行李 / 午餐", "tz": "America/Los_Angeles", "date": "2026-10-07", "time": "11:30"}, {"at": "2026-10-07T14:00:00-07:00", "label": "Sphere《The Wizard of Oz》建议场次 · 建议提前45–60分钟到场", "tz": "America/Los_Angeles", "date": "2026-10-07", "time": "14:00"}, {"at": "2026-10-07T17:00:00-07:00", "label": "酒店入住、休息", "tz": "America/Los_Angeles", "date": "2026-10-07", "time": "17:00"}, {"at": "2026-10-07T19:00:00-07:00", "label": "Las Vegas Strip 夜游 / Bellagio", "tz": "America/Los_Angeles", "date": "2026-10-07", "time": "19:00"}, {"at": "2026-10-08T07:30:00-07:00", "label": "退房 → Joshua Tree", "tz": "America/Los_Angeles", "date": "2026-10-08", "time": "07:30"}, {"at": "2026-10-08T11:00:00-07:00", "label": "Keys View / Hidden Valley / Cap Rock", "tz": "America/Los_Angeles", "date": "2026-10-08", "time": "11:00"}, {"at": "2026-10-08T14:30:00-07:00", "label": "前往 Desert Hills Premium Outlets", "tz": "America/Los_Angeles", "date": "2026-10-08", "time": "14:30"}, {"at": "2026-10-08T16:00:00-07:00", "label": "Outlets 购物 / 晚餐", "tz": "America/Los_Angeles", "date": "2026-10-08", "time": "16:00"}, {"at": "2026-10-08T18:30:00-07:00", "label": "Quality Inn Banning 入住", "tz": "America/Los_Angeles", "date": "2026-10-08", "time": "18:30"}, {"at": "2026-10-09T08:30:00-07:00", "label": "Banning 出发 → Santa Monica", "tz": "America/Los_Angeles", "date": "2026-10-09", "time": "08:30"}, {"at": "2026-10-09T11:00:00-07:00", "label": "Santa Monica Pier / 海滩 / 午餐", "tz": "America/Los_Angeles", "date": "2026-10-09", "time": "11:00"}, {"at": "2026-10-09T14:30:00-07:00", "label": "洛杉矶机动时间 / 休息", "tz": "America/Los_Angeles", "date": "2026-10-09", "time": "14:30"}, {"at": "2026-10-09T17:30:00-07:00", "label": "前往 LAX Rental Car Center", "tz": "America/Los_Angeles", "date": "2026-10-09", "time": "18:30"}, {"at": "2026-10-09T19:00:00-07:00", "label": "目标约 19:00 抵达 Avis 还车区并办理还车（订单时间为 22:00）", "tz": "America/Los_Angeles", "date": "2026-10-09", "time": "19:30"}, {"at": "2026-10-09T20:00:00-07:00", "label": "进入 LAX 国际航班流程", "tz": "America/Los_Angeles", "date": "2026-10-09", "time": "20:00"}, {"at": "2026-10-09T23:50:00-07:00", "label": "KE012 · LAX T-B → ICN", "tz": "America/Los_Angeles", "date": "2026-10-09", "time": "23:50"}, {"at": "2026-10-11T04:40:00+09:00", "label": "抵达首尔 ICN T2 · 转机 3小时45分", "tz": "Asia/Seoul", "date": "2026-10-11", "time": "04:40"}, {"at": "2026-10-11T08:25:00+09:00", "label": "KE881 · ICN → PVG 起飞", "tz": "Asia/Seoul", "date": "2026-10-11", "time": "08:25"}, {"at": "2026-10-11T09:40:00+08:00", "label": "抵达上海浦东 T1 · 行程结束", "tz": "Asia/Shanghai", "date": "2026-10-11", "time": "09:40"}];
 
@@ -1353,6 +1443,112 @@ function jumpToday(){
   }
   (current||document.querySelector('.focus')).scrollIntoView({behavior:'smooth',block:'start'});
 }
+
+
+const ATTRACTION_PHOTO_CONFIGS = [{"match": "Beverly Hills / Rodeo Drive", "items": [["Beverly Hills", "Beverly Hills California"], ["Rodeo Drive", "Rodeo Drive Beverly Hills California"]]}, {"match": "Hollywood Walk of Fame / TCL Chinese Theatre", "items": [["Walk of Fame", "Hollywood Walk of Fame"], ["TCL Chinese Theatre", "TCL Chinese Theatre Hollywood"]]}, {"match": "Griffith Observatory", "items": [["Griffith Observatory", "Griffith Observatory Los Angeles"]]}, {"match": "Antelope Island / 大盐湖观景", "items": [["Antelope Island", "Antelope Island State Park Utah"], ["Great Salt Lake", "Great Salt Lake Utah"]]}, {"match": "Utah State Capitol", "items": [["Utah State Capitol", "Utah State Capitol Salt Lake City"]]}, {"match": "Temple Square / Visitors’ Center", "items": [["Temple Square", "Temple Square Salt Lake City"]]}, {"match": "Old Faithful + Upper Geyser Basin", "items": [["Old Faithful", "Old Faithful Yellowstone"], ["Upper Geyser Basin", "Upper Geyser Basin Yellowstone"]]}, {"match": "Grand Prismatic + Midway Geyser Basin", "items": [["Grand Prismatic", "Grand Prismatic Spring Yellowstone"], ["Midway Geyser Basin", "Midway Geyser Basin Yellowstone"], ["Fairy Falls Overlook", "Fairy Falls Grand Prismatic overlook Yellowstone"]]}, {"match": "Norris Geyser Basin · 重点走 Porcelain Basin", "items": [["Norris Geyser Basin", "Norris Geyser Basin Yellowstone"], ["Porcelain Basin", "Porcelain Basin Yellowstone"]]}, {"match": "Mammoth Hot Springs · Upper / Lower Terraces", "items": [["Upper Terraces", "Mammoth Hot Springs Upper Terraces Yellowstone"], ["Lower Terraces", "Mammoth Hot Springs Lower Terraces Yellowstone"]]}, {"match": "Lamar Valley", "items": [["Lamar Valley", "Lamar Valley Yellowstone"]]}, {"match": "Tower Fall / 午餐", "items": [["Tower Fall", "Tower Fall Yellowstone"]]}, {"match": "Grand Canyon of the Yellowstone", "items": [["Yellowstone Canyon", "Grand Canyon of the Yellowstone"], ["Artist Point", "Artist Point Yellowstone"], ["Upper Falls", "Upper Falls Yellowstone River"], ["Lower Falls", "Lower Falls Yellowstone River"]]}, {"match": "Hayden Valley", "items": [["Hayden Valley", "Hayden Valley Yellowstone"]]}, {"match": "West Thumb Geyser Basin", "items": [["West Thumb", "West Thumb Geyser Basin Yellowstone"]]}, {"match": "Jackson Lake / Oxbow Bend", "items": [["Jackson Lake", "Jackson Lake Grand Teton"], ["Oxbow Bend", "Oxbow Bend Grand Teton"]]}, {"match": "Jenny Lake + 午餐", "items": [["Jenny Lake", "Jenny Lake Grand Teton"]]}, {"match": "Mormon Row / Schwabacher Landing", "items": [["Mormon Row", "Mormon Row Grand Teton"], ["Schwabacher Landing", "Schwabacher Landing Grand Teton"]]}, {"match": "Balanced Rock / Windows / Delicate Arch Viewpoint", "items": [["Balanced Rock", "Balanced Rock Arches National Park"], ["The Windows", "Windows Arches National Park"], ["Delicate Arch", "Delicate Arch Arches National Park"]]}, {"match": "Visitor Center / 主观景台（不走 17-mile loop）", "items": [["Monument Valley", "Monument Valley Arizona Utah Mittens"]]}, {"match": "Desert View Watchtower / 东入口观景", "items": [["Desert View Watchtower", "Desert View Watchtower Grand Canyon"]]}, {"match": "Desert View Drive 沿线观景", "items": [["Desert View Drive", "Desert View Grand Canyon South Rim"]]}, {"match": "Grand Canyon Village / 午餐", "items": [["Grand Canyon Village", "Grand Canyon Village South Rim"]]}, {"match": "Mather Point + Rim Trail 短走", "items": [["Mather Point", "Mather Point Grand Canyon"], ["Rim Trail", "Rim Trail Grand Canyon South Rim"]]}, {"match": "Horseshoe Bend", "items": [["Horseshoe Bend", "Horseshoe Bend Page Arizona"]]}, {"match": "Glen Canyon Dam / Lake Powell 周边", "items": [["Glen Canyon Dam", "Glen Canyon Dam Arizona"], ["Lake Powell", "Lake Powell Arizona Utah"]]}, {"match": "Upper Antelope Canyon · Sightseer's Tour", "items": [["Upper Antelope Canyon", "Upper Antelope Canyon Arizona"]]}, {"match": "Wahweap Overlook / 湖区机动", "items": [["Wahweap Overlook", "Wahweap Overlook Lake Powell"]]}, {"match": "Page 周边补漏 / Lake Powell", "items": [["Lake Powell", "Lake Powell Page Arizona"]]}, {"match": "途中可短停 Kanab", "items": [["Kanab", "Kanab Utah"]]}, {"match": "Riverside Walk / The Narrows 河口段", "items": [["Riverside Walk", "Riverside Walk Zion National Park"], ["The Narrows", "The Narrows Zion National Park"]]}, {"match": "Zion Lodge / 午餐", "items": [["Zion Lodge", "Zion Lodge National Park"]]}, {"match": "Emerald Pools 或 Canyon Overlook", "items": [["Emerald Pools", "Emerald Pools Zion National Park"], ["Canyon Overlook", "Canyon Overlook Trail Zion National Park"]]}, {"match": "Pa’rus Trail / 日落前散步", "items": [["Pa’rus Trail", "Pa'rus Trail Zion National Park"]]}, {"match": "Sphere《The Wizard of Oz》建议场次", "items": [["Sphere", "Sphere Las Vegas"]]}, {"match": "Las Vegas Strip 夜游 / Bellagio", "items": [["Las Vegas Strip", "Las Vegas Strip Nevada"], ["Bellagio", "Bellagio fountains Las Vegas"]]}, {"match": "Keys View / Hidden Valley / Cap Rock", "items": [["Keys View", "Keys View Joshua Tree National Park"], ["Hidden Valley", "Hidden Valley Joshua Tree National Park"], ["Cap Rock", "Cap Rock Joshua Tree National Park"]]}, {"match": "Desert Hills Premium Outlets", "items": [["Desert Hills Outlets", "Desert Hills Premium Outlets California"]]}, {"match": "Santa Monica Pier / 海滩 / 午餐", "items": [["Santa Monica Pier", "Santa Monica Pier California"], ["Santa Monica Beach", "Santa Monica Beach California"]]}];
+const photoCache = new Map();
+
+function cameraIcon(){
+  return `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5h3l1.4-2h7.2l1.4 2h3a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 20 19.5H4A1.5 1.5 0 0 1 2.5 18v-8A1.5 1.5 0 0 1 4 8.5Z"></path><circle cx="12" cy="14" r="3.5"></circle></svg>`;
+}
+
+function initAttractionPhotoButtons(){
+  document.querySelectorAll('.timeline-row .event').forEach(eventEl=>{
+    const raw=eventEl.textContent.replace(/\s+/g,' ').trim();
+    const buttons=[];
+    ATTRACTION_PHOTO_CONFIGS.forEach(cfg=>{
+      if(raw.includes(cfg.match)) cfg.items.forEach(([label,query])=>buttons.push({label,query}));
+    });
+    if(!buttons.length) return;
+    const wrap=document.createElement('div');
+    wrap.className='photo-actions';
+    const seen=new Set();
+    buttons.forEach(({label,query})=>{
+      if(seen.has(query)) return; seen.add(query);
+      const btn=document.createElement('button');
+      btn.type='button'; btn.className='photo-btn';
+      btn.innerHTML=cameraIcon()+`<span>${label} 照片</span>`;
+      btn.addEventListener('click',()=>openAttractionPhotos(label,query));
+      wrap.appendChild(btn);
+    });
+    eventEl.appendChild(wrap);
+  });
+}
+
+async function commonsSearch(query){
+  const url=new URL('https://commons.wikimedia.org/w/api.php');
+  const params={action:'query',format:'json',generator:'search',gsrsearch:query,gsrnamespace:'6',gsrlimit:'24',prop:'imageinfo',iiprop:'url|mime|size',iiurlwidth:'1400',origin:'*'};
+  Object.entries(params).forEach(([k,v])=>url.searchParams.set(k,v));
+  const res=await fetch(url.toString());
+  if(!res.ok) throw new Error('photo fetch failed');
+  const data=await res.json();
+  const pages=Object.values(data.query?.pages||{}).sort((a,b)=>(a.index||999)-(b.index||999));
+  return pages.map(p=>{
+    const info=p.imageinfo?.[0];
+    if(!info) return null;
+    return {title:(p.title||'').replace(/^File:/,''),src:info.thumburl||info.url,full:info.url,page:info.descriptionurl,mime:info.mime,width:info.width||0,height:info.height||0};
+  }).filter(Boolean).filter(x=>/^image\/(jpeg|png|webp)$/i.test(x.mime||'') && x.width>=500 && x.height>=300 && x.src);
+}
+
+async function getFiveCommonsImages(query){
+  if(photoCache.has(query)) return photoCache.get(query);
+  const variations=[query,`${query} landscape`,`${query} travel`];
+  const found=[]; const used=new Set();
+  for(const q of variations){
+    if(found.length>=5) break;
+    try{
+      const batch=await commonsSearch(q);
+      for(const item of batch){
+        const key=item.full||item.src;
+        if(!used.has(key)){used.add(key);found.push(item);}
+        if(found.length>=5) break;
+      }
+    }catch(e){}
+  }
+  const result=found.slice(0,5); photoCache.set(query,result); return result;
+}
+
+async function openAttractionPhotos(label,query){
+  const modal=document.getElementById('attractionPhotoModal');
+  const grid=document.getElementById('attractionPhotoGrid');
+  const title=document.getElementById('attractionPhotoTitle');
+  title.textContent=label;
+  grid.innerHTML='<div class="photo-loading"><span class="photo-spinner"></span>正在从网上加载照片…</div>';
+  modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+  try{
+    const images=await getFiveCommonsImages(query);
+    if(!images.length){
+      grid.innerHTML=`<div class="photo-empty"><div>暂时没有找到合适照片。<br><a class="photo-fallback-link" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=${encodeURIComponent(query)}">打开图片搜索</a></div></div>`;
+      return;
+    }
+    grid.innerHTML='';
+    images.forEach((img,i)=>{
+      const card=document.createElement('div'); card.className='photo-card';
+      const image=document.createElement('img'); image.src=img.src; image.alt=`${label} 照片 ${i+1}`; image.loading=i===0?'eager':'lazy';
+      const link=document.createElement('a'); link.href=img.page||img.full; link.target='_blank'; link.rel='noopener'; link.textContent='查看图片来源';
+      const caption=document.createElement('div'); caption.className='photo-card-label'; caption.textContent=img.title||`照片 ${i+1}`;
+      card.append(image,link,caption); grid.appendChild(card);
+    });
+    if(images.length<5){
+      const empty=document.createElement('div'); empty.className='photo-empty';
+      empty.innerHTML=`目前找到 ${images.length} 张合适照片。<br><a class="photo-fallback-link" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=${encodeURIComponent(query)}">查看更多图片</a>`;
+      grid.appendChild(empty);
+    }
+  }catch(e){
+    grid.innerHTML=`<div class="photo-empty"><div>照片加载失败，请检查网络后重试。<br><a class="photo-fallback-link" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=${encodeURIComponent(query)}">打开图片搜索</a></div></div>`;
+  }
+}
+
+function closeAttractionPhotos(){
+  const modal=document.getElementById('attractionPhotoModal');
+  modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow='';
+}
+
+document.getElementById('attractionPhotoClose')?.addEventListener('click',closeAttractionPhotos);
+document.getElementById('attractionPhotoModal')?.addEventListener('click',e=>{if(e.target.id==='attractionPhotoModal') closeAttractionPhotos();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('attractionPhotoModal')?.classList.contains('open')) closeAttractionPhotos();});
+initAttractionPhotoButtons();
+
 </script>
 </body>
 </html>
