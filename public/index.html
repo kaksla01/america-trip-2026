@@ -113,6 +113,38 @@
 }
 </style>
 
+
+<style>
+/* V6 map address search */
+.day-map-search{position:absolute;z-index:30;right:18px;top:calc(var(--navh) + env(safe-area-inset-top) + 8px);width:min(330px,calc(100% - 36px));pointer-events:auto;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC","Helvetica Neue",Arial,sans-serif}
+.map-search-bar{height:46px;display:flex;align-items:center;gap:8px;padding:5px 6px 5px 14px;border:1px solid rgba(255,255,255,.78);border-radius:16px;background:rgba(248,248,250,.86);-webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);box-shadow:0 8px 28px rgba(0,0,0,.14)}
+.map-search-bar svg{width:18px;height:18px;flex:0 0 auto;color:#6e6e73}
+.map-search-input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:#1d1d1f;font-size:15px;line-height:1.2;padding:0}
+.map-search-input::placeholder{color:#8e8e93}
+.map-search-submit{width:36px;height:36px;flex:0 0 auto;border:0;border-radius:11px;background:#0071e3;color:#fff;display:grid;place-items:center;cursor:pointer;padding:0;transition:transform .15s ease,background .15s ease}
+.map-search-submit:active{transform:scale(.93)}
+.map-search-submit:disabled{opacity:.45;cursor:default}
+.map-search-submit svg{width:17px;height:17px;color:#fff}
+.map-search-results{display:none;margin-top:8px;padding:6px;border:1px solid rgba(255,255,255,.78);border-radius:18px;background:rgba(248,248,250,.94);-webkit-backdrop-filter:blur(28px) saturate(180%);backdrop-filter:blur(28px) saturate(180%);box-shadow:0 14px 38px rgba(0,0,0,.18);max-height:260px;overflow:auto}
+.map-search-results.open{display:block}
+.map-search-state{padding:12px 13px;color:#6e6e73;font-size:13px;line-height:1.45}
+.map-search-result{width:100%;border:0;background:transparent;text-align:left;padding:10px 11px;border-radius:13px;cursor:pointer;color:#1d1d1f;display:block}
+.map-search-result:hover,.map-search-result:focus-visible{background:rgba(0,113,227,.09);outline:0}
+.map-search-result strong{display:block;font-size:14px;line-height:1.3;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.map-search-result span{display:block;margin-top:3px;color:#6e6e73;font-size:11px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.search-map-pin{width:38px;height:38px;border-radius:19px;background:#0071e3;color:#fff;border:3px solid #fff;box-shadow:0 5px 18px rgba(0,0,0,.3);display:grid;place-items:center;cursor:pointer;transition:transform .15s ease}
+.search-map-pin:hover{transform:scale(1.07)}
+.search-map-pin svg{width:18px;height:18px;display:block}
+.search-place-card{position:absolute;z-index:31;right:18px;top:calc(var(--navh) + env(safe-area-inset-top) + 64px);width:min(330px,calc(100% - 36px));padding:13px 14px;border-radius:18px;background:rgba(28,28,30,.88);color:white;-webkit-backdrop-filter:blur(24px) saturate(170%);backdrop-filter:blur(24px) saturate(170%);box-shadow:0 12px 34px rgba(0,0,0,.22);display:none}
+.search-place-card.visible{display:flex;align-items:center;gap:12px}
+.search-place-copy{min-width:0;flex:1}
+.search-place-copy strong{display:block;font-size:14px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.search-place-copy span{display:block;margin-top:3px;font-size:11px;line-height:1.35;color:rgba(255,255,255,.68);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.search-place-nav{width:40px;height:40px;border-radius:13px;background:#0a84ff;color:#fff;display:grid;place-items:center;text-decoration:none;flex:0 0 auto}
+.search-place-nav svg{width:19px;height:19px;display:block}
+@media(max-width:620px){.day-map-search{width:min(260px,calc(100% - 36px));}.search-place-card{width:min(260px,calc(100% - 36px));}.day-chip .dtitle{max-width:42vw}.map-search-input{font-size:16px}}
+</style>
+
 </head>
 <body>
 <nav class="global-nav"><div class="nav-title" id="navTitle">美国西部旅行手册</div><div class="nav-dots" id="navDots"></div><div class="nav-progress" id="navProgress">1 / 20</div></nav>
@@ -337,6 +369,59 @@ async function openPlacePhotos(stop){const modal=document.getElementById('placeP
 function openViewer(im,place){viewerImg.src=im.full;viewerImg.alt=place;viewerMeta.innerHTML=`${place} · Wikimedia Commons · ${im.license||'来源信息'} · <a href="${im.page}" target="_blank" rel="noopener">查看来源</a>`;photoViewer.classList.add('open')}viewerClose.onclick=()=>photoViewer.classList.remove('open');photoViewer.onclick=e=>{if(e.target===photoViewer)photoViewer.classList.remove('open')};document.addEventListener('keydown',e=>{if(e.key==='Escape'){photoViewer.classList.remove('open');closePlacePhotos()}});
 async function loadWeather(i){const d=DAYS[i],card=document.getElementById(`weather-${i}`);if(!card||card.dataset.loaded||d.weather.lat==null)return;card.dataset.loaded='1';try{const u=`https://api.open-meteo.com/v1/forecast?latitude=${d.weather.lat}&longitude=${d.weather.lon}&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=1`;const j=await (await fetch(u)).json(),c=j.current||{},dy=j.daily||{};card.querySelector('.wx-temp').textContent=Math.round(c.temperature_2m)+'°C';card.querySelector('.wx-line').textContent=`体感 ${Math.round(c.apparent_temperature)}° · 风速 ${Math.round(c.wind_speed_10m)} km/h`;card.querySelector('.wx-range').textContent=`今日最高 ${Math.round(dy.temperature_2m_max?.[0])}° / 最低 ${Math.round(dy.temperature_2m_min?.[0])}°`;const t=Math.round(c.apparent_temperature??c.temperature_2m),hi=Math.round(dy.temperature_2m_max?.[0]??c.temperature_2m),lo=Math.round(dy.temperature_2m_min?.[0]??c.temperature_2m),wind=Math.round(c.wind_speed_10m||0);let wear='短袖或轻薄上衣即可';if(lo<=5||t<=7)wear='保暖外套＋长裤，早晚建议加抓绒或薄羽绒';else if(lo<=10||t<=12)wear='长袖＋外套＋长裤，早晚注意保暖';else if(lo<=15||t<=17)wear='薄长袖或短袖＋轻外套，建议分层穿着';else if(hi>=30||t>=28)wear='短袖透气衣物，注意防晒和补水';else if(hi>=24)wear='短袖为主，随身带一件薄外套';if(wind>=25)wear+='；风较大，外层建议防风';const suggest=card.querySelector('.wx-suggest');if(suggest)suggest.textContent='穿着建议：'+wear}catch(e){card.querySelector('.wx-line').textContent='实时天气加载失败，可稍后刷新';const suggest=card.querySelector('.wx-suggest');if(suggest)suggest.textContent='穿着建议：天气恢复后自动生成'} }
 window.focusPlaceOnMap=function(dayIndex,eventIndex,stopIndex,btn){ensureDayMap(dayIndex);const row=btn.closest('.stop-row'),stop=DAYS[dayIndex].timeline[eventIndex].stops[stopIndex];activatePlace(dayIndex,stop,row,btn,false)};window.openPlaceGallery=function(dayIndex,eventIndex,stopIndex,btn){const stop=DAYS[dayIndex].timeline[eventIndex].stops[stopIndex];openPlacePhotos(stop)};
+
+const SEARCH_ICON=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
+const SEARCH_NAV_ICON=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.35 3.9 4.62 10.73c-.9.39-.84 1.7.1 2l6.15 1.94 1.94 6.15c.3.94 1.61 1 2 .1L21.64 5.2c.36-.84-.45-1.65-1.29-1.3Z" fill="currentColor"/><path d="m11.05 14.47 4.36-4.36" fill="none" stroke="white" stroke-linecap="round" stroke-width="1.35"/></svg>`;
+const SEARCH_PIN_ICON=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6a6.6 6.6 0 0 0-6.6 6.6c0 4.9 6.6 12.2 6.6 12.2s6.6-7.3 6.6-12.2A6.6 6.6 0 0 0 12 2.6Z" fill="currentColor"/><circle cx="12" cy="9.2" r="2.7" fill="white"/></svg>`;
+function searchLabel(item){return item.display_name||item.name||'搜索结果'}
+async function geocodeAddress(query){
+  const q=query.trim(); if(!q)return [];
+  try{
+    const u='https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=5&accept-language=zh-CN,en&q='+encodeURIComponent(q);
+    const r=await fetch(u,{headers:{'Accept':'application/json'}}); if(!r.ok)throw new Error('nominatim');
+    const j=await r.json();
+    if(Array.isArray(j)&&j.length)return j.map(x=>({lat:+x.lat,lon:+x.lon,display_name:x.display_name,name:x.name||x.display_name?.split(',')[0]||q}));
+  }catch(e){}
+  try{
+    const u='https://photon.komoot.io/api/?limit=5&q='+encodeURIComponent(q);
+    const r=await fetch(u); if(!r.ok)throw new Error('photon'); const j=await r.json();
+    return (j.features||[]).map(f=>{const p=f.properties||{},c=f.geometry?.coordinates||[];const name=p.name||p.street||q;const parts=[p.street&&p.housenumber?[p.housenumber,p.street].join(' '):p.street,p.city||p.town||p.village,p.state,p.country].filter(Boolean);return {lat:+c[1],lon:+c[0],name,display_name:[name,...parts.filter(x=>x!==name)].filter(Boolean).join(', ')}}).filter(x=>Number.isFinite(x.lat)&&Number.isFinite(x.lon));
+  }catch(e){return []}
+}
+function addDayMapSearch(i,st){
+  const host=document.getElementById(`daymap-${i}`),shell=host?.closest('.day-map-shell'); if(!host||!shell||shell.querySelector('.day-map-search'))return;
+  const wrap=document.createElement('div');wrap.className='day-map-search';
+  wrap.innerHTML=`<form class="map-search-bar" role="search">${SEARCH_ICON}<input class="map-search-input" type="search" inputmode="search" autocomplete="off" placeholder="搜索地址或地点" aria-label="搜索地址或地点"><button class="map-search-submit" type="submit" aria-label="搜索">${SEARCH_ICON}</button></form><div class="map-search-results" role="listbox"></div>`;
+  const card=document.createElement('div');card.className='search-place-card';card.innerHTML=`<div class="search-place-copy"><strong></strong><span></span></div><a class="search-place-nav" target="_blank" rel="noopener" aria-label="导航到搜索地点">${SEARCH_NAV_ICON}</a>`;
+  shell.appendChild(wrap);shell.appendChild(card);
+  const form=wrap.querySelector('form'),input=wrap.querySelector('input'),submit=wrap.querySelector('.map-search-submit'),results=wrap.querySelector('.map-search-results');
+  let marker=null,lastSearch=0;
+  function closeResults(){results.classList.remove('open')}
+  function showSelected(item){
+    if(marker)marker.remove();
+    const el=document.createElement('div');el.className='search-map-pin';el.innerHTML=SEARCH_PIN_ICON;el.title='点击一键导航';
+    const dest=`${item.lat},${item.lon}`; const nav=`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(dest)}&travelmode=driving`;
+    el.addEventListener('click',e=>{e.stopPropagation();window.open(nav,'_blank','noopener')});
+    marker=new maplibregl.Marker({element:el,anchor:'bottom'}).setLngLat([item.lon,item.lat]).addTo(st.map);st.searchMarker=marker;
+    st.map.easeTo({center:[item.lon,item.lat],zoom:14.2,duration:850,padding:{top:95,bottom:70,left:40,right:40}});
+    const title=card.querySelector('strong'),sub=card.querySelector('span'),navA=card.querySelector('.search-place-nav');
+    title.textContent=item.name||searchLabel(item);sub.textContent=searchLabel(item);navA.href=nav;card.classList.add('visible');
+    closeResults(); input.blur();
+  }
+  async function runSearch(){
+    const q=input.value.trim();if(!q)return;const token=++lastSearch;submit.disabled=true;results.innerHTML='<div class="map-search-state">正在搜索…</div>';results.classList.add('open');
+    const items=await geocodeAddress(q);if(token!==lastSearch)return;submit.disabled=false;results.innerHTML='';
+    if(!items.length){results.innerHTML='<div class="map-search-state">没有找到地点，请尝试更完整的地址。</div>';return}
+    items.forEach(item=>{const b=document.createElement('button');b.type='button';b.className='map-search-result';b.setAttribute('role','option');b.innerHTML=`<strong></strong><span></span>`;b.querySelector('strong').textContent=item.name||q;b.querySelector('span').textContent=searchLabel(item);b.addEventListener('click',()=>showSelected(item));results.appendChild(b)});
+  }
+  form.addEventListener('submit',e=>{e.preventDefault();runSearch()});
+  input.addEventListener('focus',()=>{if(results.children.length)results.classList.add('open')});
+  input.addEventListener('keydown',e=>{if(e.key==='Escape'){closeResults();input.blur()}});
+  shell.addEventListener('click',e=>{if(!wrap.contains(e.target)&&!card.contains(e.target))closeResults()});
+}
+const _ensureDayMap=ensureDayMap;
+ensureDayMap=function(i){_ensureDayMap(i);const st=mapStates.get(i);if(st)addDayMapSearch(i,st)};
+for(const [i,st] of mapStates)addDayMapSearch(i,st);
 setPanelUI(0);
 </script>
 </body></html>
