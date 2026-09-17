@@ -197,6 +197,22 @@
 }
 </style>
 
+
+<style>
+/* V10: keep map search at the top of the map on mobile */
+@media(max-width:620px){
+  .day-map-search{
+    top:calc(var(--navh) + env(safe-area-inset-top) + 8px)!important;
+  }
+  .day-map-search.expanded{
+    left:12px!important;
+    right:12px!important;
+    top:calc(var(--navh) + env(safe-area-inset-top) + 8px)!important;
+    width:auto!important;
+  }
+}
+</style>
+
 </head>
 <body>
 <nav class="global-nav"><div class="nav-title" id="navTitle">美国西部旅行手册</div><div class="nav-dots" id="navDots"></div><div class="nav-progress" id="navProgress">1 / 20</div></nav>
