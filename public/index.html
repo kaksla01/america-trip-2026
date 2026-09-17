@@ -145,6 +145,42 @@
 @media(max-width:620px){.day-map-search{width:min(260px,calc(100% - 36px));}.search-place-card{width:min(260px,calc(100% - 36px));}.day-chip .dtitle{max-width:42vw}.map-search-input{font-size:16px}}
 </style>
 
+
+<style>
+/* V7 mobile map search refinements */
+.search-place-card{display:none!important}
+.day-map-search{right:14px;top:calc(var(--navh) + env(safe-area-inset-top) + 10px);width:min(340px,calc(100% - 28px));transition:width .22s ease,transform .22s ease;z-index:40}
+.map-search-bar{height:44px;border-radius:15px;padding:4px 5px 4px 13px;background:rgba(250,250,252,.88);border:1px solid rgba(255,255,255,.82);box-shadow:0 6px 20px rgba(0,0,0,.12);-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%)}
+.map-search-submit{width:34px;height:34px;border-radius:11px}
+.map-search-results{border-radius:16px;background:rgba(250,250,252,.96);box-shadow:0 14px 34px rgba(0,0,0,.16)}
+.search-map-pin{width:36px;height:36px;border-radius:18px;border:3px solid #fff;box-shadow:0 4px 16px rgba(0,0,0,.26)}
+.search-map-popup .maplibregl-popup-content{padding:0!important;border-radius:18px!important;overflow:hidden;box-shadow:0 12px 38px rgba(0,0,0,.22)!important;background:rgba(250,250,252,.96)!important;-webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%)}
+.search-map-popup .maplibregl-popup-tip{border-top-color:rgba(250,250,252,.96)!important}
+.search-popup-card{display:flex;align-items:center;gap:12px;min-width:220px;max-width:300px;padding:13px 13px 13px 15px;color:#1d1d1f}
+.search-popup-copy{min-width:0;flex:1}
+.search-popup-copy strong{display:block;font-size:14px;line-height:1.25;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.search-popup-copy span{display:block;margin-top:3px;font-size:11px;line-height:1.35;color:#6e6e73;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.search-popup-nav{width:38px;height:38px;border-radius:12px;background:#0071e3;color:#fff;display:grid;place-items:center;text-decoration:none;flex:0 0 auto}
+.search-popup-nav svg{width:18px;height:18px;display:block}
+@media(max-width:620px){
+  .map-top-glass{left:12px;right:12px;top:calc(var(--navh) + env(safe-area-inset-top) + 8px)}
+  .day-chip{max-width:calc(100% - 58px);padding:9px 12px;border-radius:16px}
+  .day-chip .dtitle{max-width:none;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .day-map-search{width:44px;right:12px;top:calc(var(--navh) + env(safe-area-inset-top) + 8px)}
+  .day-map-search .map-search-bar{width:44px;height:44px;padding:0;justify-content:center;border-radius:14px;overflow:hidden}
+  .day-map-search .map-search-bar>svg,.day-map-search .map-search-input{display:none}
+  .day-map-search .map-search-submit{width:44px;height:44px;border-radius:14px;background:rgba(250,250,252,.90);color:#1d1d1f}
+  .day-map-search .map-search-submit svg{color:#1d1d1f;width:19px;height:19px}
+  .day-map-search.expanded{left:12px;right:12px;top:calc(var(--navh) + env(safe-area-inset-top) + 66px);width:auto}
+  .day-map-search.expanded .map-search-bar{width:100%;height:46px;padding:4px 5px 4px 13px;justify-content:flex-start;border-radius:15px;overflow:visible}
+  .day-map-search.expanded .map-search-bar>svg,.day-map-search.expanded .map-search-input{display:block}
+  .day-map-search.expanded .map-search-input{font-size:16px}
+  .day-map-search.expanded .map-search-submit{width:36px;height:36px;border-radius:11px;background:#0071e3;color:#fff}
+  .day-map-search.expanded .map-search-submit svg{color:#fff;width:17px;height:17px}
+  .day-map-search.expanded .map-search-results{margin-top:7px;max-height:230px}
+}
+</style>
+
 </head>
 <body>
 <nav class="global-nav"><div class="nav-title" id="navTitle">美国西部旅行手册</div><div class="nav-dots" id="navDots"></div><div class="nav-progress" id="navProgress">1 / 20</div></nav>
@@ -392,21 +428,28 @@ function addDayMapSearch(i,st){
   const host=document.getElementById(`daymap-${i}`),shell=host?.closest('.day-map-shell'); if(!host||!shell||shell.querySelector('.day-map-search'))return;
   const wrap=document.createElement('div');wrap.className='day-map-search';
   wrap.innerHTML=`<form class="map-search-bar" role="search">${SEARCH_ICON}<input class="map-search-input" type="search" inputmode="search" autocomplete="off" placeholder="搜索地址或地点" aria-label="搜索地址或地点"><button class="map-search-submit" type="submit" aria-label="搜索">${SEARCH_ICON}</button></form><div class="map-search-results" role="listbox"></div>`;
-  const card=document.createElement('div');card.className='search-place-card';card.innerHTML=`<div class="search-place-copy"><strong></strong><span></span></div><a class="search-place-nav" target="_blank" rel="noopener" aria-label="导航到搜索地点">${SEARCH_NAV_ICON}</a>`;
-  shell.appendChild(wrap);shell.appendChild(card);
+  shell.appendChild(wrap);
   const form=wrap.querySelector('form'),input=wrap.querySelector('input'),submit=wrap.querySelector('.map-search-submit'),results=wrap.querySelector('.map-search-results');
-  let marker=null,lastSearch=0;
+  let marker=null,popup=null,lastSearch=0;
   function closeResults(){results.classList.remove('open')}
+  function collapseSearch(){if(window.matchMedia('(max-width:620px)').matches){wrap.classList.remove('expanded');closeResults();input.blur()}}
+  function popupFor(item,nav){
+    const root=document.createElement('div');root.className='search-popup-card';
+    const copy=document.createElement('div');copy.className='search-popup-copy';
+    const strong=document.createElement('strong');strong.textContent=item.name||searchLabel(item);
+    const span=document.createElement('span');span.textContent=searchLabel(item);
+    const link=document.createElement('a');link.className='search-popup-nav';link.href=nav;link.target='_blank';link.rel='noopener';link.setAttribute('aria-label','导航到搜索地点');link.title='一键导航';link.innerHTML=SEARCH_NAV_ICON;
+    copy.append(strong,span);root.append(copy,link);return root;
+  }
   function showSelected(item){
-    if(marker)marker.remove();
-    const el=document.createElement('div');el.className='search-map-pin';el.innerHTML=SEARCH_PIN_ICON;el.title='点击一键导航';
+    if(marker)marker.remove();if(popup)popup.remove();
+    const el=document.createElement('div');el.className='search-map-pin';el.innerHTML=SEARCH_PIN_ICON;el.title='点击查看地点与导航';
     const dest=`${item.lat},${item.lon}`; const nav=`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(dest)}&travelmode=driving`;
-    el.addEventListener('click',e=>{e.stopPropagation();window.open(nav,'_blank','noopener')});
-    marker=new maplibregl.Marker({element:el,anchor:'bottom'}).setLngLat([item.lon,item.lat]).addTo(st.map);st.searchMarker=marker;
-    st.map.easeTo({center:[item.lon,item.lat],zoom:14.2,duration:850,padding:{top:95,bottom:70,left:40,right:40}});
-    const title=card.querySelector('strong'),sub=card.querySelector('span'),navA=card.querySelector('.search-place-nav');
-    title.textContent=item.name||searchLabel(item);sub.textContent=searchLabel(item);navA.href=nav;card.classList.add('visible');
-    closeResults(); input.blur();
+    popup=new maplibregl.Popup({offset:24,closeButton:false,className:'search-map-popup',maxWidth:'320px'}).setDOMContent(popupFor(item,nav));
+    marker=new maplibregl.Marker({element:el,anchor:'bottom'}).setLngLat([item.lon,item.lat]).setPopup(popup).addTo(st.map);st.searchMarker=marker;
+    el.addEventListener('click',e=>{e.stopPropagation();marker.togglePopup()});
+    st.map.easeTo({center:[item.lon,item.lat],zoom:14.2,duration:850,padding:{top:95,bottom:90,left:40,right:40}});
+    marker.togglePopup();closeResults();input.value=item.name||input.value;collapseSearch();
   }
   async function runSearch(){
     const q=input.value.trim();if(!q)return;const token=++lastSearch;submit.disabled=true;results.innerHTML='<div class="map-search-state">正在搜索…</div>';results.classList.add('open');
@@ -414,10 +457,17 @@ function addDayMapSearch(i,st){
     if(!items.length){results.innerHTML='<div class="map-search-state">没有找到地点，请尝试更完整的地址。</div>';return}
     items.forEach(item=>{const b=document.createElement('button');b.type='button';b.className='map-search-result';b.setAttribute('role','option');b.innerHTML=`<strong></strong><span></span>`;b.querySelector('strong').textContent=item.name||q;b.querySelector('span').textContent=searchLabel(item);b.addEventListener('click',()=>showSelected(item));results.appendChild(b)});
   }
-  form.addEventListener('submit',e=>{e.preventDefault();runSearch()});
-  input.addEventListener('focus',()=>{if(results.children.length)results.classList.add('open')});
-  input.addEventListener('keydown',e=>{if(e.key==='Escape'){closeResults();input.blur()}});
-  shell.addEventListener('click',e=>{if(!wrap.contains(e.target)&&!card.contains(e.target))closeResults()});
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    if(window.matchMedia('(max-width:620px)').matches&&!wrap.classList.contains('expanded')){wrap.classList.add('expanded');setTimeout(()=>input.focus(),50);return}
+    runSearch();
+  });
+  submit.addEventListener('click',e=>{
+    if(window.matchMedia('(max-width:620px)').matches&&!wrap.classList.contains('expanded')){e.preventDefault();wrap.classList.add('expanded');setTimeout(()=>input.focus(),50)}
+  });
+  input.addEventListener('focus',()=>{wrap.classList.add('expanded');if(results.children.length)results.classList.add('open')});
+  input.addEventListener('keydown',e=>{if(e.key==='Escape'){collapseSearch()}});
+  shell.addEventListener('click',e=>{if(!wrap.contains(e.target)){closeResults();if(window.matchMedia('(max-width:620px)').matches&&document.activeElement!==input)wrap.classList.remove('expanded')}});
 }
 const _ensureDayMap=ensureDayMap;
 ensureDayMap=function(i){_ensureDayMap(i);const st=mapStates.get(i);if(st)addDayMapSearch(i,st)};
