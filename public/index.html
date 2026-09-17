@@ -467,6 +467,19 @@
 }
 </style>
 
+
+<style>
+/* V23 — overview map mirrors daily map styling */
+#overviewMap .route-place-marker{
+  width:18px!important;
+  height:18px!important;
+  border:3px solid #fff!important;
+  border-radius:50%!important;
+  background:#1f6fe5!important;
+  box-shadow:0 3px 10px rgba(12,63,138,.28)!important;
+}
+</style>
+
 </head>
 <body>
 <nav class="global-nav"><div class="nav-title" id="navTitle">American West Travel Guide</div><div class="nav-dots" id="navDots"></div><div class="nav-progress" id="navProgress">1 / 20</div></nav>
@@ -974,7 +987,87 @@ let edgeStart=null;document.addEventListener('touchstart',e=>{const x=e.touches[
 function fmtInTZ(date,tz){return new Intl.DateTimeFormat('zh-CN',{timeZone:tz,month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false}).format(date)}
 function updateCountdown(){const el={nextEvent:document.getElementById('nextEvent'),nextMeta:document.getElementById('nextMeta'),dd:document.getElementById('dd'),hh:document.getElementById('hh'),mm:document.getElementById('mm'),ss:document.getElementById('ss')};if(!Object.values(el).every(Boolean))return;const now=new Date(),next=EVENTS.find(e=>new Date(e.at).getTime()>now.getTime());if(!next){el.nextEvent.textContent='美国西部行程已完成';el.nextMeta.textContent='期待下一次旅行';el.dd.textContent=el.hh.textContent=el.mm.textContent=el.ss.textContent='00';return}const target=new Date(next.at),diff=Math.max(0,target-now),d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),mi=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);el.dd.textContent=String(d).padStart(2,'0');el.hh.textContent=String(h).padStart(2,'0');el.mm.textContent=String(mi).padStart(2,'0');el.ss.textContent=String(s).padStart(2,'0');el.nextEvent.textContent=next.label;el.nextMeta.textContent=fmtInTZ(target,next.tz)}updateCountdown();window.setInterval(updateCountdown,1000);
 function allTripPoints(){const pts=[];DAYS.forEach(d=>d.routePoints.forEach(p=>{if(!pts.some(x=>x.name===p.name))pts.push(p)}));return pts}
-let overviewMap;function initOverview(){if(overviewMap)return;overviewMap=new maplibregl.Map({container:'overviewMap',style:MAP_STYLE,center:[-112,40],zoom:3.5,attributionControl:true});overviewMap.addControl(new maplibregl.NavigationControl({showCompass:false}),'top-right');overviewMap.on('load',()=>{const pts=allTripPoints();const coords=pts.map(p=>[p.lon,p.lat]);overviewMap.addSource('trip-route',{type:'geojson',data:{type:'Feature',geometry:{type:'LineString',coordinates:coords}}});overviewMap.addLayer({id:'trip-route-shadow',type:'line',source:'trip-route',layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'rgba(27,106,214,.22)','line-width':13,'line-blur':1.1,'line-opacity':1}});overviewMap.addLayer({id:'trip-route-casing',type:'line',source:'trip-route',layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'#1f6fe5','line-width':10,'line-opacity':1}});overviewMap.addLayer({id:'trip-route-line',type:'line',source:'trip-route',layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'#4da3ff','line-width':6.2,'line-opacity':1}});pts.forEach((p,i)=>new maplibregl.Marker({color:'#0071e3'}).setLngLat([p.lon,p.lat]).setPopup(new maplibregl.Popup({offset:18}).setText(p.name)).addTo(overviewMap));if(coords.length){const b=coords.reduce((b,c)=>b.extend(c),new maplibregl.LngLatBounds(coords[0],coords[0]));overviewMap.fitBounds(b,{padding:55,duration:0})}})}
+let overviewMap;
+function initOverview(){
+  if(overviewMap)return;
+  overviewMap=new maplibregl.Map({
+    container:'overviewMap',
+    style:MAP_STYLE,
+    center:[-112,40],
+    zoom:3.5,
+    attributionControl:true
+  });
+  overviewMap.addControl(new maplibregl.NavigationControl({showCompass:false}),'top-right');
+
+  overviewMap.on('load',async()=>{
+    const pts=allTripPoints();
+    const coords=pts.map(p=>[p.lon,p.lat]);
+
+    overviewMap.addSource('trip-route',{
+      type:'geojson',
+      data:{type:'Feature',geometry:{type:'LineString',coordinates:coords}}
+    });
+
+    // Exactly the same three-layer Apple-style route treatment as each daily map.
+    overviewMap.addLayer({
+      id:'trip-route-shadow',
+      type:'line',
+      source:'trip-route',
+      layout:{'line-join':'round','line-cap':'round'},
+      paint:{
+        'line-color':'rgba(27,106,214,.24)',
+        'line-width':14,
+        'line-blur':1.2,
+        'line-opacity':1
+      }
+    });
+    overviewMap.addLayer({
+      id:'trip-route-casing',
+      type:'line',
+      source:'trip-route',
+      layout:{'line-join':'round','line-cap':'round'},
+      paint:{
+        'line-color':'#1f6fe5',
+        'line-width':10.5,
+        'line-opacity':1
+      }
+    });
+    overviewMap.addLayer({
+      id:'trip-route-line',
+      type:'line',
+      source:'trip-route',
+      layout:{'line-join':'round','line-cap':'round'},
+      paint:{
+        'line-color':'#4da3ff',
+        'line-width':6.6,
+        'line-opacity':1
+      }
+    });
+
+    // Use the same circular markers as the daily maps.
+    pts.forEach(p=>{
+      const el=makePlaceMarker();
+      new maplibregl.Marker({element:el})
+        .setLngLat([p.lon,p.lat])
+        .setPopup(new maplibregl.Popup({offset:18}).setText(p.name))
+        .addTo(overviewMap);
+    });
+
+    // Replace the initial straight preview with a real driving geometry when routing is available.
+    // If routing fails, the straight fallback remains visible.
+    const routed=await fetchDrivingRoute(pts);
+    const src=overviewMap.getSource('trip-route');
+    if(src&&routed)src.setData(routed);
+
+    if(coords.length){
+      const b=coords.reduce(
+        (b,c)=>b.extend(c),
+        new maplibregl.LngLatBounds(coords[0],coords[0])
+      );
+      overviewMap.fitBounds(b,{padding:55,duration:0});
+    }
+  });
+}
 const overviewPanel=panels[1];const oo=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting))setTimeout(initOverview,80)},{root:deck,threshold:.4});oo.observe(overviewPanel);
 const mapStates=new Map();
 function routeGeo(points){
