@@ -581,6 +581,97 @@
 }
 </style>
 
+
+<style>
+/* V27 — Apple Maps-like daily start/end markers */
+.route-terminal-marker{
+  min-width:36px!important;
+  height:34px!important;
+  padding:4px 7px!important;
+  gap:5px!important;
+  border-radius:17px!important;
+  background:rgba(255,255,255,.96)!important;
+  border:1px solid rgba(0,0,0,.08)!important;
+  box-shadow:0 5px 16px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.9)!important;
+  backdrop-filter:blur(14px) saturate(160%);
+  -webkit-backdrop-filter:blur(14px) saturate(160%);
+}
+.route-terminal-marker .term-chip{
+  width:24px!important;
+  height:24px!important;
+  flex:0 0 24px!important;
+  border-radius:50%!important;
+}
+.route-terminal-marker .term-chip svg{
+  width:15px!important;
+  height:15px!important;
+}
+.route-terminal-marker.start .term-chip,
+.route-terminal-marker.airport .term-chip,
+.route-terminal-marker.combo .term-chip.start{
+  background:#0A84FF!important;
+  color:#fff!important;
+  box-shadow:0 1px 4px rgba(10,132,255,.28);
+}
+.route-terminal-marker.end .term-chip,
+.route-terminal-marker.combo .term-chip.end{
+  background:#FF3B30!important;
+  color:#fff!important;
+  box-shadow:0 1px 4px rgba(255,59,48,.22);
+}
+.route-terminal-marker.combo{
+  padding-left:5px!important;
+  padding-right:5px!important;
+  gap:4px!important;
+}
+.route-terminal-marker.combo .term-sep{
+  display:none!important;
+}
+
+/* The overview page intentionally has no start/end markers. */
+#overviewMap .route-terminal-marker{display:none!important}
+
+/* Search selection clear button */
+.map-search-clear-selection{
+  position:absolute;
+  left:-46px;
+  top:3px;
+  width:38px;
+  height:38px;
+  border:0;
+  border-radius:13px;
+  display:none;
+  place-items:center;
+  padding:0;
+  color:#1d1d1f;
+  background:rgba(250,250,252,.92);
+  border:1px solid rgba(255,255,255,.82);
+  box-shadow:0 6px 18px rgba(0,0,0,.13);
+  -webkit-backdrop-filter:blur(22px) saturate(180%);
+  backdrop-filter:blur(22px) saturate(180%);
+  cursor:pointer;
+}
+.day-map-search.has-selection .map-search-clear-selection{
+  display:grid;
+}
+.map-search-clear-selection svg{
+  width:18px;
+  height:18px;
+}
+.map-search-clear-selection:active{
+  transform:scale(.93);
+}
+@media(max-width:620px){
+  .map-search-clear-selection{
+    left:-46px;
+    top:3px;
+  }
+  .day-map-search.expanded .map-search-clear-selection{
+    display:none!important;
+  }
+}
+</style>
+
 </head>
 <body>
 <nav class="global-nav"><div class="nav-title" id="navTitle">American West Travel Guide</div><div class="nav-dots" id="navDots"></div><div class="nav-progress" id="navProgress">1 / 20</div></nav>
@@ -1203,15 +1294,35 @@ async function buildOverviewData(center){
   return {routePts,placeMarkers,terminalMarkers};
 }
 function allTripPoints(){return DAYS.flatMap(d=>d.routePoints||[])}
+
+async function fetchDrivingRoute(points){
+  if(!points||points.length<2)return null;
+  const coords=points.map(p=>`${p.lon},${p.lat}`).join(';');
+  const urls=[
+    `https://router.project-osrm.org/route/v1/driving/${coords}?overview=full&geometries=geojson&steps=false`,
+    `https://routing.openstreetmap.de/routed-car/route/v1/driving/${coords}?overview=full&geometries=geojson&steps=false`
+  ];
+  for(const url of urls){
+    try{
+      const r=await fetch(url);
+      if(!r.ok)continue;
+      const j=await r.json();
+      const geom=j.routes?.[0]?.geometry;
+      if(geom?.coordinates?.length>1)return {type:'Feature',geometry:geom};
+    }catch(e){}
+  }
+  return null;
+}
+
 let overviewMap;
 function makeTerminalSVG(kind='start',airport=false){
   if(kind==='end'){
-    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 11V7.8A2.8 2.8 0 0 1 7.8 5h2.4A2.8 2.8 0 0 1 13 7.8V11h2.2A3.8 3.8 0 0 1 19 14.8V19h-2v-2H7v2H5v-8Zm2 0h4V8.1c0-.61-.49-1.1-1.1-1.1H8.1C7.49 7 7 7.49 7 8.1V11Zm0 2v2h10v-.4c0-.88-.72-1.6-1.6-1.6H7Z" fill="currentColor"/></svg>';
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.1a6.25 6.25 0 0 0-6.25 6.25c0 4.66 6.25 11.55 6.25 11.55s6.25-6.89 6.25-11.55A6.25 6.25 0 0 0 12 3.1Z" fill="currentColor"/><circle cx="12" cy="9.35" r="2.65" fill="white"/></svg>';
   }
   if(airport){
-    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.7 11.05 13.9 11l-5.1-6.5c-.22-.28-.55-.44-.9-.44H6.8c-.52 0-.89.5-.74 1l1.95 5.96-4.36-.03c-.36 0-.69.2-.85.52L2 13l5.9 1.95 1.95 5.75c.17.49.83.66 1.24.31l1-.84c.25-.21.39-.52.38-.84l-.2-6.64 6.78-6.65c.48-.47.11-1.29-.57-1.29h-1.16c-.31 0-.61.12-.83.34L11.4 10.1l-1.05-3.21 1.95 2.48 8.4.07c.67 0 1.03.81.47 1.31Z" fill="currentColor"/></svg>';
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21.1 10.7-7.1.08-4.1-6.1a1.1 1.1 0 0 0-.92-.49H7.63c-.55 0-.94.54-.76 1.06l1.86 5.6-4.1.06a1.1 1.1 0 0 0-.91.51L2.7 13l6.03 1.93-1.52 5.36c-.15.54.25 1.07.81 1.07h1.31c.37 0 .71-.19.9-.5l3.78-6.02 7.14.06a2.1 2.1 0 0 0 0-4.2Z" fill="currentColor"/></svg>';
   }
-  return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5c-3.68-4.28-5.52-7.48-5.52-9.6A5.52 5.52 0 1 1 17.52 10.9c0 2.12-1.84 5.32-5.52 9.6Zm0-7.1a2.5 2.5 0 1 0 0-5.01 2.5 2.5 0 0 0 0 5.01Z" fill="currentColor"/></svg>';
+  return '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5.2" fill="white"/></svg>';
 }
 function makeTerminalMarker(kind='start',airport=false){
   const el=document.createElement('div');
@@ -1286,15 +1397,6 @@ function initOverview(){
         .setPopup(new maplibregl.Popup({offset:18}).setText(p.name))
         .addTo(overviewMap);
     });
-    ov.terminalMarkers.forEach(t=>{
-      const el=makeTerminalMarker(t.kind,t.airport);
-      const popup=new maplibregl.Popup({offset:18,closeButton:false})
-        .setHTML(`<div class="terminal-map-popup"><strong>${t.title}</strong><span>${t.day} · ${t.subtitle}</span></div>`);
-      new maplibregl.Marker({element:el,anchor:'bottom'})
-        .setLngLat([t.point.lon,t.point.lat])
-        .setPopup(popup)
-        .addTo(overviewMap);
-    });
 
     const routed=await fetchDrivingRoute(pts);
     const src=overviewMap.getSource('trip-route');
@@ -1307,6 +1409,14 @@ function initOverview(){
   });
 }
 
+
+const overviewPanel=panels[1];
+const oo=new IntersectionObserver(es=>{
+  if(es.some(e=>e.isIntersecting))setTimeout(initOverview,80)
+},{root:deck,threshold:.4});
+oo.observe(overviewPanel);
+
+const mapStates=new Map();
 
 function ensureDayMap(i){
   if(mapStates.has(i)){
@@ -1595,9 +1705,9 @@ async function suggestAddress(query,center){
 function addDayMapSearch(i,st){
   const host=document.getElementById(`daymap-${i}`),shell=host?.closest('.day-map-shell'); if(!host||!shell||shell.querySelector('.day-map-search'))return;
   const wrap=document.createElement('div');wrap.className='day-map-search';
-  wrap.innerHTML=`<form class="map-search-bar" role="search">${SEARCH_ICON}<input class="map-search-input" type="search" inputmode="search" autocomplete="off" placeholder="搜索地址或地点" aria-label="搜索地址或地点"><button class="map-search-submit" type="submit" aria-label="搜索">${SEARCH_ICON}</button></form><div class="map-search-results" role="listbox"></div>`;
+  wrap.innerHTML=`<button class="map-search-clear-selection" type="button" aria-label="清除搜索地点" title="清除搜索地点"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 7.2 16.8 16.8M16.8 7.2 7.2 16.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></svg></button><form class="map-search-bar" role="search">${SEARCH_ICON}<input class="map-search-input" type="search" inputmode="search" autocomplete="off" placeholder="搜索地址或地点" aria-label="搜索地址或地点"><button class="map-search-submit" type="submit" aria-label="搜索">${SEARCH_ICON}</button></form><div class="map-search-results" role="listbox"></div>`;
   shell.appendChild(wrap);
-  const form=wrap.querySelector('form'),input=wrap.querySelector('input'),submit=wrap.querySelector('.map-search-submit'),results=wrap.querySelector('.map-search-results');
+  const form=wrap.querySelector('form'),input=wrap.querySelector('input'),submit=wrap.querySelector('.map-search-submit'),results=wrap.querySelector('.map-search-results'),clearSelection=wrap.querySelector('.map-search-clear-selection');
   let marker=null,popup=null,lastSearch=0,suggestTimer=null,suggestToken=0,activeSuggestion=-1,currentSuggestions=[];
   function closeResults(){results.classList.remove('open');activeSuggestion=-1}
   function renderSuggestions(items,q){
@@ -1636,6 +1746,17 @@ function addDayMapSearch(i,st){
     if(activeSuggestion>=0)buttons[activeSuggestion].scrollIntoView({block:'nearest'});
   }
   function collapseSearch(){if(window.matchMedia('(max-width:620px)').matches){wrap.classList.remove('expanded');closeResults();input.blur()}}
+  function clearSearchSelection(restoreRoute=true){
+    if(marker){marker.remove();marker=null}
+    if(popup){popup.remove();popup=null}
+    st.searchMarker=null;
+    wrap.classList.remove('has-selection');
+    input.value='';
+    currentSuggestions=[];
+    results.innerHTML='';
+    closeResults();
+    if(restoreRoute)fitDayRoute(i,true);
+  }
   function popupFor(item,nav){
     const root=document.createElement('div');root.className='search-popup-card';
     const copy=document.createElement('div');copy.className='search-popup-copy';
@@ -1652,7 +1773,7 @@ function addDayMapSearch(i,st){
     marker=new maplibregl.Marker({element:el,anchor:'bottom'}).setLngLat([item.lon,item.lat]).setPopup(popup).addTo(st.map);st.searchMarker=marker;
     el.addEventListener('click',e=>{e.stopPropagation();marker.togglePopup()});
     st.map.easeTo({center:[item.lon,item.lat],zoom:14.2,duration:850,padding:{top:95,bottom:90,left:40,right:40}});
-    marker.togglePopup();closeResults();input.value=item.name||input.value;collapseSearch();
+    marker.togglePopup();closeResults();input.value=item.name||input.value;wrap.classList.add('has-selection');collapseSearch();
   }
   async function runSearch(){
     const q=input.value.trim();if(!q)return;const token=++lastSearch;submit.disabled=true;results.innerHTML='<div class="map-search-state">正在搜索…</div>';results.classList.add('open');
@@ -1668,6 +1789,11 @@ function addDayMapSearch(i,st){
   });
   submit.addEventListener('click',e=>{
     if(window.matchMedia('(max-width:620px)').matches&&!wrap.classList.contains('expanded')){e.preventDefault();wrap.classList.add('expanded');setTimeout(()=>input.focus(),50)}
+  });
+  clearSelection.addEventListener('click',e=>{
+    e.preventDefault();
+    e.stopPropagation();
+    clearSearchSelection(true);
   });
   input.addEventListener('focus',()=>{wrap.classList.add('expanded');if(results.children.length)results.classList.add('open')});
   input.addEventListener('input',()=>{
@@ -1690,7 +1816,7 @@ function addDayMapSearch(i,st){
     },350);
   });
   input.addEventListener('keydown',e=>{
-    if(e.key==='Escape'){collapseSearch();return}
+    if(e.key==='Escape'){if(marker){clearSearchSelection(true)}else{collapseSearch()}return}
     if(e.key==='ArrowDown'){
       e.preventDefault();
       setActiveSuggestion(activeSuggestion+1);
